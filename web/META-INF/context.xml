@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/banktastic-banco-api">
+<!--
+    <Resource name="jdbc/MySQLDS"
+           url="jdbc:mysql://56618ac37628e1985100004e-samuvl.rhcloud.com:52051/banco"
+           
+           driverClassName="com.mysql.jdbc.Driver"
+           username="adminIcWbrE2"
+           password="FGm5XTFw83m2"
+           
+           auth="Container"
+           type="javax.sql.DataSource"
+           
+           maxActive="20"
+           maxIdle="5"
+           maxWait="10000"
+    />
+     -->
+    <Resource driverClassName="com.mysql.jdbc.Driver" 
+
+        maxActive="5" 
+        maxIdle="4" 
+        maxWait="1" 
+
+        name="jdbc/MySQLDS" 
+        password="banco" 
+
+        type="javax.sql.DataSource" 
+        url="jdbc:mysql://localhost:3306/banco" 
+        username="banco" 
+
+        validationQuery="SELECT 1 FROM dual"/>
+          
+ </Context>

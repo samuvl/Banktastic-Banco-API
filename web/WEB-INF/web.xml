@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    
+    <!-- ************************************ -->
+    <!--Para cargar varios applicationContext -->
+    <!-- ************************************ -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:applicationContext.xml
+            classpath:applicationContext.service.xml
+            classpath:applicationContext.dao.xml
+            classpath:applicationContext.persistence.xml
+        </param-value>
+    </context-param>
+    
+    <!-- ************************************ -->
+    <!--Database Migration Context -->
+    <!-- ************************************ -->
+    <listener>
+        <listener-class>com.fpmislata.banco.presentacion.database.DatabaseMigrateContextListener</listener-class>
+    </listener>
+    
+    <!-- ************************************ -->
+    <!--Dispatcher Servlet controladores.... -->
+    <!-- ************************************ -->
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+   
+    <!-- ************************************ -->
+    <!-- ...........Filtro de Seguridad -->
+    <!-- ************************************ -->
+    <filter>
+        <filter-name>Security</filter-name>
+        <filter-class>com.fpmislata.banco.presentacion.security.FilterImplSecurity</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Security</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+    
+    </web-app>
