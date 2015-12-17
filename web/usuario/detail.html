@@ -1,0 +1,37 @@
+<div class="col-md-4 col-md-offset-4">
+    <form role="form">
+
+        <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" name="nombre" class="form-control" placeholder="Nombre" ng-model="usuario.nombre"ng-disabled=" (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{usuario.nombre}}">
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" placeholder="email" name="email" ng-model="usuario.email" ng-disabled=" (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{usuario.email}}"/>
+        </div>
+
+        <div class="form-group">
+            <label>Nick</label>
+            <input type="text" class="form-control" placeholder="nick" name="nick" ng-model="usuario.nick" ng-disabled=" (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{usuario.nick}}"/>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" placeholder="Password" name="Password" ng-model="usuario.password" ng-disabled="  (tipo === 'UPDATE') || (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{usuario.password}}">
+        </div>
+
+        <div class="form-group">
+            <label>Rol</label> <br />
+            <select name="rol" ng-model="usuario.rol" ng-disabled=" (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{usuario.rol}}">
+                <option value="trabajador">Trabajador</option>
+                <option value="cliente">Cliente</option>
+            </select>
+
+        </div>
+
+        <input ng-click="ok()" class="btn btn-sm btn-primary" type="submit" value="{{okBoton}}"/> <input ng-click="cancel()" class="btn btn-sm btn-danger" type="submit" value="cancel"/><br><br>
+    </form>
+
+    <div  class="alert alert-danger" ng-repeat="businessMessage in businessMessages"> {{businessMessage.fieldName}}: {{businessMessage.mensaje}}</div>
+</div>

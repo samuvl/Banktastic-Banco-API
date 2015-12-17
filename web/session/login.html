@@ -1,0 +1,27 @@
+<link href="login.css" rel="stylesheet" type="text/css"/>
+
+<div id="container" class="container">
+    <h1>WELCOME TO BANKTASTIC</h1>
+    <div id="capa" class="col-md-12 col-xs-12">
+
+        <div class="col-md-4"></div>
+        <div id="capaLogin" class="col-md-4 col-xs-12">
+            <h3>LOGIN</h3>
+            <br>
+            <p>
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <input type="text" placeholder="Usuario" ng-model="usuario.nick" >
+            </p>
+            <br>
+            <p>
+                <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                <input type="password" placeholder="Contraseña" ng-model="usuario.password"/>
+            </p>
+            <br>
+            <button class="btn btn-primary" ng-click="ok()">
+                entrar
+            </button>
+        </div>
+        <div class="col-md-4"> </div>
+    </div>
+</div>
