@@ -1,21 +1,17 @@
 @keyframes
 fadeOut {
     from {
-
         filter: blur(6px);
-
     }
 
     to {
-
         filter: blur(0px);
     }
-
 }
 
 body {
     text-align: center;
-    background-image: url('./site/images/germany_sunset.jpg');
+    background-image: url('../site/images/germany_sunset.jpg');
     background-repeat: no-repeat;
     font-family: 'Montserrat', sans-serif;
 }
