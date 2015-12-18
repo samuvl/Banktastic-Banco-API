@@ -37,9 +37,8 @@ public class LoginServiceImpl implements LoginService {
         if (passwordManager.check(usuario.getPassword(), usuarioNickComprobado.getPassword())) {
             webSession = new WebSession(usuarioNickComprobado, new Date());
             webSessionProvider.setWebSession(httpServletRequest, httpServletResponse, webSession);
-
         } else {
-            throw new BusinessException("Error: ", "Usuario/ Contraseña incorrecta.");
+            throw new BusinessException("Error ", "Usuario/ Contraseña incorrecta.");
         }
         return webSession;
     }
@@ -52,7 +51,7 @@ public class LoginServiceImpl implements LoginService {
         if (webSession != null) {
             return webSession;
         } else {
-            throw new BusinessException("Sesión: ", "No existe.");
+            throw new BusinessException("Sesión ", "No existe.");
         }
     }
 
