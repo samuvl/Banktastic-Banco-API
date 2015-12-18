@@ -46,9 +46,9 @@
         
         <echo> -------------------------------------------------------- </echo>
         <echo> ------------------ Add, Commit, Push-------------------- </echo>
-            <git dir="../banco" command="add" options="*" />
-            <git dir="../banco" command="commit" options="-am antAutomatizado" />
-            <git dir="../banco" command="push" />
+            <git dir="../banktastic" command="add" options="*" />
+            <git dir="../banktastic" command="commit" options="-am antAutomatizado" />
+            <git dir="../banktastic" command="push" />
 
     </target>
     
