@@ -1,4 +1,4 @@
-<link href="login.css" rel="stylesheet" type="text/css"/>
+<link href="session/login.css" rel="stylesheet" type="text/css"/>
 
 <div id="container" class="container">
     <h1>WELCOME TO BANKTASTIC</h1>
@@ -20,8 +20,14 @@
             <br>
             <button class="btn btn-primary" ng-click="ok()">
                 entrar
-            </button>
+            </button> 
+            <br />          
+            <br />
+
+            <div class="alert alert-danger" ng-repeat="businessMessage in businessMessages"> {{businessMessage.fieldName}}: {{businessMessage.mensaje}}</div>
         </div>
+                    
+
         <div class="col-md-4"> </div>
     </div>
 </div>

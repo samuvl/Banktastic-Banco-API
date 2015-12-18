@@ -15,8 +15,7 @@ function UsuarioService($http) {
             method: "POST",
             url: "../banktastic-banco-api/api/usuario/",
             data: usuario
-        }
-        );
+        });
         return response;
     };
 
