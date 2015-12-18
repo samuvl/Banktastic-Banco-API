@@ -3,16 +3,13 @@ package com.fpmislata.banco.presentacion.security.impl;
 import com.fpmislata.banco.business.domain.Usuario;
 import com.fpmislata.banco.business.service.UsuarioService;
 import com.fpmislata.banco.core.BusinessException;
-import com.fpmislata.banco.core.BusinessMessage;
 import com.fpmislata.banco.presentacion.security.LoginService;
 import com.fpmislata.banco.presentacion.security.WebSession;
 import com.fpmislata.banco.presentacion.security.WebSessionProvider;
 import com.fpmislata.banco.security.PasswordManager;
 import java.util.Date;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

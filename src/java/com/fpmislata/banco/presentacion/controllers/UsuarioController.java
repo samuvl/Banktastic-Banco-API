@@ -31,7 +31,7 @@ public class UsuarioController {
 
     @Autowired
     JsonTransformer jsonTransformer;
-    
+
     @Autowired
     PasswordManager passwordManager;
 
@@ -76,10 +76,14 @@ public class UsuarioController {
     public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
         try {
             Usuario usuario = (Usuario) jsonTransformer.jsonToObject(jsonEntrada, Usuario.class);
+            if (!passwordManager.checkComplexity(usuario.getPassword())) {
+                throw new BusinessException("Password", "La contraseña debe contener Mínusculas, Mayúsculas, Dígitos y de 6-20 caractéres");
+            }
+
             usuario.setPassword(passwordManager.encrypt(usuario.getPassword()));
-            
+
             usuarioService.insert(usuario);
-            
+
             System.out.println(jsonEntrada);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
