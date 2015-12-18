@@ -38,7 +38,7 @@
         
         <echo> -------------------------------------------------------- </echo>
         <echo> ---------------------- Clonando------------------------- </echo>
-            <git dir="../" command="clone" options="ssh://56744ce12d52715fcf00005b@banktastic-samuvl.rhcloud.com/~/git/banktastic.git/"  />
+            <git dir="../" command="clone" options="ssh://56744f367628e165c900004c@banktastic-samuvlc.rhcloud.com/~/git/banktastic.git/"  />
 
         <echo> -------------------------------------------------------- </echo>
         <echo> --------Moviendo ROOT.war a openshift repositorio------- </echo>
