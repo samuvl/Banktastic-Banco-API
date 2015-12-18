@@ -34,15 +34,15 @@
         
         <echo> -------------------------------------------------------- </echo>
         <echo> ---------------------- Borrando repo local-------------- </echo>
-            <delete dir="../banco"/>
+            <delete dir="../banktastic"/>
         
         <echo> -------------------------------------------------------- </echo>
         <echo> ---------------------- Clonando------------------------- </echo>
-            <git dir="../" command="clone" options="ssh://5674428089f5cf46ab00005d@banco-samuvl.rhcloud.com/~/git/banco.git/"  />
+            <git dir="../" command="clone" options="ssh://56744ce12d52715fcf00005b@banktastic-samuvl.rhcloud.com/~/git/banktastic.git/"  />
 
         <echo> -------------------------------------------------------- </echo>
         <echo> --------Moviendo ROOT.war a openshift repositorio------- </echo>
-            <move file="./dist/banktastic-banco-api.war" tofile="../banco/webapps/banktastic-banco-api.war"/>
+            <move file="./dist/banktastic-banco-api.war" tofile="../banktastic/webapps/banktastic-banco-api.war"/>
         
         <echo> -------------------------------------------------------- </echo>
         <echo> ------------------ Add, Commit, Push-------------------- </echo>
