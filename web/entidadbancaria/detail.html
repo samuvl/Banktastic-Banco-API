@@ -13,7 +13,7 @@
   
     <div class="form-group">
         <label>Fecha de creacion</label>
-        <input ui-date="{dateFormat:'dd/mm/yy'}" type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="entidadBancaria.fechaCreacion"ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{entidadBancaria.fechaCreacion}}">
+        <input ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="entidadBancaria.fechaCreacion"ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{entidadBancaria.fechaCreacion}}">
     </div>
     
     <div class="form-group">
