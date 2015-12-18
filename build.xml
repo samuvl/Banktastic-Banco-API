@@ -7,11 +7,82 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="banktastic-banco-api" default="default" basedir=".">
-    <description>Builds, tests, and runs the project banktastic-banco-api.</description>
+<project name="banco-api" default="default" basedir=".">
+    <description>Builds, tests, and runs the project banco-api.</description>    
     <import file="nbproject/build-impl.xml"/>
-    <!--
 
+    <macrodef name="git">
+        <!-- https://github.com/FrancisVarga/ant-git-macros/blob/master/LICENSE.md -->
+        <attribute name="command" />
+        <attribute name="options" default="" />
+        <attribute name="dir" default="" />
+        <attribute name="failerror" default="true" />
+        <element name="args" optional="true" />
+        <sequential>
+            <echo message="git dir @{dir}" />
+            <echo message="git @{command} @{options}" />
+            <exec executable="git" dir="@{dir}" failonerror="@{failerror}">
+                <arg line="@{command} @{options}" />
+                <args />
+            </exec>
+        </sequential>
+    </macrodef>        
+    
+    <target name="desplegarProduccion" depends="distProduccion" > 
+        
+        <!--    <move file="./dist/banktastic-banco-api.war" tofile="./dist/banktastic-banco-api.war"/>-->
+        
+        <echo> -------------------------------------------------------- </echo>
+        <echo> ---------------------- Borrando repo local-------------- </echo>
+            <delete dir="../banco"/>
+        
+        <echo> -------------------------------------------------------- </echo>
+        <echo> ---------------------- Clonando------------------------- </echo>
+            <git dir="../" command="clone" options="ssh://5673d64389f5cf40eb0000fe@banco-samuvl.rhcloud.com/~/git/banco.git/"  />
+
+        <echo> -------------------------------------------------------- </echo>
+        <echo> --------Moviendo ROOT.war a openshift repositorio------- </echo>
+            <move file="./dist/banktastic-banco-api.war" tofile="../banco/webapps/banktastic-banco-api.war"/>
+        
+        <echo> -------------------------------------------------------- </echo>
+        <echo> ------------------ Add, Commit, Push-------------------- </echo>
+            <git dir="../banco" command="add" options="*" />
+            <git dir="../banco" command="commit" options="-am antAutomatizado" />
+            <git dir="../banco" command="push" />
+
+    </target>
+    
+    <target name="distProduccion" depends="-enable-produccion, dist" > 
+    </target>
+    
+    <property name="libs.CopyLibs.classpath" value="ant/lib/org-netbeans-modules-java-j2seproject-copylibstask.jar" />
+    <property name="j2ee.server.home" value="ant" />
+    
+    <path id="tomcat.classpath"> 
+        <fileset dir="ant/lib" includes="*.jar" />
+    </path>
+    <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" classpathref="tomcat.classpath" />
+
+    <!-- ANT CAMBIAR CONTEXT.XML para PRODUCCION -->
+    <!-- Si activamos la variable enableProduccion cambiaremos el context para produccion -->
+
+    <target name="-enable-produccion" >
+        <property name="enableProduccion" value="patata" />
+    </target>
+
+    <target name="-base-datos-produccion" if="enableProduccion"> 
+        <echo> Borrando y Renombrando... </echo>
+        <delete dir="build/web/META-INF/context.xml"/>
+        <move file="build/web/META-INF/context-produccion.xml" tofile="build/web/META-INF/context.xml"/>
+    </target>
+
+     <!--Para que se ejecute el target de renombrar y borrar-->
+    <!--<target name="-pre-dist" depends="-base-datos-produccion"> 
+        
+    </target>-->
+    </project>
+
+<!--
     There exist several targets which are by default empty and which can be 
     used for execution of your tasks. These targets are usually executed 
     before and after some main targets. They are: 
@@ -67,5 +138,5 @@
     properties which you can use check the target you are overriding in 
     nbproject/build-impl.xml file. 
 
-    -->
-</project>
+-->
+
