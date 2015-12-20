@@ -34,21 +34,21 @@
         
         <echo> -------------------------------------------------------- </echo>
         <echo> ---------------------- Borrando repo local-------------- </echo>
-            <delete dir="../banktastic"/>
+            <delete dir="../banco"/>
         
         <echo> -------------------------------------------------------- </echo>
         <echo> ---------------------- Clonando------------------------- </echo>
-            <git dir="../" command="clone" options="ssh://5676ffb12d52716643000053@banktastic-samuvlc.rhcloud.com/~/git/banktastic.git/"  />
+            <git dir="../" command="clone" options="ssh://567705d92d52718b76000001@banco-samuvlc.rhcloud.com/~/git/banco.git/"  />
 
         <echo> -------------------------------------------------------- </echo>
         <echo> --------Moviendo ROOT.war a openshift repositorio------- </echo>
-            <move file="./dist/banktastic-banco-api.war" tofile="../banktastic/webapps/banktastic-banco-api.war"/>
+            <move file="./dist/banktastic-banco-api.war" tofile="../banco/webapps/banktastic-banco-api.war"/>
         
         <echo> -------------------------------------------------------- </echo>
         <echo> ------------------ Add, Commit, Push-------------------- </echo>
-            <git dir="../banktastic" command="add" options="*" />
-            <git dir="../banktastic" command="commit" options="-am antAutomatizado" />
-            <git dir="../banktastic" command="push" />
+            <git dir="../banco" command="add" options="*" />
+            <git dir="../banco" command="commit" options="-am antAutomatizado" />
+            <git dir="../banco" command="push" />
 
     </target>
     
