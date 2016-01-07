@@ -52,7 +52,6 @@ public class LoginController {
 
             httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
-
             try {
                 httpServletResponse.getWriter().println(jsonSalida);
             } catch (IOException ex1) {
