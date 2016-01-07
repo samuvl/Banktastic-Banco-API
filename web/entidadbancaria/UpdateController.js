@@ -25,6 +25,7 @@ function UpdateController($scope, $routeParams, entidadBancariaService, $locatio
             alert("Actualizado con Éxito la Entidad Bancaria: " + $scope.entidadBancaria.idEntidadBancaria) + "\n Recargando...";
             $window.location.reload();
         });
+        
         response.error(function (data, status, headers, config) {
             if (status === 500) {
                 alert("Ha fallado la petición. Estado HTTP:" + status);

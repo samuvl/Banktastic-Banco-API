@@ -13,8 +13,8 @@
             <tr  ng-repeat="usuario in usuarios">
                 <td> <a href="#/getUser/{{usuario.idUsuario}}"><span class="glyphicon glyphicon-eye-open"></span> {{usuario.idUsuario}} </a></td>
                 <td> {{usuario.nombre}}</td>
-                <td> <a href="#/deleteUser/{{usuario.idUsuario}}"> <button class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span> Borrar</button></a></td>
-                <td> <a href="#/updateUser/{{usuario.idUsuario}}" > <button class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-pencil"></span> Actualizar</button></a></td>
+                <td> <a href="#/deleteUser/{{usuario.idUsuario}}"> <button class="btn btn-sm btn-danger">Borrar <span class="glyphicon glyphicon-trash"></span></button></a></td>
+                <td> <a href="#/updateUser/{{usuario.idUsuario}}" > <button class="btn btn-sm btn-primary">Actualizar <span class="glyphicon glyphicon-pencil"></span> </button></a></td>
             </tr>
         </tbody>
     </table>
