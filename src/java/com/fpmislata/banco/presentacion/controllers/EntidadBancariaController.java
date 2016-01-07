@@ -121,7 +121,7 @@ public class EntidadBancariaController {
         } catch (BusinessException ex) {
             List<BusinessMessage> bussinessMessage = ex.getBusinessMessages();
             String jsonSalida = jsonTransformer.objectToJson(bussinessMessage);
-            System.out.println(jsonSalida);
+            //System.out.println(jsonSalida);
 
             httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
