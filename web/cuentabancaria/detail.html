@@ -1,0 +1,33 @@
+<div class="col-md-4 col-md-offset-4">
+<form role="form">
+  
+    <div class="form-group">
+        <label>Nombre del Titular</label>
+        <input type="text" class="form-control" placeholder="Nombre del Titular" name="nombreTitular"  ng-model="cuentaBancaria.nombreTitular"ng-disabled=" (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.nombreTitular}}">
+    </div>
+  
+    <div class="form-group">
+        <label>Número de Cuenta</label>
+        <input type="text" class="form-control" placeholder="Número de Cuenta" name="nCuenta" ng-model="cuentaBancaria.nCuenta"ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.nCuenta}}">
+    </div>
+  
+    <div class="form-group">
+        <label>Tipo de Cuenta</label>
+        <input type="text" class="form-control" placeholder="Tipo de Cuenta"  name="tipoCuenta" ng-model="cuentaBancaria.tipoCuenta" ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.tipoCuenta}}">
+    </div>
+    
+    <div class="form-group">
+        <label>ID Sucursal Bancaria</label>
+        <input type="text" class="form-control" placeholder="idSucursalBancaria" name="idSucursalBancaria" ng-model="cuentaBancaria.idSucursalBancaria"ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.idSucursalBancaria}}"/>
+    </div>
+    
+    <div class="form-group">
+        <label>Saldo Cuenta</label>
+        <input type="text" class="form-control" placeholder="saldoCuenta" name="saldoCuenta" ng-model="cuentaBancaria.saldoCuenta" ng-disabled=" (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.saldoCuenta}}"/>
+    </div>
+  
+  <input ng-click="ok()" class="btn btn-sm btn-primary" type="submit" value="{{okBoton}}"/> <input ng-click="cancel()" class="btn btn-sm btn-danger" type="submit" value="cancel"/><br><br>
+</form>
+    
+<div  class="alert alert-danger" ng-repeat="businessMessage in businessMessages"><span class="glyphicon glyphicon-exclamation-sign"></span> {{businessMessage.fieldName}}: {{businessMessage.mensaje}}</div>
+</div>
