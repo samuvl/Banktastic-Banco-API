@@ -46,11 +46,10 @@ public class CuentaBancariaController {
         }
     }
 
-    @RequestMapping(value = "/entidadbancaria", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/cuentabancaria", method = RequestMethod.GET, produces = "application/json")
     public void find(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
-            List<CuentaBancaria> cuentasBancarias;
-            cuentasBancarias = cuentaBancariaService.findAll();
+            List<CuentaBancaria> cuentasBancarias = cuentaBancariaService.findAll();
 
             String jsonSalida = jsonTransformer.objectToJson(cuentasBancarias);
 
@@ -63,9 +62,10 @@ public class CuentaBancariaController {
         }
     }
 
-    @RequestMapping(value = {"/cuentabancaria"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/cuentabancaria"}, method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
         try {
+            System.out.println(jsonEntrada);
             CuentaBancaria cuentaBancaria = (CuentaBancaria) jsonTransformer.jsonToObject(jsonEntrada, CuentaBancaria.class);
             cuentaBancariaService.insert(cuentaBancaria);
 
@@ -143,7 +143,7 @@ public class CuentaBancariaController {
     }
 
 //¿?¿?¿??¿?¿?¿?¿?
-    @RequestMapping(value = {"/cuentabancaria/{idcuentaBancaria}/movimientoBancario"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/cuentabancaria/{idCuentaBancaria}/movimientobancario"}, method = RequestMethod.GET)
     public void getMovimiento(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idcuentaBancaria") int idcuentaBancaria) {
         try {
 
