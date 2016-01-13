@@ -2,6 +2,7 @@ package com.fpmislata.banco.presentacion.controllers;
 
 import com.fpmislata.banco.business.domain.CuentaBancaria;
 import com.fpmislata.banco.business.domain.MovimientoBancario;
+import com.fpmislata.banco.business.domain.RolMovimiento;
 import com.fpmislata.banco.business.service.CuentaBancariaService;
 import com.fpmislata.banco.business.service.MovimientoBancarioService;
 import com.fpmislata.banco.core.BusinessException;
@@ -41,18 +42,18 @@ public class MovimientoBancarioController {
         try {
             /*Session session = HibernateUtil.getSessionFactory().getCurrentSession();
              session.getTransaction().rollback();*/
-            int idCuentaBancaria = movimientoBancario.getIdCuentaBancaria();
+            int idCuentaBancaria = movimientoBancario.getCuentaBancaria().getIdCuentaBancaria();
             if (idCuentaBancaria != 0) {
                 CuentaBancaria cuentaBancaria = cuentaBancariaService.get(idCuentaBancaria);
-                BigDecimal saldoNuevo = movimientoBancario.getCantidad();
-                BigDecimal saldoViejo = cuentaBancaria.getSaldoCuenta();
+                BigDecimal saldoNuevo = movimientoBancario.getImporte();
+                BigDecimal saldoViejo = cuentaBancaria.getSaldo();
 
-                if (movimientoBancario.getTipoMovimiento().equalsIgnoreCase("Debe")) {
+                if (movimientoBancario.getTipoMovimiento() == RolMovimiento.debe) {
                     saldoNuevo = saldoNuevo.multiply(new BigDecimal(-1));
                 }
                 saldoNuevo = saldoViejo.add(saldoNuevo);
                 if (saldoNuevo.compareTo(BigDecimal.ZERO) > 0) {
-                    cuentaBancaria.setSaldoCuenta(saldoNuevo);
+                    cuentaBancaria.setSaldo(saldoNuevo);
                     return true;
                 }
             }

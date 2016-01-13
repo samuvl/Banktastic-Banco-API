@@ -143,6 +143,7 @@ public class CuentaBancariaController {
     }
 
 //¿?¿?¿??¿?¿?¿?¿?
+    /*
     @RequestMapping(value = {"/cuentabancaria/{idCuentaBancaria}/movimientobancario"}, method = RequestMethod.GET)
     public void getMovimiento(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idcuentaBancaria") int idcuentaBancaria) {
         try {
@@ -154,5 +155,5 @@ public class CuentaBancariaController {
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
-    }
+    }*/
 }
