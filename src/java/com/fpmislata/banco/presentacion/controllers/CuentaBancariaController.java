@@ -35,6 +35,7 @@ public class CuentaBancariaController {
     public void get(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
         try {
             CuentaBancaria cuentaBancaria = cuentaBancariaService.get(idCuentaBancaria);
+            
             String jsonSalida = jsonTransformer.objectToJson(cuentaBancaria);
 
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
