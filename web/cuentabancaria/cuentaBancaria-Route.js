@@ -9,7 +9,7 @@ app.config(['$routeProvider', function ($routeProvider) {
 //            controller: "FindController"
 //        });        
 //        
-        $routeProvider.when('/get/:idCuentaBancaria', {
+        $routeProvider.when('/getCuenta/:idCuentaBancaria', {
             templateUrl: "cuentabancaria/detail.html",
             controller: "GetCuentaController"
         });

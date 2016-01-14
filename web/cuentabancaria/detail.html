@@ -12,18 +12,18 @@
     </div>
   
     <div class="form-group">
-        <label>Tipo de Cuenta</label>
-        <input type="text" class="form-control" placeholder="Tipo de Cuenta"  name="tipoCuenta" ng-model="cuentaBancaria.tipoCuenta" ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.tipoCuenta}}">
+        <label>Usuario</label>
+        <input type="text" class="form-control" placeholder="Usuario"  name="usuario" ng-model="cuentaBancaria.usuario" ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.usuario}}">
     </div>
     
     <div class="form-group">
-        <label>ID Sucursal Bancaria</label>
-        <input type="text" class="form-control" placeholder="idSucursalBancaria" name="idSucursalBancaria" ng-model="cuentaBancaria.idSucursalBancaria"ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.idSucursalBancaria}}"/>
+        <label>Sucursal Bancaria</label>
+        <input type="text" class="form-control" placeholder="Sucursal Bancaria" name="sucursalBancaria" ng-model="cuentaBancaria.sucursalBancaria"ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.sucursalBancaria}}"/>
     </div>
     
     <div class="form-group">
-        <label>Saldo Cuenta</label>
-        <input type="text" class="form-control" placeholder="saldoCuenta" name="saldoCuenta" ng-model="cuentaBancaria.saldoCuenta" ng-disabled=" (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.saldoCuenta}}"/>
+        <label>Saldo</label>
+        <input type="text" class="form-control" placeholder="saldo" name="saldo" ng-model="cuentaBancaria.saldo" ng-disabled=" (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.saldo}}"/>
     </div>
   
   <input ng-click="ok()" class="btn btn-sm btn-primary" type="submit" value="{{okBoton}}"/> <input ng-click="cancel()" class="btn btn-sm btn-danger" type="submit" value="cancel"/><br><br>
