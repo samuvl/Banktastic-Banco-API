@@ -1,11 +1,21 @@
-InsertCuentaController.$inject = ['$scope', 'cuentaBancariaService', '$location', '$window'];
-function InsertCuentaController($scope, cuentaBancariaService, $location, $window) {
+InsertCuentaController.$inject = ['$scope', 'cuentaBancariaService', 'usuarioService', '$location', '$window'];
+function InsertCuentaController($scope, cuentaBancariaService, usuarioService, $location, $window) {
     $scope.tipo = "INSERT";
     $scope.okBoton = "Insertar";
     $scope.cuentaBancaria = {};
 
+    var response = usuarioService.find();
+
+    response.success(function (data, status, headers, config) {
+        $scope.usuarios = data;
+    });
+
+    response.error(function (data, status, headers, config) {
+        alert("Ha fallado la petición GET usuarios. Estado HTTP:" + status);
+    });
+
     $scope.ok = function () {
-        alert(cuentaBancaria.saldoCuenta);
+
         var response = cuentaBancariaService.insert($scope.cuentaBancaria);
 
         response.success(function (data, status, headers, config) {
@@ -21,7 +31,7 @@ function InsertCuentaController($scope, cuentaBancariaService, $location, $windo
             }
         });
     };
-    
+
     $scope.cancel = function () {
         $location.url('/');
     };

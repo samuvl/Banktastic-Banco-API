@@ -12,7 +12,7 @@
         <tbody  >
             <tr  ng-repeat="cuentaBancaria in cuentasBancarias">
                 <td> <a href="#/getCuenta/{{cuentaBancaria.idCuentaBancaria}}"><span class="glyphicon glyphicon-eye-open"></span> {{cuentaBancaria.idCuentaBancaria}} </a></td>
-                <td> {{cuentaBancaria.nombreTitular}}</td>
+                <td> {{cuentaBancaria.nCuenta}}</td>
                 <td> <a href="#/deleteCuenta/{{cuentaBancaria.idCuentaBancaria}}"> <button class="btn btn-sm btn-danger">Borrar <span class="glyphicon glyphicon-trash"></span></button></a></td>
                 <td> <a href="#/updateCuenta/{{cuentaBancaria.idCuentaBancaria}}" > <button class="btn btn-sm btn-primary">Actualizar <span class="glyphicon glyphicon-pencil"></span></button></a></td>
             </tr>

@@ -5,33 +5,32 @@ function UpdateCuentaController($scope, $routeParams, cuentaBancariaService, $lo
     $scope.cuentaBancaria.idCuentaBancaria = $routeParams.idCuentaBancaria;
     $scope.tipo = "UPDATE";
     $scope.okBoton = "Actualizar";
-
-    var response = cuentaBancariaService.get($routeParams.idCuentaBancaria);
-
-    response.success(function (data, status, headers, config) {
-        $scope.cuentaBancaria = data;
+//Cargar Usuarios:
+    usuarioService.find().then(function (result) {
+        $scope.usuarios = result.data;
+    }, function (result) {
+        alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });
-
-    response.error(function (data, status, headers, config) {
-        alert("Ha fallado la petición. Estado HTTP:" + status);
+//Cargar 
+    cuentaBancariaService.get($routeParams.idCuentaBancaria).then(function (result) {
+        $scope.cuentaBancaria = result.data;
+    }, function (result) {
+        alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });
-
 
     $scope.ok = function () {
-        var response = cuentaBancariaService.update($scope.cuentaBancaria);
 
-        response.success(function (data, status, headers, config) {
-            alert("Actualizado con Éxito la cuenta Bancaria: " + $scope.cuentaBancaria.idCuentaBancaria) + "\n Recargando...";
+        cuentaBancariaService.update($scope.cuentaBancaria).then(function (result) {
+            alert("Actualizado con Éxito la cuenta Bancaria: " + $scope.cuentaBancaria.nCuenta) + "\n Recargando...";
             $window.location.reload();
-        });
-        
-        response.error(function (data, status, headers, config) {
+        }, function (result) {
             if (status === 500) {
                 alert("Ha fallado la petición. Estado HTTP:" + status);
             } else {
                 $scope.businessMessages = data;
             }
         });
+
     };
 
     $scope.cancel = function () {
