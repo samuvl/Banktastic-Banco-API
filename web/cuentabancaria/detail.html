@@ -3,26 +3,38 @@
 
     <div class="form-group">
         <label>Número de Cuenta</label>
-        <input type="text" class="form-control" placeholder="Número de Cuenta" name="nCuenta" ng-model="cuentaBancaria.nCuenta"ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.nCuenta}}">
+        <input type="text" class="form-control" placeholder="Número de Cuenta" name="numeroCuenta" ng-model="cuentaBancaria.numeroCuenta"ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.numeroCuenta}}">
     </div>
   
     <div class="form-group">
+        <label>Dígito de Control</label>
+        <input type="text" class="form-control" placeholder="Dígito de Control" name="digitoControl" ng-model="cuentaBancaria.digitoControl"ng-disabled="true" ng-value="{{cuentaBancaria.digitoControl}}">
+    </div>
+    
+    <div class="form-group">
         <label>Usuario</label> <br />
-        <select ng-model="cuentaBancaria.usuario" ng-options="usuario as usuario.nombre for usuario in usuarios track by usuario.idUsuario" ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')">
+        <select ng-model="cuentaBancaria.usuario" ng-options="usuario as usuario.nombre for usuario in usuarios" ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')">
             <option value=""> -- Elige una Opción -- </option>
         </select>
      </div>
-    
+    <!--
     <div class="form-group">
-        <label>Sucursal Bancaria</label>
-        <input type="text" class="form-control" placeholder="Sucursal Bancaria" name="sucursalBancaria" ng-model="cuentaBancaria.sucursalBancaria"ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.sucursalBancaria}}"/>
-    </div>
-    
+        <label>Sucursal Bancaria</label> <br />
+        <select ng-model="cuentaBancaria.sucursalBancaria" ng-options="sucursalBancaria as sucursalBancaria.nombre for sucursalBancaria in sucursalesBancarias" ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')">
+            <option value=""> -- Elige una Opción -- </option>
+        </select>
+     </div>
+    -->
     <div class="form-group">
         <label>Saldo</label>
         <input type="text" class="form-control" placeholder="saldo" name="saldo" ng-model="cuentaBancaria.saldo" ng-disabled=" (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.saldo}}"/>
     </div>
   
+    <div class="form-group">
+        <label>Fecha de creacion</label>
+        <input ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="cuentaBancaria.fechaCreacion"ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.fechaCreacion}}">
+    </div>
+    
   <input ng-click="ok()" class="btn btn-sm btn-primary" type="submit" value="{{okBoton}}"/> <input ng-click="cancel()" class="btn btn-sm btn-danger" type="submit" value="cancel"/><br><br>
 </form>
     

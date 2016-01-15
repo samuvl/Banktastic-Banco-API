@@ -4,9 +4,11 @@ function GetMovimientoController($scope, $routeParams, cuentaBancariaService) {
     $scope.tipo = "GETMOVIMIENTO";
     //$scope.idCuentaBancaria = $routeParams.idCuentaBancaria;
 
-    var response = cuentaBancariaService.getMovimiento($routeParams.idCuentaBancaria);
-    response.success(function (data, status, headers, config) {
-        $scope.cuentasBancarias = data;
+
+    cuentaBancariaService.getMovimiento($routeParams.idCuentaBancaria).then(function (result) {
+        $scope.cuentasBancarias = result.data;
+    }, function (result) {
+        alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });
 
 }

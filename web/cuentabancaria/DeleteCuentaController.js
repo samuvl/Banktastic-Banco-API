@@ -1,30 +1,30 @@
-DeleteCuentaController.$inject = ['$scope', '$routeParams', 'cuentaBancariaService', '$location'];
+DeleteCuentaController.$inject = ['$scope', '$routeParams', 'cuentaBancariaService', 'usuarioService', '$location'];
 
-function DeleteCuentaController($scope, $routeParams, cuentaBancariaService, $location) {
+function DeleteCuentaController($scope, $routeParams, cuentaBancariaService, usuarioService, $location) {
     $scope.cuentaBancaria = {};
     $scope.idCuentaBancaria = $routeParams.idCuentaBancaria;
     $scope.tipo = "DELETE";
     $scope.okBoton = "Borrar";
 
-    var response = cuentaBancariaService.get($routeParams.idCuentaBancaria);
-        response.success(function (data, status, headers, config) {
-            $scope.cuentaBancaria = data;
-        });
+    usuarioService.find().then(function (result) {
+        $scope.usuarios = result.data;
+    }, function (result) {
+        alert("Ha fallado la petición. Estado HTTP:" + result.status);
+    });
 
-        response.error(function (data, status, headers, config) {
-            alert("Ha fallado la petición. Estado HTTP:" + status);
-        });
+    cuentaBancariaService.get($routeParams.idCuentaBancaria).then(function (result) {
+        $scope.cuentaBancaria = result.data;
+    }, function (result) {
+        alert("Ha fallado la petición. Estado HTTP:" + result.status);
+    });
 
     $scope.ok = function () {
 
-        var response = cuentaBancariaService.delete($routeParams.idCuentaBancaria);
-
-        response.success(function (data, status, headers, config) {
+        cuentaBancariaService.delete($routeParams.idCuentaBancaria).then(function (result) {
             alert("Borrado Con Éxito");
             $location.url('/findCuenta');
-        });
-        response.error(function (data, status, headers, config) {
-            alert("Error Borrando la Cuenta:  " + status);
+        }, function (result) {
+            alert("Ha fallado la petición. Estado HTTP:" + result.status);
         });
     };
 

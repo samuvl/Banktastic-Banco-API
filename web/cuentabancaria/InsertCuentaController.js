@@ -4,26 +4,19 @@ function InsertCuentaController($scope, cuentaBancariaService, usuarioService, $
     $scope.okBoton = "Insertar";
     $scope.cuentaBancaria = {};
 
-    var response = usuarioService.find();
 
-    response.success(function (data, status, headers, config) {
-        $scope.usuarios = data;
-    });
-
-    response.error(function (data, status, headers, config) {
-        alert("Ha fallado la petición GET usuarios. Estado HTTP:" + status);
+    usuarioService.find().then(function (result) {
+        $scope.usuarios = result.data;
+    }, function (result) {
+        alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });
 
     $scope.ok = function () {
-
-        var response = cuentaBancariaService.insert($scope.cuentaBancaria);
-
-        response.success(function (data, status, headers, config) {
-            alert("Cuenta Insertada con Éxito con el nombre Titular: " + $scope.cuentaBancaria.nombreTitular);
+        
+        cuentaBancariaService.insert($scope.cuentaBancaria).then(function (result) {
+            alert("Cuenta Insertada con Éxito con el nombre Titular: " + $scope.cuentaBancaria.numeroCuenta);
             $location.url("/findCuenta");
-        });
-
-        response.error(function (data, status, headers, config) {
+        }, function (result) {
             if (status === 500) {
                 alert("Ha fallado la petición. Estado HTTP:" + status);
             } else {
