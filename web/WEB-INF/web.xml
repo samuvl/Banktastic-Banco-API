@@ -5,7 +5,9 @@
             30
         </session-timeout>
     </session-config>
-    
+    <listener>
+        <listener-class>com.fpmislata.banco.presentacion.database.HibernateContextListener</listener-class>
+    </listener>
     <!-- ************************************ -->
     <!--Para cargar varios applicationContext -->
     <!-- ************************************ -->
@@ -29,6 +31,7 @@
         <listener-class>com.fpmislata.banco.presentacion.database.DatabaseMigrateContextListener</listener-class>
     </listener>
     
+
     <!-- ************************************ -->
     <!--Dispatcher Servlet controladores.... -->
     <!-- ************************************ -->
@@ -51,6 +54,15 @@
     </filter>
     <filter-mapping>
         <filter-name>Security</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+    
+    <filter>
+        <filter-name>HibernateSession</filter-name>
+        <filter-class>com.fpmislata.banco.presentacion.database.FilterImplHibernate</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HibernateSession</filter-name>
         <url-pattern>/api/*</url-pattern>
     </filter-mapping>
     
