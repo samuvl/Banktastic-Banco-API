@@ -8,11 +8,6 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: "entidadbancaria/entidadBancaria-List.html",
             controller: "FindController"
         });        
-        
-        $routeProvider.when('/get/:idEntidadBancaria', {
-            templateUrl: "entidadbancaria/detail.html",
-            controller: "GetController"
-        });
 
         $routeProvider.when('/delete/:idEntidadBancaria', {
             templateUrl: "entidadbancaria/detail.html",

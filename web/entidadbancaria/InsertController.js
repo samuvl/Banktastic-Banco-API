@@ -6,24 +6,21 @@ function InsertController($scope, entidadBancariaService, $location, $window) {
 
     $scope.ok = function () {
 
-        var response = entidadBancariaService.insert($scope.entidadBancaria);
-
-        response.success(function (data, status, headers, config) {
+        entidadBancariaService.insert($scope.entidadBancaria).then(function (result) {
             alert("Entidad Insertada con Éxito con el nombre: " + $scope.entidadBancaria.nombre);
             $location.url("/find");
-        });
-
-        response.error(function (data, status, headers, config) {
-            if (status === 500) {
-                alert("Ha fallado la petición. Estado HTTP:" + status);
+        }, function (result) {
+            if (result.status === 500) {
+                alert("Ha fallado la petición. Estado HTTP:" + result.status);
             } else {
-                $scope.businessMessages = data;
+                $scope.businessMessages = result.data;
             }
         });
+
     };
-    
+
     $scope.cancel = function () {
-        $location.url('/');
+        $location.url('/find');
     };
 
 }

@@ -36,3 +36,11 @@ footer{
 .navbar-inverse .navbar-nav>li>a:hover{
     color: darkgray !important;
 }
+
+span.ui-icon.ui-icon-circle-triangle-w {
+    color: black;
+}
+
+h1{
+    text-align: center;
+}

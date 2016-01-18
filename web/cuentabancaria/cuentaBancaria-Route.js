@@ -9,15 +9,15 @@ app.config(['$routeProvider', function ($routeProvider) {
 //            controller: "FindController"
 //        });        
 //        
-        $routeProvider.when('/getCuenta/:idCuentaBancaria', {
-            templateUrl: "cuentabancaria/detail.html",
-            controller: "GetCuentaController"
-        });
-
-        $routeProvider.when('/deleteCuenta/:idCuentaBancaria', {
-            templateUrl: "cuentabancaria/detail.html",
-            controller: "DeleteCuentaController"
-        });
+//        $routeProvider.when('/getCuenta/:idCuentaBancaria', {
+//            templateUrl: "cuentabancaria/detail.html",
+//            controller: "GetCuentaController"
+//        });
+//
+//        $routeProvider.when('/deleteCuenta/:idCuentaBancaria', {
+//            templateUrl: "cuentabancaria/detail.html",
+//            controller: "DeleteCuentaController"
+//        });
 
         $routeProvider.when('/insertCuenta/', {
             templateUrl: "cuentabancaria/detail.html",

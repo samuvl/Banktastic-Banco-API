@@ -1,5 +1,5 @@
-InsertCuentaController.$inject = ['$scope', 'cuentaBancariaService', 'usuarioService', '$location', '$window'];
-function InsertCuentaController($scope, cuentaBancariaService, usuarioService, $location, $window) {
+InsertCuentaController.$inject = ['$scope', 'cuentaBancariaService', 'usuarioService', 'sucursalBancariaService', '$location', '$window'];
+function InsertCuentaController($scope, cuentaBancariaService, usuarioService, sucursalBancariaService, $location, $window) {
     $scope.tipo = "INSERT";
     $scope.okBoton = "Insertar";
     $scope.cuentaBancaria = {};
@@ -11,16 +11,22 @@ function InsertCuentaController($scope, cuentaBancariaService, usuarioService, $
         alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });
 
+    sucursalBancariaService.find().then(function (result) {
+        $scope.sucursalesBancarias = result.data;
+    }, function (result) {
+        alert("Ha fallado la petición. Estado HTTP:" + result.status);
+    });
+
     $scope.ok = function () {
-        
+
         cuentaBancariaService.insert($scope.cuentaBancaria).then(function (result) {
             alert("Cuenta Insertada con Éxito con el nombre Titular: " + $scope.cuentaBancaria.numeroCuenta);
             $location.url("/findCuenta");
         }, function (result) {
-            if (status === 500) {
-                alert("Ha fallado la petición. Estado HTTP:" + status);
+            if (result.status === 500) {
+                alert("Ha fallado la petición. Estado HTTP:" + result.status);
             } else {
-                $scope.businessMessages = data;
+                $scope.businessMessages = result.data;
             }
         });
     };

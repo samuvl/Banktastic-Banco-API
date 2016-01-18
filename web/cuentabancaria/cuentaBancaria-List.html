@@ -2,26 +2,21 @@
     <table class="table table-striped table-hover">
         <thead>
             <tr class="success">
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Borrar</th>
-                <th>Actualizar</th>
-                <th>movimientos</th>
+                <th>Número de Cuenta</th>
+                <th>Saldo</th>
+                <th>Dígito de Control</th>
             </tr>
         </thead>
 
-        <tbody  >
+        <tbody >
             <tr  ng-repeat="cuentaBancaria in cuentasBancarias">
-                <td> <a href="#/getCuenta/{{cuentaBancaria.idCuentaBancaria}}"><span class="glyphicon glyphicon-eye-open"></span> {{cuentaBancaria.idCuentaBancaria}} </a></td>
-                <td> {{cuentaBancaria.numeroCuenta}}</td>
-                <td> <a href="#/deleteCuenta/{{cuentaBancaria.idCuentaBancaria}}"> <button class="btn btn-sm btn-danger">Borrar <span class="glyphicon glyphicon-trash"></span></button></a></td>
-                <td> <a href="#/updateCuenta/{{cuentaBancaria.idCuentaBancaria}}" > <button class="btn btn-sm btn-primary">Actualizar <span class="glyphicon glyphicon-pencil"></span></button></a></td>
-                <td> <a href="#/movimientos/{{cuentaBancaria.idCuentaBancaria}}" > <button class="btn btn-sm btn-primary">movimientos</button></a></td>
-                
+                <td> <a href="#/updateCuenta/{{cuentaBancaria.idCuentaBancaria}}">{{cuentaBancaria.numeroCuenta}}</a></td>
+                <td> {{cuentaBancaria.saldo}}</td>
+                <td> {{cuentaBancaria.digitoControl}}</td>
             </tr>
         </tbody>
     </table>
-    
+
     <a href="#/insertCuenta"><button class="btn btn-sm btn-primary">Insertar cuenta</button></a>
 
 </div>

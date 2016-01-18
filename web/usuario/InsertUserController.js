@@ -4,26 +4,23 @@ function InsertUserController($scope, usuarioService, $location) {
     $scope.tipo = "INSERT";
     $scope.okBoton = "Insertar";
     $scope.usuario = {};
-    
-    $scope.ok = function () {
 
-        var response = usuarioService.insert($scope.usuario);
-        
-        response.success(function (data, status, headers, config) {
+    $scope.ok = function () {
+        usuarioService.insert($scope.usuario).then(function (result) {
             alert("Usuario Insertado con Éxito con el nombre: " + $scope.usuario.nombre);
             $location.url("/findUser");
-        });
-
-        response.error(function (data, status, headers, config) {
-            if (status === 500) {
-                alert("Ha fallado la petición. Estado HTTP:" + status);
+        }, function (result) {
+            if (result.status === 500) {
+                alert("Ha fallado la petición. Estado HTTP:" + result.status);
             } else {
-                $scope.businessMessages = data;
+                $scope.businessMessages = result.data;
             }
         });
+
     };
+    
     $scope.cancel = function () {
-        $location.url('/');
+        $location.url('/findUser');
     };
 
 }
