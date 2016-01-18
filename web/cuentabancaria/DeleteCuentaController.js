@@ -1,6 +1,6 @@
-DeleteCuentaController.$inject = ['$scope', '$routeParams', 'cuentaBancariaService', 'usuarioService', '$location'];
+DeleteCuentaController.$inject = ['$scope', '$routeParams', 'cuentaBancariaService', 'usuarioService', 'sucursalBancariaService', '$location'];
 
-function DeleteCuentaController($scope, $routeParams, cuentaBancariaService, usuarioService, $location) {
+function DeleteCuentaController($scope, $routeParams, cuentaBancariaService, usuarioService, sucursalBancariaService, $location) {
     $scope.cuentaBancaria = {};
     $scope.idCuentaBancaria = $routeParams.idCuentaBancaria;
     $scope.tipo = "DELETE";
@@ -12,8 +12,15 @@ function DeleteCuentaController($scope, $routeParams, cuentaBancariaService, usu
         alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });
 
+    sucursalBancariaService.find().then(function (result) {
+        $scope.sucursalesBancarias = result.data;
+    }, function (result) {
+        alert("Ha fallado la petición. Estado HTTP:" + result.status);
+    });
+
     cuentaBancariaService.get($routeParams.idCuentaBancaria).then(function (result) {
         $scope.cuentaBancaria = result.data;
+        $scope.cuentaBancaria.fechaCreacion = new Date($scope.cuentaBancaria.fechaCreacion);
     }, function (result) {
         alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });

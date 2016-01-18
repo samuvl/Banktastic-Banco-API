@@ -9,6 +9,7 @@ function DeleteController($scope, $routeParams, entidadBancariaService, $locatio
     var response = entidadBancariaService.get($routeParams.idEntidadBancaria);
         response.success(function (data, status, headers, config) {
             $scope.entidadBancaria = data;
+            $scope.entidadBancaria.fechaCreacion = new Date($scope.entidadBancaria.fechaCreacion);
         });
 
         response.error(function (data, status, headers, config) {

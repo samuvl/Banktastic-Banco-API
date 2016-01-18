@@ -1,5 +1,5 @@
-UpdateCuentaController.$inject = ['$scope', '$routeParams', 'cuentaBancariaService', 'usuarioService', '$location', '$window'];
-function UpdateCuentaController($scope, $routeParams, cuentaBancariaService, usuarioService, $location, $window) {
+UpdateCuentaController.$inject = ['$scope', '$routeParams', 'cuentaBancariaService', 'usuarioService', 'sucursalBancariaService', '$location', '$window'];
+function UpdateCuentaController($scope, $routeParams, cuentaBancariaService, usuarioService, sucursalBancariaService, $location, $window) {
 
     $scope.cuentaBancaria = {};
     $scope.cuentaBancaria.idCuentaBancaria = $routeParams.idCuentaBancaria;
@@ -13,9 +13,15 @@ function UpdateCuentaController($scope, $routeParams, cuentaBancariaService, usu
         alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });
 
+    sucursalBancariaService.find().then(function (result) {
+        $scope.sucursalesBancarias = result.data;
+    }, function (result) {
+        alert("Ha fallado la petición. Estado HTTP:" + result.status);
+    });
+    
     cuentaBancariaService.get($routeParams.idCuentaBancaria).then(function (result) {
         $scope.cuentaBancaria = result.data;
-        //$scope.cuentaBancaria.fechaCreacion = new Date($scope.cuentaBancaria.fechaCreacion);
+        $scope.cuentaBancaria.fechaCreacion = new Date($scope.cuentaBancaria.fechaCreacion);
     }, function (result) {
         alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });

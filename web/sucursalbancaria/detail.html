@@ -1,0 +1,36 @@
+<div class="col-md-4 col-md-offset-4">
+    <form role="form">
+
+        <div class="form-group">
+            <label>Código Sucursal Bancaria</label>
+            <input type="text" class="form-control" placeholder="Código Sucursal Bancaria" name="codigo" ng-model="sucursalBancaria.codigoSucursalBancaria" ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{sucursalBancaria.codigoSucursalBancaria}}">
+        </div>
+
+        <div class="form-group">
+            <label>Direccion Sucursal Bancaria</label>
+            <input type="text" class="form-control" placeholder="Direccion" name="direccion" ng-model="sucursalBancaria.direccion" ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')"  ng-value="{{sucursalBancaria.direccion}}">
+        </div>
+
+        <div class="form-group">
+            <label>Telefono</label>
+            <input type="text" class="form-control" placeholder="Telefono" name="telefono" ng-model="sucursalBancaria.telefono" ng-disabled=" (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{sucursalBancaria.telefono}}"/>
+        </div>
+
+
+        <div class="form-group">
+            <label>Nombre Entidad Bancaria</label> <br />
+            <select ng-model="sucursalBancaria.entidadBancaria" ng-options="entidadBancaria as entidadBancaria.nombre for entidadBancaria in entidadesBancarias track by entidadBancaria.nombre" ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')">
+                <option value=""> -- Elige una Opción -- </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Fecha de creacion</label>
+            <input ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="sucursalBancaria.fechaCreacion" ng-disabled="(tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{sucursalBancaria.fechaCreacion}}">
+        </div>
+
+        <input ng-click="ok()" class="btn btn-sm btn-primary" type="submit" value="{{okBoton}}"/> <input ng-click="cancel()" class="btn btn-sm btn-danger" type="submit" value="cancel"/><br><br>
+    </form>
+
+    <div  class="alert alert-danger" ng-repeat="businessMessage in businessMessages"><span class="glyphicon glyphicon-exclamation-sign"></span> {{businessMessage.fieldName}}: {{businessMessage.mensaje}}</div>
+</div>
