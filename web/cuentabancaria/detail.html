@@ -3,36 +3,36 @@
 
         <div class="form-group">
             <label>Número de Cuenta</label>
-            <input type="text" class="form-control" placeholder="Número de Cuenta" name="numeroCuenta" ng-model="cuentaBancaria.numeroCuenta"ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.numeroCuenta}}">
+            <input type="text" class="form-control" placeholder="Número de Cuenta" name="numeroCuenta" ng-model="cuentaBancaria.numeroCuenta"ng-disabled="  (tipo === 'VIEW') " ng-value="{{cuentaBancaria.numeroCuenta}}">
         </div>
 
         <div class="form-group">
             <label>Dígito de Control</label>
-            <input type="text" class="form-control" placeholder="Dígito de Control" name="digitoControl" ng-model="cuentaBancaria.digitoControl"ng-disabled="true" ng-value="{{cuentaBancaria.digitoControl}}">
+            <input type="text" class="form-control" placeholder="Dígito de Control" name="digitoControl" ng-model="cuentaBancaria.digitoControl" ng-disabled="true" ng-value="{{cuentaBancaria.digitoControl}}">
         </div>
 
         <div class="form-group">
             <label>Nombre de Usuario</label> <br />
-            <select ng-model="cuentaBancaria.usuario" ng-options="usuario as usuario.nombre for usuario in usuarios track by usuario.nombre" ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')">
+            <select ng-model="cuentaBancaria.usuario" ng-options="usuario as usuario.nombre for usuario in usuarios track by usuario.nombre" ng-disabled="  (tipo === 'VIEW') ">
                 <option value=""> -- Elige una Opción -- </option>
             </select>
         </div>
 
         <div class="form-group">
             <label>Código de Sucursal Bancaria</label> <br />
-            <select ng-model="cuentaBancaria.sucursalBancaria" ng-options="sucursalBancaria as sucursalBancaria.codigoSucursalBancaria for sucursalBancaria in sucursalesBancarias track by sucursalBancaria.codigoSucursalBancaria" ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')">
+            <select ng-model="cuentaBancaria.sucursalBancaria" ng-options="sucursalBancaria as sucursalBancaria.codigoSucursalBancaria for sucursalBancaria in sucursalesBancarias track by sucursalBancaria.codigoSucursalBancaria" ng-disabled="  (tipo === 'VIEW') ">
                 <option value=""> -- Elige una Opción -- </option>
             </select>
         </div>
 
         <div class="form-group">
             <label>Saldo</label>
-            <input type="text" class="form-control" placeholder="saldo" name="saldo" ng-model="cuentaBancaria.saldo" ng-disabled=" (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.saldo}}"/>
+            <input type="text" class="form-control" placeholder="saldo" name="saldo" ng-model="cuentaBancaria.saldo"  ng-value="{{cuentaBancaria.saldo}}"/>
         </div>
 
         <div class="form-group">
             <label>Fecha de creacion</label>
-            <input ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="cuentaBancaria.fechaCreacion"ng-disabled="  (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{cuentaBancaria.fechaCreacion}}">
+            <input ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="cuentaBancaria.fechaCreacion"ng-disabled="  (tipo === 'VIEW') " ng-value="{{cuentaBancaria.fechaCreacion}}">
         </div>
         
         <a href="#/movimientos/{{cuentaBancaria.idCuentaBancaria}}"> <button class="btn btn-md btn-primary">Movimientos</button></a> <br/><br/>
@@ -41,6 +41,13 @@
         <input ng-click="delete()" class="btn btn-sm btn-warning" type="submit" value="{{deleteBoton}}" ng-hide="(tipo === 'INSERT')"> 
         <input ng-click="cancel()" class="btn btn-sm btn-primary" type="submit" value="Volver"/>
         
+        <div>
+            <!--Aqui los movimientos bancarios   
+            
+            -   En clase ha dicho que es copiar y pegar el código tal cual de movimiento....-->
+            
+            <!-- Como tu eres el pensante, te dejo esta parte a ti JAJAJAJA -->
+        </div>
 </form>
 
 <div  class="alert alert-danger" ng-repeat="businessMessage in businessMessages"><span class="glyphicon glyphicon-exclamation-sign"></span> {{businessMessage.fieldName}}: {{businessMessage.mensaje}}</div>

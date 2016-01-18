@@ -30,12 +30,12 @@ function UpdateCuentaController($scope, $routeParams, cuentaBancariaService, usu
     $scope.ok = function () {
         cuentaBancariaService.update($scope.cuentaBancaria).then(function (result) {
             alert("Actualizado con Éxito la cuenta Bancaria: " + $scope.cuentaBancaria.numeroCuenta) + "\n Recargando...";
-            $window.location.reload();
+            $location.url('/findCuenta/');
         }, function (result) {
-            if (status === 500) {
-                alert("Ha fallado la petición. Estado HTTP:" + status);
+            if (result.status === 500) {
+                alert("Ha fallado la petición. Estado HTTP:" + result.status);
             } else {
-                $scope.businessMessages = data;
+                $scope.businessMessages = result.data;
             }
         });
 
