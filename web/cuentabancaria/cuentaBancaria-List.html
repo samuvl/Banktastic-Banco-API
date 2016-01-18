@@ -6,6 +6,7 @@
                 <th>Nombre</th>
                 <th>Borrar</th>
                 <th>Actualizar</th>
+                <th>movimientos</th>
             </tr>
         </thead>
 
@@ -15,8 +16,12 @@
                 <td> {{cuentaBancaria.numeroCuenta}}</td>
                 <td> <a href="#/deleteCuenta/{{cuentaBancaria.idCuentaBancaria}}"> <button class="btn btn-sm btn-danger">Borrar <span class="glyphicon glyphicon-trash"></span></button></a></td>
                 <td> <a href="#/updateCuenta/{{cuentaBancaria.idCuentaBancaria}}" > <button class="btn btn-sm btn-primary">Actualizar <span class="glyphicon glyphicon-pencil"></span></button></a></td>
+                <td> <a href="#/movimientos/{{cuentaBancaria.idCuentaBancaria}}" > <button class="btn btn-sm btn-primary">movimientos</button></a></td>
+                
             </tr>
         </tbody>
     </table>
+    
+    <a href="#/insertCuenta"><button class="btn btn-sm btn-primary">Insertar cuenta</button></a>
 
 </div>

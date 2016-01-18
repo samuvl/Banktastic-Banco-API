@@ -1,12 +1,9 @@
-GetMovimientoController.$inject = ['$scope', '$routeParams', 'cuentaBancariaService'];
+GetMovimientoController.$inject = ['$scope', '$routeParams', 'movimientoService'];
 
-function GetMovimientoController($scope, $routeParams, cuentaBancariaService) {
-    $scope.tipo = "GETMOVIMIENTO";
-    //$scope.idCuentaBancaria = $routeParams.idCuentaBancaria;
+function GetMovimientoController($scope, $routeParams, movimientoService) {
 
-
-    cuentaBancariaService.getMovimiento($routeParams.idCuentaBancaria).then(function (result) {
-        $scope.cuentasBancarias = result.data;
+    movimientoService.getMovimiento($routeParams.idCuentaBancaria).then(function (result) {
+        $scope.movimientos = result.data;
     }, function (result) {
         alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });
