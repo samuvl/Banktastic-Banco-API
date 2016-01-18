@@ -23,7 +23,7 @@ function InsertController($scope, entidadBancariaService, $location, $window) {
     };
     
     $scope.cancel = function () {
-        $location.url('/');
+        $location.url('/find');
     };
 
 }

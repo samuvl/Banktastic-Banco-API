@@ -5,6 +5,7 @@ function UpdateController($scope, $routeParams, entidadBancariaService, $locatio
     $scope.entidadBancaria.idEntidadBancaria = $routeParams.idEntidadBancaria;
     $scope.tipo = "UPDATE";
     $scope.okBoton = "Actualizar";
+    $scope.deleteBoton = "Borrar";
 
     var response = entidadBancariaService.get($routeParams.idEntidadBancaria);
 
@@ -34,9 +35,22 @@ function UpdateController($scope, $routeParams, entidadBancariaService, $locatio
             }
         });
     };
+    
+        $scope.delete = function () {
+
+        var response = entidadBancariaService.delete($routeParams.idEntidadBancaria);
+
+        response.success(function (data, status, headers, config) {
+            alert("Borrado Con Éxito");
+            $location.url('/find');
+        });
+        response.error(function (data, status, headers, config) {
+            alert("Error Borrando la entidad:  " + status);
+        });
+    };
 
     $scope.cancel = function () {
-        $location.url('/find/');
+        $location.url('/find');
     };
 }
 app.controller("UpdateController", UpdateController);

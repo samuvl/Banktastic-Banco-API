@@ -25,8 +25,11 @@
         <label>CIF</label>
         <input type="text" class="form-control" placeholder="cif" name="cif" ng-model="entidadBancaria.cif" ng-disabled=" (tipo === 'VIEW') || (tipo === 'DELETE') || (tipo === 'GET')" ng-value="{{entidadBancaria.cif}}"/>
     </div>
-  
-  <input ng-click="ok()" class="btn btn-sm btn-primary" type="submit" value="{{okBoton}}"/> <input ng-click="cancel()" class="btn btn-sm btn-danger" type="submit" value="cancel"/><br><br>
+
+  <input ng-click="ok()" class="btn btn-sm btn-primary" type="submit" value="{{okBoton}}"/> 
+  <input ng-click="delete()" class="btn btn-sm btn-primary" type="submit" value="{{deleteBoton}}" ng-hide="(tipo === 'INSERT')"> 
+  <input ng-click="cancel()" class="btn btn-sm btn-danger" type="submit" value="Volver"/><br><br>
+
 </form>
     
 <div  class="alert alert-danger" ng-repeat="businessMessage in businessMessages"><span class="glyphicon glyphicon-exclamation-sign"></span> {{businessMessage.fieldName}}: {{businessMessage.mensaje}}</div>

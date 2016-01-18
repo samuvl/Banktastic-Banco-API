@@ -5,6 +5,7 @@ function UpdateSucursalController($scope, $routeParams, sucursalBancariaService,
     $scope.sucursalBancaria.idSucursalBancaria = $routeParams.idSucursalBancaria;
     $scope.tipo = "UPDATE";
     $scope.okBoton = "Actualizar";
+    $scope.deleteBoton = "Borrar";
 
     entidadBancariaService.find().then(function (result) {
         $scope.entidadesBancarias = result.data;
@@ -19,9 +20,10 @@ function UpdateSucursalController($scope, $routeParams, sucursalBancariaService,
         alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });
 
+
     $scope.ok = function () {
         sucursalBancariaService.update($scope.sucursalBancaria).then(function (result) {
-            alert("Actualizado con Éxito la cuenta Bancaria: " + $scope.sucursalBancaria.numeroCuenta) + "\n Recargando...";
+            alert("Actualizado con Éxito la cuenta Bancaria: " + $scope.sucursalBancaria.codigoSucursalBancaria) + "\n Recargando...";
             $window.location.reload();
         }, function (result) {
             if (status === 500) {
@@ -31,6 +33,16 @@ function UpdateSucursalController($scope, $routeParams, sucursalBancariaService,
             }
         });
 
+    };
+    
+    $scope.delete = function () {
+
+        sucursalBancariaService.delete($routeParams.idSucursalBancaria).then(function (result) {
+            alert("Borrado Con Éxito");
+            $location.url('/findSucursal');
+        }, function (result) {
+            alert("Ha fallado la petición. Estado HTTP:" + result.status);
+        });
     };
 
     $scope.cancel = function () {

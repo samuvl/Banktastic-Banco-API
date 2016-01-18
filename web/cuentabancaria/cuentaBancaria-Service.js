@@ -44,12 +44,6 @@ function CuentaBancariaService($http) {
         return response;
     };
 
-//    this.getMovimiento = function (idcuentaBancaria) {
-//        var response = $http({
-//            method: "GET",
-//            url: "/banktastic-banco-api/api/cuentabancaria/" + idCuentaBancaria + "/movimientobancario"
-//        });
-//        return response;
-//    };
+
 }
 app.service("cuentaBancariaService", CuentaBancariaService);
