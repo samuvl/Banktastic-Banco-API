@@ -81,6 +81,10 @@ public class MovimientoBancarioController {
     @RequestMapping(value = {"/movimientobancario"}, method = RequestMethod.POST)
     public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) throws IOException {
         try {
+            
+            //Primero hay que cojer el id o el numero de cuenta y hacer un get de ese numero de cuenta
+            //para obtener todos los datos de la cuenta, y crear un objeto de tipo CuentaBancaria que será
+            //metido en un objeto MovimientoBancario 
 
             MovimientoBancario movimientoBancario = (MovimientoBancario) jsonTransformer.jsonToObject(jsonEntrada, MovimientoBancario.class);
 
