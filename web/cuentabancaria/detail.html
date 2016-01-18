@@ -35,20 +35,47 @@
             <input ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="cuentaBancaria.fechaCreacion"ng-disabled="  (tipo === 'VIEW') " ng-value="{{cuentaBancaria.fechaCreacion}}">
         </div>
         
-        <a href="#/movimientos/{{cuentaBancaria.idCuentaBancaria}}"> <button class="btn btn-md btn-primary">Movimientos</button></a> <br/><br/>
-
+        
+    
         <input ng-click="ok()" class="btn btn-sm btn-success" type="submit" value="{{okBoton}}"/> 
         <input ng-click="delete()" class="btn btn-sm btn-warning" type="submit" value="{{deleteBoton}}" ng-hide="(tipo === 'INSERT')"> 
         <input ng-click="cancel()" class="btn btn-sm btn-primary" type="submit" value="Volver"/>
+    
+    </form>
+    </div>
         
-        <div>
-            <!--Aqui los movimientos bancarios   
-            
-            -   En clase ha dicho que es copiar y pegar el código tal cual de movimiento....-->
-            
-            <!-- Como tu eres el pensante, te dejo esta parte a ti JAJAJAJA -->
+        <div class="row">
+            <div id="detalle_movimientos" class="col-md-4 col-md-offset-3">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr class="success">
+                            <th>idMovimientoBancario</th>
+                            <th>tipoMovimiento</th>
+                            <th>concepto</th>
+                            <th>importe</th>
+                            <th>saldo</th>
+                            <th>fechaMovimiento </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr  ng-repeat="movimiento in movimientos">
+                            <td> {{movimiento.idMovimientoBancario}}</td>
+                            <td> {{movimiento.tipoMovimiento}}</td>
+                            <td> {{movimiento.concepto}}</td>
+                            <td> {{movimiento.importe}}</td>
+                            <td> {{movimiento.saldo}}</td>
+                            <td> {{movimiento.fechaMovimiento}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+    
+            <a href="#/insertMovimiento"><button class="btn btn-sm btn-primary">Insertar movimiento</button></a>
+
+            </div>
         </div>
-</form>
+        
+
 
 <div  class="alert alert-danger" ng-repeat="businessMessage in businessMessages"><span class="glyphicon glyphicon-exclamation-sign"></span> {{businessMessage.fieldName}}: {{businessMessage.mensaje}}</div>
-</div>

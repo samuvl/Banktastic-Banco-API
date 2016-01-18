@@ -6,6 +6,12 @@ body{
     margin-top: 100px;
 }
 
+#detalle_movimientos{
+    
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
 footer{
     background-color: #0C816A !important;
     position: fixed;
