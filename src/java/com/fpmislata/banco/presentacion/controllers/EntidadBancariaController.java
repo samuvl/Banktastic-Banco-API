@@ -59,6 +59,7 @@ public class EntidadBancariaController {
             String name = httpServletRequest.getParameter("nombre");
             if (name == null) {
                 entidadesBancarias = entidadBancariaService.findAll();
+                System.out.println(entidadesBancarias.size());
             } else {
                 entidadesBancarias = entidadBancariaService.findByNombre(name);
             }
