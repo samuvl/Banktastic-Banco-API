@@ -5,6 +5,7 @@ function UpdateCuentaController($scope, $routeParams, cuentaBancariaService, usu
     $scope.cuentaBancaria.idCuentaBancaria = $routeParams.idCuentaBancaria;
     $scope.tipo = "UPDATE";
     $scope.okBoton = "Actualizar";
+    $scope.deleteBoton = "Borrar";
 
 
     usuarioService.find().then(function (result) {
@@ -18,7 +19,7 @@ function UpdateCuentaController($scope, $routeParams, cuentaBancariaService, usu
     }, function (result) {
         alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });
-    
+
     cuentaBancariaService.get($routeParams.idCuentaBancaria).then(function (result) {
         $scope.cuentaBancaria = result.data;
         $scope.cuentaBancaria.fechaCreacion = new Date($scope.cuentaBancaria.fechaCreacion);
@@ -39,6 +40,20 @@ function UpdateCuentaController($scope, $routeParams, cuentaBancariaService, usu
         });
 
     };
+
+    $scope.delete = function () {
+        if (confirm('¿Está seguro que desea borrar?')) {
+            cuentaBancariaService.delete($routeParams.idCuentaBancaria).then(function (result) {
+                alert("Borrado Con Éxito");
+                $location.url('/findCuenta');
+            }, function (result) {
+                alert("Ha fallado la petición. Estado HTTP:" + result.status);
+            });
+        } else {
+
+        }
+    };
+
 
     $scope.cancel = function () {
         $location.url('/findCuenta/');

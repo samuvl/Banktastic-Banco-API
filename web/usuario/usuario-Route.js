@@ -8,16 +8,16 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: "usuario/usuario-List.html",
             controller: "FindUserController"
         });
-
-        $routeProvider.when('/getUser/:idUsuario', {
-            templateUrl: "usuario/detail.html",
-            controller: "GetUserController"
-        });
-
-        $routeProvider.when('/deleteUser/:idUsuario', {
-            templateUrl: "usuario/detail.html",
-            controller: "DeleteUserController"
-        });
+//
+//        $routeProvider.when('/getUser/:idUsuario', {
+//            templateUrl: "usuario/detail.html",
+//            controller: "GetUserController"
+//        });
+//
+//        $routeProvider.when('/deleteUser/:idUsuario', {
+//            templateUrl: "usuario/detail.html",
+//            controller: "DeleteUserController"
+//        });
 
         $routeProvider.when('/insertUser/', {
             templateUrl: "usuario/detail.html",

@@ -2,18 +2,15 @@ FindUserController.$inject = ['$scope', '$routeParams', 'usuarioService'];
 
 function FindUserController($scope, $routeParams, usuarioService) {
     $scope.tipo = "FIND";
-    
-    var response;
+
     if ($routeParams.nombre === undefined) {
-        response = usuarioService.find();
-        response.success(function (data, status, headers, config) {
-            $scope.usuarios = data;
+        usuarioService.find().then(function (result) {
+            $scope.usuarios = result.data;
         });
     }
     else {
-        response = usuarioService.findByNombre($routeParams.nombre);
-        response.success(function (data, status, headers, config) {
-            $scope.usuarios = data;
+        usuarioService.findByNombre($routeParams.nombre).then(function (result) {
+            $scope.usuarios = result.data;
         });
     }
 }

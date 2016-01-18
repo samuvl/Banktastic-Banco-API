@@ -7,46 +7,38 @@ function UpdateController($scope, $routeParams, entidadBancariaService, $locatio
     $scope.okBoton = "Actualizar";
     $scope.deleteBoton = "Borrar";
 
-    var response = entidadBancariaService.get($routeParams.idEntidadBancaria);
-
-    response.success(function (data, status, headers, config) {
-        $scope.entidadBancaria = data;
+    entidadBancariaService.get($routeParams.idEntidadBancaria).then(function (result) {
+        $scope.entidadBancaria = result.data;
         $scope.entidadBancaria.fechaCreacion = new Date($scope.entidadBancaria.fechaCreacion);
-    });
-
-    response.error(function (data, status, headers, config) {
-        alert("Ha fallado la petición. Estado HTTP:" + status);
+    }, function (result) {
+        alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });
 
 
     $scope.ok = function () {
-        var response = entidadBancariaService.update($scope.entidadBancaria);
-
-        response.success(function (data, status, headers, config) {
-            alert("Actualizado con Éxito la Entidad Bancaria: " + $scope.entidadBancaria.idEntidadBancaria) + "\n Recargando...";
+        entidadBancariaService.update($scope.entidadBancaria).then(function (result) {
+            alert("Actualizado con Éxito la Entidad Bancaria: " + $scope.entidadBancaria.nombre) + "\n Recargando...";
             $window.location.reload();
-        });
-        
-        response.error(function (data, status, headers, config) {
-            if (status === 500) {
-                alert("Ha fallado la petición. Estado HTTP:" + status);
+        }, function (result) {
+            if (result.status === 500) {
+                alert("Ha fallado la petición. Estado HTTP:" + result.status);
             } else {
-                $scope.businessMessages = data;
+                $scope.businessMessages = result.data;
             }
         });
     };
-    
-        $scope.delete = function () {
 
-        var response = entidadBancariaService.delete($routeParams.idEntidadBancaria);
+    $scope.delete = function () {
+        if (confirm('¿Está seguro que desea borrar?')) {
+            entidadBancariaService.delete($routeParams.idEntidadBancaria).then(function (result) {
+                alert("Borrado Con Éxito");
+                $location.url('/find');
+            }, function (result) {
+                alert("Error Borrando la entidad:  " + result.status);
+            });
+        } else {
 
-        response.success(function (data, status, headers, config) {
-            alert("Borrado Con Éxito");
-            $location.url('/find');
-        });
-        response.error(function (data, status, headers, config) {
-            alert("Error Borrando la entidad:  " + status);
-        });
+        }
     };
 
     $scope.cancel = function () {

@@ -6,32 +6,38 @@ function UpdateUserController($scope, $routeParams, usuarioService, $location, $
     $scope.usuario.idUsuario = $routeParams.idUsuario;
     $scope.tipo = "UPDATE";
     $scope.okBoton = "Actualizar";
+    $scope.deleteBoton = "Borrar";
 
-    var response = usuarioService.get($routeParams.idUsuario);
-
-    response.success(function (data, status, headers, config) {
-        $scope.usuario = data;
-    });
-
-    response.error(function (data, status, headers, config) {
-        alert("Ha fallado la petición. Estado HTTP:" + status);
+    usuarioService.get($routeParams.idUsuario).then(function (result) {
+        $scope.usuario = result.data;
+    }, function (result) {
+        alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });
 
 
     $scope.ok = function () {
-        var response = usuarioService.update($scope.usuario);
-
-        response.success(function (data, status, headers, config) {
+        usuarioService.update($scope.usuario).then(function (result) {
             alert("Actualizado con Éxito el Usuario: " + $scope.usuario.idUsuario) + "\n Recargando...";
-            $window.location.reload();
-        });
-        response.error(function (data, status, headers, config) {
-            if (status === 500) {
-                alert("Ha fallado la petición. Estado HTTP:" + status);
+            $location.url('/findUser/');
+        }, function (result) {
+            if (result, status === 500) {
+                alert("Ha fallado la petición. Estado HTTP:" + result.status);
             } else {
-                $scope.businessMessages = data;
+                $scope.businessMessages = result.data;
             }
         });
+    };
+
+    $scope.delete = function () {
+        if (confirm('¿Está seguro que desea borrar?')) {
+            usuarioService.delete($routeParams.idUsuario).then(function (result) {
+                alert("Borrado Con Éxito");
+                $location.url('/findUser');
+            }, function (result) {
+                alert("Error Borrando la entidad:  " + result.status);
+            });
+        } else {
+        }
     };
 
     $scope.cancel = function () {

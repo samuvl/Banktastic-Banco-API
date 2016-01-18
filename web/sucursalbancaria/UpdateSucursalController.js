@@ -34,15 +34,18 @@ function UpdateSucursalController($scope, $routeParams, sucursalBancariaService,
         });
 
     };
-    
-    $scope.delete = function () {
 
-        sucursalBancariaService.delete($routeParams.idSucursalBancaria).then(function (result) {
-            alert("Borrado Con Éxito");
-            $location.url('/findSucursal');
-        }, function (result) {
-            alert("Ha fallado la petición. Estado HTTP:" + result.status);
-        });
+    $scope.delete = function () {
+        if (confirm('¿Está seguro que desea borrar?')) {
+            sucursalBancariaService.delete($routeParams.idSucursalBancaria).then(function (result) {
+                alert("Borrado Con Éxito");
+                $location.url('/findSucursal');
+            }, function (result) {
+                alert("Ha fallado la petición. Estado HTTP:" + result.status);
+            });
+        } else {
+
+        }
     };
 
     $scope.cancel = function () {

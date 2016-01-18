@@ -2,13 +2,13 @@ EntidadBancariaService.$inject = ['$http'];
 
 function EntidadBancariaService($http) {
 
-//    this.get = function (idEntidadBancaria) {
-//        var response = $http({
-//            method: "GET",
-//            url: "/banktastic-banco-api/api/entidadbancaria/" + idEntidadBancaria
-//        });
-//        return response;
-//    };
+    this.get = function (idEntidadBancaria) {
+        var response = $http({
+            method: "GET",
+            url: "/banktastic-banco-api/api/entidadbancaria/" + idEntidadBancaria
+        });
+        return response;
+    };
 
     this.insert = function (entidadBancaria) {
         var response = $http({
