@@ -40,52 +40,55 @@ public class MovimientoBancarioController {
 
     private boolean updateSaldoCuenta(HttpServletResponse httpServletResponse, MovimientoBancario movimientoBancario) {
         try {
-            /*Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-             session.getTransaction().rollback();*/
-            int idCuentaBancaria = movimientoBancario.getCuentaBancaria().getIdCuentaBancaria();
-            if (idCuentaBancaria != 0) {
-                CuentaBancaria cuentaBancaria = cuentaBancariaService.get(idCuentaBancaria);
-                BigDecimal saldoNuevo = movimientoBancario.getImporte();
-                BigDecimal saldoViejo = cuentaBancaria.getSaldo();
+            if (movimientoBancario != null) {
+                int idCuentaBancaria = movimientoBancario.getCuentaBancaria().getIdCuentaBancaria();
+                if (idCuentaBancaria != 0) {
+                    CuentaBancaria cuentaBancaria = cuentaBancariaService.get(idCuentaBancaria);
+                    BigDecimal saldoNuevo = movimientoBancario.getImporte();
+                    BigDecimal saldoViejo = cuentaBancaria.getSaldo();
 
-                if (movimientoBancario.getTipoMovimiento() == RolMovimiento.debe) {
-                    saldoNuevo = saldoNuevo.multiply(new BigDecimal(-1));
-                }
-                saldoNuevo = saldoViejo.add(saldoNuevo);
-                if (saldoNuevo.compareTo(BigDecimal.ZERO) > 0) {
-                    cuentaBancaria.setSaldo(saldoNuevo);
-                    return true;
+                    if (movimientoBancario.getTipoMovimiento() == RolMovimiento.debe) {
+                        saldoNuevo = saldoNuevo.multiply(new BigDecimal(-1));
+                    }
+                    saldoNuevo = saldoViejo.add(saldoNuevo);
+                    if (saldoNuevo.compareTo(BigDecimal.ZERO) > 0) {
+                        cuentaBancaria.setSaldo(saldoNuevo);
+                        return true;
+                    }
+                } else {
+                    throw new BusinessException("MovimientoBancario", "Ha ocurrido un error. NULL.");
                 }
             }
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
+        } catch (BusinessException ex) {
+            List<BusinessMessage> bussinessMessage = ex.getBusinessMessages();
+            String jsonSalida = jsonTransformer.objectToJson(bussinessMessage);
+
+            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            try {
+                httpServletResponse.getWriter().println(jsonSalida);
+            } catch (IOException ex1) {
+                Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, "Error devolviendo Lista de Mensajes", ex1);
+            }
+        } catch (Exception ex1) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            try {
+                ex1.printStackTrace(httpServletResponse.getWriter());
+            } catch (IOException ex2) {
+                Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, "Error devolviendo la traza", ex2);
+            }
         }
         return false;
     }
 
-//    @RequestMapping(value = {"/movimientobancario/{idMovimientoBancario}"}, method = RequestMethod.GET)
-//    public void get(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idMovimientoBancario") int idMovimientoBancario) {
-//        try {
-//            MovimientoBancario movimientoBancario = movimientoBancarioService.get(idMovimientoBancario);
-//            String jsonSalida = jsonTransformer.objectToJson(movimientoBancario);
-//
-//            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-//            httpServletResponse.setContentType("application/json");
-//            httpServletResponse.getWriter().println(jsonSalida);
-//
-//        } catch (Exception ex) {
-//            throw new RuntimeException(ex);
-//        }
-//    }
-
     @RequestMapping(value = {"/movimientobancario"}, method = RequestMethod.POST)
     public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) throws IOException {
         try {
-            
+
             //Primero hay que cojer el id o el numero de cuenta y hacer un get de ese numero de cuenta
             //para obtener todos los datos de la cuenta, y crear un objeto de tipo CuentaBancaria que será
             //metido en un objeto MovimientoBancario 
-
             MovimientoBancario movimientoBancario = (MovimientoBancario) jsonTransformer.jsonToObject(jsonEntrada, MovimientoBancario.class);
 
             if (updateSaldoCuenta(httpServletResponse, movimientoBancario)) {
@@ -128,7 +131,7 @@ public class MovimientoBancarioController {
             throw new RuntimeException(ex);
         }
     }
-    
+
     @RequestMapping(value = {"/movimientobancario/{idCuentaBancaria}"}, method = RequestMethod.GET)
     public void getByIdCuenta(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
         try {
