@@ -1,8 +1,7 @@
 package com.fpmislata.banco.presentacion.controllers;
 
-import com.fpmislata.banco.business.domain.CuentaBancaria;
-import com.fpmislata.banco.business.service.CuentaBancariaService;
-import com.fpmislata.banco.business.service.MovimientoBancarioService;
+import com.fpmislata.banco.business.domain.SucursalBancaria;
+import com.fpmislata.banco.business.service.SucursalBancariaService;
 import com.fpmislata.banco.core.BusinessException;
 import com.fpmislata.banco.core.BusinessMessage;
 import com.fpmislata.banco.presentacion.json.JsonTransformer;
@@ -19,40 +18,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ *
+ * @author Lliurex
+ */
 @Controller
-public class CuentaBancariaController {
-
-    @Autowired
-    CuentaBancariaService cuentaBancariaService;
-
-    @Autowired
-    MovimientoBancarioService movimientoBancarioService;
+public class SucursalBancariaController {
 
     @Autowired
     JsonTransformer jsonTransformer;
+    @Autowired
+    SucursalBancariaService sucursalBancariaService;
 
-    @RequestMapping(value = {"/cuentabancaria/{idCuentaBancaria}"}, method = RequestMethod.GET)
-    public void get(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
+    @RequestMapping(value = "/sucursalbancaria/{idSucursalBancaria}", method = RequestMethod.GET, produces = "application/json")
+    public void get(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idSucursalBancaria") int idSucursalBancaria) {
         try {
-            CuentaBancaria cuentaBancaria = cuentaBancariaService.get(idCuentaBancaria);
-            
-            String jsonSalida = jsonTransformer.objectToJson(cuentaBancaria);
+            SucursalBancaria sucursalBancaria = sucursalBancariaService.get(idSucursalBancaria);
+            String jsonSalida = jsonTransformer.objectToJson(sucursalBancaria);
 
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json");
             httpServletResponse.getWriter().println(jsonSalida);
-
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }
 
-    @RequestMapping(value = "/cuentabancaria", method = RequestMethod.GET, produces = "application/json")
-    public void find(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    @RequestMapping(value = "/sucursalbancaria", method = RequestMethod.GET, produces = "application/json")
+    public void findAll(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        List<SucursalBancaria> sucursalesBancarias;
         try {
-            List<CuentaBancaria> cuentasBancarias = cuentaBancariaService.findAll();
+            sucursalesBancarias = sucursalBancariaService.findAll();
 
-            String jsonSalida = jsonTransformer.objectToJson(cuentasBancarias);
+            String jsonSalida = jsonTransformer.objectToJson(sucursalesBancarias);
 
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
@@ -63,17 +61,15 @@ public class CuentaBancariaController {
         }
     }
 
-    @RequestMapping(value = {"/cuentabancaria"}, method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = {"/sucursalbancaria"}, method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
         try {
-            //System.out.println(jsonEntrada);
-            CuentaBancaria cuentaBancaria = (CuentaBancaria) jsonTransformer.jsonToObject(jsonEntrada, CuentaBancaria.class);
-            cuentaBancariaService.insert(cuentaBancaria);
+            SucursalBancaria sucursalBancaria = (SucursalBancaria) jsonTransformer.jsonToObject(jsonEntrada, SucursalBancaria.class);
+            sucursalBancariaService.insert(sucursalBancaria);
 
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
-            httpServletResponse.getWriter().println(jsonTransformer.objectToJson(cuentaBancaria));
-
+            httpServletResponse.getWriter().println(jsonTransformer.objectToJson(sucursalBancaria));
         } catch (BusinessException ex) {
             List<BusinessMessage> bussinessMessage = ex.getBusinessMessages();
             String jsonSalida = jsonTransformer.objectToJson(bussinessMessage);
@@ -83,7 +79,7 @@ public class CuentaBancariaController {
             try {
                 httpServletResponse.getWriter().println(jsonSalida);
             } catch (IOException ex1) {
-                Logger.getLogger(EntidadBancariaController.class.getName()).log(Level.SEVERE, "Error devolviendo Lista de Mensajes", ex1);
+                Logger.getLogger(SucursalBancariaController.class.getName()).log(Level.SEVERE, "Error devolviendo Lista de Mensajes", ex1);
             }
         } catch (Exception ex1) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -91,21 +87,20 @@ public class CuentaBancariaController {
             try {
                 ex1.printStackTrace(httpServletResponse.getWriter());
             } catch (IOException ex2) {
-                Logger.getLogger(EntidadBancariaController.class.getName()).log(Level.SEVERE, "Error devolviendo la traza", ex2);
+                Logger.getLogger(SucursalBancariaController.class.getName()).log(Level.SEVERE, "Error devolviendo la traza", ex2);
             }
         }
     }
 
-    @RequestMapping(value = {"/cuentabancaria"}, method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = {"/sucursalbancaria"}, method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public void update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
         try {
-            CuentaBancaria cuentaBancaria = (CuentaBancaria) jsonTransformer.jsonToObject(jsonEntrada, CuentaBancaria.class);
-            cuentaBancariaService.update(cuentaBancaria);
+            SucursalBancaria sucursalBancaria = (SucursalBancaria) jsonTransformer.jsonToObject(jsonEntrada, SucursalBancaria.class);
+            sucursalBancariaService.update(sucursalBancaria);
 
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
-            httpServletResponse.getWriter().println(jsonTransformer.objectToJson(cuentaBancaria));
-
+            httpServletResponse.getWriter().println(jsonTransformer.objectToJson(sucursalBancaria));
         } catch (BusinessException ex) {
             List<BusinessMessage> bussinessMessage = ex.getBusinessMessages();
             String jsonSalida = jsonTransformer.objectToJson(bussinessMessage);
@@ -115,7 +110,7 @@ public class CuentaBancariaController {
             try {
                 httpServletResponse.getWriter().println(jsonSalida);
             } catch (IOException ex1) {
-                Logger.getLogger(EntidadBancariaController.class.getName()).log(Level.SEVERE, "Error devolviendo Lista de Mensajes", ex1);
+                Logger.getLogger(SucursalBancariaController.class.getName()).log(Level.SEVERE, "Error devolviendo Lista de Mensajes", ex1);
             }
         } catch (Exception ex1) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -123,16 +118,15 @@ public class CuentaBancariaController {
             try {
                 ex1.printStackTrace(httpServletResponse.getWriter());
             } catch (IOException ex2) {
-                Logger.getLogger(EntidadBancariaController.class.getName()).log(Level.SEVERE, "Error devolviendo la traza", ex2);
+                Logger.getLogger(SucursalBancariaController.class.getName()).log(Level.SEVERE, "Error devolviendo la traza", ex2);
             }
         }
-
     }
 
-    @RequestMapping(value = "/cuentabancaria/{idCuentaBancaria}", method = RequestMethod.DELETE, produces = "application/json")
-    public void delete(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
+    @RequestMapping(value = "/sucursalbancaria/{idSucursalBancaria}", method = RequestMethod.DELETE, produces = "application/json")
+    public void delete(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idSucursalBancaria") int idSucursalBancaria) {
         try {
-            cuentaBancariaService.delete(idCuentaBancaria);
+            sucursalBancariaService.delete(idSucursalBancaria);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
 
@@ -142,18 +136,4 @@ public class CuentaBancariaController {
         }
     }
 
-//¿?¿?¿??¿?¿?¿?¿?
-    /*
-    @RequestMapping(value = {"/cuentabancaria/{idCuentaBancaria}/movimientobancario"}, method = RequestMethod.GET)
-    public void getMovimiento(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idcuentaBancaria") int idcuentaBancaria) {
-        try {
-
-            httpServletResponse.getWriter().println(jsonTransformer.objectToJson(movimientoBancarioService.getByIdCuenta(idcuentaBancaria)));
-            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-            httpServletResponse.setContentType("application/json; charset=UTF-8");
-
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
-    }*/
 }
