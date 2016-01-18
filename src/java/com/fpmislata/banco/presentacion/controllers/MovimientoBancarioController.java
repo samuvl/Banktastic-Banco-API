@@ -63,20 +63,20 @@ public class MovimientoBancarioController {
         return false;
     }
 
-    @RequestMapping(value = {"/movimientobancario/{idMovimientoBancario}"}, method = RequestMethod.GET)
-    public void get(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idMovimientoBancario") int idMovimientoBancario) {
-        try {
-            MovimientoBancario movimientoBancario = movimientoBancarioService.get(idMovimientoBancario);
-            String jsonSalida = jsonTransformer.objectToJson(movimientoBancario);
-
-            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-            httpServletResponse.setContentType("application/json");
-            httpServletResponse.getWriter().println(jsonSalida);
-
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
-    }
+//    @RequestMapping(value = {"/movimientobancario/{idMovimientoBancario}"}, method = RequestMethod.GET)
+//    public void get(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idMovimientoBancario") int idMovimientoBancario) {
+//        try {
+//            MovimientoBancario movimientoBancario = movimientoBancarioService.get(idMovimientoBancario);
+//            String jsonSalida = jsonTransformer.objectToJson(movimientoBancario);
+//
+//            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+//            httpServletResponse.setContentType("application/json");
+//            httpServletResponse.getWriter().println(jsonSalida);
+//
+//        } catch (Exception ex) {
+//            throw new RuntimeException(ex);
+//        }
+//    }
 
     @RequestMapping(value = {"/movimientobancario"}, method = RequestMethod.POST)
     public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) throws IOException {
@@ -120,6 +120,23 @@ public class MovimientoBancarioController {
             List<MovimientoBancario> movimientosBancarios = movimientoBancarioService.findAll();
             httpServletResponse.getWriter().println(jsonTransformer.objectToJson(movimientosBancarios));
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    
+    @RequestMapping(value = {"/movimientobancario/{idCuentaBancaria}"}, method = RequestMethod.GET)
+    public void getByIdCuenta(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
+        try {
+            CuentaBancaria cuentaBancaria = new CuentaBancaria();
+            cuentaBancaria.setIdCuentaBancaria(idCuentaBancaria);
+            List<MovimientoBancario> movimientoBancario = movimientoBancarioService.getByIdCuenta(cuentaBancaria);
+            String jsonSalida = jsonTransformer.objectToJson(movimientoBancario);
+
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            httpServletResponse.setContentType("application/json");
+            httpServletResponse.getWriter().println(jsonSalida);
+
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
