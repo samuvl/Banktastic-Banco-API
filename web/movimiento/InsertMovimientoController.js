@@ -1,10 +1,11 @@
-InsertMovimientoController.$inject = ['$scope', 'movimientoService'];
+InsertMovimientoController.$inject = ['$scope', 'movimientoService','$location','cuentaBancariaService'];
 
-function InsertMovimiento($scope, movimientoService){
+function InsertMovimientoController($scope, movimientoService, $location, cuentaBancariaService){
     
     $scope.movimiento = {};
     
      $scope.ok = function () {
+         
         
         movimientoService.insertMovimiento($scope.movimiento).then(function (result) {
             alert("Movimiento Insertado con Éxito con el id: " + $scope.movimiento.idMovimientoBancario);
@@ -13,7 +14,7 @@ function InsertMovimiento($scope, movimientoService){
             if (status === 500) {
                 alert("Ha fallado la petición. Estado HTTP:" + status);
             } else {
-                $scope.businessMessages = data;
+                $scope.businessMessages = result.data;
             }
         });
     };
