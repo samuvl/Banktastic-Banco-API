@@ -8,17 +8,17 @@
   
     <div class="form-group">
         <label>Codigo Entidad</label>
-        <input type="text" class="form-control" placeholder="Codigo de la entidad" name="codigoEntidad" ng-model="entidadBancaria.codigoEntidad"ng-disabled="  (tipo === 'VIEW') " ng-value="{{entidadBancaria.codigoEntidad}}">
+        <input type="text" class="form-control" placeholder="Codigo de la entidad" name="codigoEntidad" ng-model="entidadBancaria.codigoEntidad" ng-disabled="true" ng-value="{{entidadBancaria.codigoEntidad}}">
     </div>
   
     <div class="form-group">
         <label>Fecha de creacion</label>
-        <input ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="entidadBancaria.fechaCreacion"ng-disabled="  (tipo === 'VIEW') " ng-value="{{entidadBancaria.fechaCreacion}}">
+        <input ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="entidadBancaria.fechaCreacion"ng-disabled="" ng-value="{{entidadBancaria.fechaCreacion}}">
     </div>
     
     <div class="form-group">
         <label>Direccion</label>
-        <input type="text" class="form-control" placeholder="Direccion" name="direccion" ng-model="entidadBancaria.direccion"ng-disabled="  (tipo === 'VIEW') " ng-value="{{entidadBancaria.direccion}}"/>
+        <input type="text" class="form-control" placeholder="Direccion" name="direccion" ng-model="entidadBancaria.direccion"ng-disabled="" ng-value="{{entidadBancaria.direccion}}"/>
     </div>
     
     <div class="form-group">
