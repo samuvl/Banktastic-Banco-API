@@ -11,7 +11,7 @@
 
         <tbody>
             <tr  ng-repeat="usuario in usuarios">
-                <td> <a href="#/updateUser/{{usuario.idUsuario}}">{{usuario.nombre}}</a></td>
+                <td> <a class="tooltipp" href="#/updateUser/{{usuario.idUsuario}}">{{usuario.nombre}}<span>Pulse aquí para ver más detalles.</span></a></td>
                 <td>{{usuario.nick}}</td>
                 <td>{{usuario.email}}</td>
             </tr>

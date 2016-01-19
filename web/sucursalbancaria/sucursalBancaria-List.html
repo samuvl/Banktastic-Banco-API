@@ -11,7 +11,7 @@
 
         <tbody  >
             <tr  ng-repeat="sucursalBancaria in sucursalesBancarias">
-                <td> <a href="#/updateSucursal/{{sucursalBancaria.idSucursalBancaria}}"> {{sucursalBancaria.codigoSucursalBancaria}} </a></td>
+                <td> <a class="tooltipp" href="#/updateSucursal/{{sucursalBancaria.idSucursalBancaria}}"> {{sucursalBancaria.codigoSucursalBancaria}}<span>Pulse aquí para ver más detalles.</span> </a></td>
                 <td>{{sucursalBancaria.direccion}}</td>
                 <td>{{sucursalBancaria.telefono}}</td>
             </tr>

@@ -12,7 +12,7 @@
 
         <tbody>
             <tr ng-repeat="entidadBancaria in entidadesBancarias">
-                <td> <a href="#/update/{{entidadBancaria.idEntidadBancaria}}">{{entidadBancaria.nombre}}</a></td>
+                <td> <a class="tooltipp" href="#/update/{{entidadBancaria.idEntidadBancaria}}">{{entidadBancaria.nombre}}<span>Pulse aquí para ver más detalles.</span></a></td>
                 <td>{{entidadBancaria.direccion}}</td>
                 <td>{{entidadBancaria.codigoEntidad}}</td>
             </tr>

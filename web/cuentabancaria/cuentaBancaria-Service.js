@@ -52,5 +52,14 @@ function CuentaBancariaService($http) {
         return response;
     };
 
+
+    this.findCuentaByUsuario = function (idUsuario) {
+        var response = $http({
+            method: "GET",
+            url: "/banktastic-banco-api/api/cuentabancariabyusuario/" + idUsuario
+        });
+        return response;
+    };
+
 }
 app.service("cuentaBancariaService", CuentaBancariaService);

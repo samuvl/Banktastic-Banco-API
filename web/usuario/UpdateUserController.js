@@ -1,12 +1,18 @@
-UpdateUserController.$inject = ['$scope', '$routeParams', 'usuarioService', '$location', '$window'];
+UpdateUserController.$inject = ['$scope', '$routeParams', 'usuarioService', 'cuentaBancariaService', '$location', '$window'];
 
-function UpdateUserController($scope, $routeParams, usuarioService, $location, $window) {
+function UpdateUserController($scope, $routeParams, usuarioService, cuentaBancariaService, $location, $window) {
 
     $scope.usuario = {};
     $scope.usuario.idUsuario = $routeParams.idUsuario;
     $scope.tipo = "UPDATE";
     $scope.okBoton = "Actualizar";
     $scope.deleteBoton = "Borrar";
+
+    cuentaBancariaService.findCuentaByUsuario($scope.usuario.idUsuario).then(function (result) {
+        $scope.cuentasBancarias = result.data;
+    }, function (result) {
+        alert("Ha fallado la petición. Estado HTTP:" + result.status);
+    });
 
     usuarioService.get($routeParams.idUsuario).then(function (result) {
         $scope.usuario = result.data;

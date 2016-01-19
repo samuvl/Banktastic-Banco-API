@@ -7,7 +7,7 @@ body{
 }
 
 #detalle_movimientos{
-    
+
     margin-top: 50px;
     margin-bottom: 100px;
 }
@@ -55,13 +55,21 @@ h1{
     background-color: white;
 }
 
-span {
-  position: absolute;
-  margin-top: -1000px;
-}
 
-span:hover {
-  position: relative;
-  margin-top: 20px;
+a.tooltipp span {
+    display:none;
+    padding:2px 3px;
+    margin-left:8px; 
+    width:130px; /*el ancho del tooltip*/
+}
+a.tooltipp:hover span {
+    text-align: center;
+    display: inline; 
+    position: absolute; /* posición del tooltip necesaria y obligatoria*/
+    background: #dff0d8 ; /*el color del fondo del tooltip*/
+    border: 1px solid #c6dcf0; /*el color del borde y su estilo*/
+    color: black;  /*el color de la letra del tooltip*/
+    font-size: 12px;  /*el tamaño de la letra*/
+    line-height: 120%;  /*la separación entre lineas*/
 }
 
