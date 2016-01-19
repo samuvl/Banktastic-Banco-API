@@ -159,4 +159,20 @@ public class CuentaBancariaController {
             throw new RuntimeException(ex);
         }
     }
+    
+    @RequestMapping(value = "/cuentabancariabyDni/{dni}", method = RequestMethod.GET, produces = "application/json")
+    public void findByDni(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("dni") String dni) {
+        try {
+            List<CuentaBancaria> cuentasBancarias = cuentaBancariaService.getByDni(dni);
+
+            String jsonSalida = jsonTransformer.objectToJson(cuentasBancarias);
+
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            httpServletResponse.getWriter().println(jsonSalida);
+
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }
