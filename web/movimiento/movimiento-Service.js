@@ -6,6 +6,7 @@ function MovimientoService($http){
         var response = $http({
             method: "GET",
             url: "/banktastic-banco-api/api/movimientobancario/" + idcuentaBancaria
+            
         });
         return response;
     };
