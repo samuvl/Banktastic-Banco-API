@@ -1,6 +1,7 @@
 package com.fpmislata.banco.presentacion.controllers;
 
 import com.fpmislata.banco.business.domain.CuentaBancaria;
+import com.fpmislata.banco.business.domain.SucursalBancaria;
 import com.fpmislata.banco.business.service.CuentaBancariaService;
 import com.fpmislata.banco.business.service.MovimientoBancarioService;
 import com.fpmislata.banco.core.BusinessException;
@@ -142,18 +143,20 @@ public class CuentaBancariaController {
         }
     }
 
-//¿?¿?¿??¿?¿?¿?¿?
-    /*
-    @RequestMapping(value = {"/cuentabancaria/{idCuentaBancaria}/movimientobancario"}, method = RequestMethod.GET)
-    public void getMovimiento(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idcuentaBancaria") int idcuentaBancaria) {
+    
+     @RequestMapping(value = "/cuentabancariabySucursal/{idSucursalBancaria}", method = RequestMethod.GET, produces = "application/json")
+    public void findBySucursal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idSucursalBancaria") int idSucursalBancaria) {
         try {
+            List<CuentaBancaria> cuentasBancarias = cuentaBancariaService.getBySucursal(idSucursalBancaria);
 
-            httpServletResponse.getWriter().println(jsonTransformer.objectToJson(movimientoBancarioService.getByIdCuenta(idcuentaBancaria)));
+            String jsonSalida = jsonTransformer.objectToJson(cuentasBancarias);
+
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
+            httpServletResponse.getWriter().println(jsonSalida);
 
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
-    }*/
+    }
 }
