@@ -43,6 +43,6 @@ function SucursalBancariaService($http) {
         });
         return response;
     };
-
+    
 }
 app.service("sucursalBancariaService", SucursalBancariaService);

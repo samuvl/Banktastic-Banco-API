@@ -13,7 +13,7 @@ function UpdateSucursalController($scope, $routeParams, sucursalBancariaService,
         alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });
 
-    cuentaBancariaService.find().then(function (result) {
+    cuentaBancariaService.findCuentaBySucursal($scope.sucursalBancaria.idSucursalBancaria).then(function (result) {
         $scope.cuentasBancarias = result.data;
     }, function (result) {
         alert("Ha fallado la petición. Estado HTTP:" + result.status);
@@ -37,7 +37,6 @@ function UpdateSucursalController($scope, $routeParams, sucursalBancariaService,
                 $scope.businessMessages = result.data;
             }
         });
-
     };
 
     $scope.delete = function () {

@@ -8,7 +8,7 @@
   
     <div class="form-group">
         <label>Codigo Entidad</label>
-        <input type="text" class="form-control" placeholder="Codigo de la entidad" name="codigoEntidad" ng-model="entidadBancaria.codigoEntidad" ng-disabled="true" ng-value="{{entidadBancaria.codigoEntidad}}">
+        <input type="text" class="form-control" placeholder="Codigo de la entidad" name="codigoEntidad" ng-model="entidadBancaria.codigoEntidad" ng-disabled="(tipo === 'UPDATE')" ng-value="{{entidadBancaria.codigoEntidad}}">
     </div>
   
     <div class="form-group">

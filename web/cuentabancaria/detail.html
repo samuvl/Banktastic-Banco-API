@@ -3,7 +3,7 @@
 
         <div class="form-group">
             <label>Número de Cuenta</label>
-            <input type="text" class="form-control" placeholder="Número de Cuenta" name="numeroCuenta" ng-model="cuentaBancaria.numeroCuenta"ng-disabled="true" ng-value="{{cuentaBancaria.numeroCuenta}}">
+            <input type="text" class="form-control" placeholder="Número de Cuenta" name="numeroCuenta" ng-model="cuentaBancaria.numeroCuenta" ng-disabled="(tipo === 'UPDATE')" ng-value="{{cuentaBancaria.numeroCuenta}}">
         </div>
 
         <div class="form-group">
@@ -48,11 +48,11 @@
 <div  class="alert alert-danger" ng-repeat="businessMessage in businessMessages"><span class="glyphicon glyphicon-exclamation-sign"></span> {{businessMessage.fieldName}}: {{businessMessage.mensaje}}</div>
 
 
-<div class="col-md-3 col-md-offset-3">
-    <div class="row">
-        <div id="detalle_movimientos" class="col-md-4 col-md-offset-3">
-            <table class="table table-striped table-hover">
-                <thead>
+<div class="col-md-3 col-md-offset-3" ng-hide="(tipo === 'INSERT')">
+    <div class="row" >
+        <div id="detalle_movimientos" class="col-md-4 col-md-offset-3" >
+            <table class="table table-striped table-hover" >
+                <thead ng-disabled="(tipo === 'INSERT')">
                     <tr class="success">
                         <th>idMovimientoBancario</th>
                         <th>tipoMovimiento</th>
@@ -72,7 +72,7 @@
                         <td> {{movimiento.importe}}</td>
                         <td>{{cuentaBancaria.saldo - movimiento.importe}}</td>
                         <td> {{cuentaBancaria.saldo}}</td>
-                        <td> {{movimiento.fechaMovimiento}}</td>
+                        <td> {{movimiento.fechaMovimiento | date:'dd/MMMM/yyyy'}}</td>
                     </tr>
                 </tbody>
             </table>
