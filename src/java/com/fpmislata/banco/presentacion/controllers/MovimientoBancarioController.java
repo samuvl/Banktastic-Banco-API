@@ -88,9 +88,11 @@ public class MovimientoBancarioController {
 
             //Primero hay que cojer el id o el numero de cuenta y hacer un get de ese numero de cuenta
             //para obtener todos los datos de la cuenta, y crear un objeto de tipo CuentaBancaria que será
-            //metido en un objeto MovimientoBancario 
+            //metido en un objeto MovimientoBancario    
+            
             MovimientoBancario movimientoBancario = (MovimientoBancario) jsonTransformer.jsonToObject(jsonEntrada, MovimientoBancario.class);
-
+            
+            
             if (updateSaldoCuenta(httpServletResponse, movimientoBancario)) {
                 movimientoBancarioService.insert(movimientoBancario);
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
@@ -137,6 +139,10 @@ public class MovimientoBancarioController {
         try {
             CuentaBancaria cuentaBancaria = new CuentaBancaria();
             cuentaBancaria.setIdCuentaBancaria(idCuentaBancaria);
+            
+            httpServletRequest.setAttribute("CuentaBancaria", cuentaBancaria);//lo meto en la cabecera
+            //para después recuperarlo en el insert
+            
             List<MovimientoBancario> movimientoBancario = movimientoBancarioService.getByIdCuenta(cuentaBancaria);
             String jsonSalida = jsonTransformer.objectToJson(movimientoBancario);
 
