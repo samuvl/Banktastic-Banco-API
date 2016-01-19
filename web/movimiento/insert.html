@@ -1,28 +1,28 @@
 <div class="col-md-4 col-md-offset-4">
-<form role="form">
- 
-    <div class="form-group">
-        <label>Tipo movimiento</label> <br />
-        <select ng-model="movimiento.tipoMovimiento">
-            <option value="debe">Debe</option>
-             <option value="haber">Haber</option>
-        </select>
-     </div>
-    
-    
-    <div class="form-group">
-        <label>Concepto</label>
-        <input type="text" class="form-control" placeholder="Concepto" name="concepto" ng-model="movimiento.concepto"  ng-value="{{movimiento.concepto}}">
-    </div>
-    
-    <div class="form-group">
-        <label>Importe</label>
-        <input type="text" class="form-control" placeholder="Importe" name="importe" ng-model="movimiento.importe"  ng-value="{{movimiento.importe}}">
-    </div>
-    
-    
-  <input ng-click="ok()" class="btn btn-sm btn-primary" type="submit" value="ok"/> <input ng-click="cancel()" class="btn btn-sm btn-danger" type="submit" value="cancel"/><br><br>
-</form>
-    
-<div class="alert alert-danger" ng-repeat="businessMessage in businessMessages"><span class="glyphicon glyphicon-exclamation-sign"></span> {{businessMessage.fieldName}}: {{businessMessage.mensaje}}</div>
+    <form role="form">
+
+        <div class="form-group">
+            <label>Tipo movimiento</label> <br />
+            <select ng-model="movimiento.tipoMovimiento">
+                <option value="debe">Debe</option>
+                <option value="haber">Haber</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label>Concepto</label>
+            <input type="text" class="form-control" placeholder="Concepto" name="concepto" ng-model="movimiento.concepto"  ng-value="{{movimiento.concepto}}">
+        </div>
+
+        <div class="form-group">
+            <label>Importe</label>
+            <input type="text" class="form-control" placeholder="Importe" name="importe" ng-model="movimiento.importe"  ng-value="{{movimiento.importe}}">
+        </div>
+
+        <input ng-click="ok()" class="btn btn-sm btn-primary" type="submit" value="Insertar"/>
+        <input ng-click="cancel()" class="btn btn-sm btn-danger" type="submit" value="Volver"/><br><br>
+    </form>
+
+    <div class="alert alert-danger" ng-repeat="businessMessage in businessMessages"><span class="glyphicon glyphicon-exclamation-sign"></span> {{businessMessage.fieldName}}: {{businessMessage.mensaje}}</div>
 </div>

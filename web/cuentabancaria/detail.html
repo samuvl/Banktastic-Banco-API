@@ -3,7 +3,7 @@
 
         <div class="form-group">
             <label>Número de Cuenta</label>
-            <input type="text" class="form-control" placeholder="Número de Cuenta" name="numeroCuenta" ng-model="cuentaBancaria.numeroCuenta"ng-disabled="  (tipo === 'VIEW') " ng-value="{{cuentaBancaria.numeroCuenta}}">
+            <input type="text" class="form-control" placeholder="Número de Cuenta" name="numeroCuenta" ng-model="cuentaBancaria.numeroCuenta"ng-disabled="true" ng-value="{{cuentaBancaria.numeroCuenta}}">
         </div>
 
         <div class="form-group">
@@ -13,14 +13,14 @@
 
         <div class="form-group">
             <label>Nombre de Usuario</label> <br />
-            <select ng-model="cuentaBancaria.usuario" ng-options="usuario as usuario.nombre for usuario in usuarios track by usuario.nombre" ng-disabled="  (tipo === 'VIEW') ">
+            <select ng-model="cuentaBancaria.usuario" ng-options="usuario as usuario.nombre for usuario in usuarios track by usuario.nombre">
                 <option value=""> -- Elige una Opción -- </option>
             </select>
         </div>
 
         <div class="form-group">
             <label>Código de Sucursal Bancaria</label> <br />
-            <select ng-model="cuentaBancaria.sucursalBancaria" ng-options="sucursalBancaria as sucursalBancaria.codigoSucursalBancaria for sucursalBancaria in sucursalesBancarias track by sucursalBancaria.codigoSucursalBancaria" ng-disabled="  (tipo === 'VIEW') ">
+            <select ng-model="cuentaBancaria.sucursalBancaria" ng-options="sucursalBancaria as sucursalBancaria.codigoSucursalBancaria for sucursalBancaria in sucursalesBancarias track by sucursalBancaria.codigoSucursalBancaria" ng-disabled="  (tipo === 'VIEW')">
                 <option value=""> -- Elige una Opción -- </option>
             </select>
         </div>
@@ -32,50 +32,55 @@
 
         <div class="form-group">
             <label>Fecha de creacion</label>
-            <input ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="cuentaBancaria.fechaCreacion"ng-disabled="  (tipo === 'VIEW') " ng-value="{{cuentaBancaria.fechaCreacion}}">
+            <input ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="cuentaBancaria.fechaCreacion" ng-value="{{cuentaBancaria.fechaCreacion}}">
         </div>
-        
-        
-    
+
+
+
         <input ng-click="ok()" class="btn btn-sm btn-success" type="submit" value="{{okBoton}}"/> 
         <input ng-click="delete()" class="btn btn-sm btn-warning" type="submit" value="{{deleteBoton}}" ng-hide="(tipo === 'INSERT')"> 
         <input ng-click="cancel()" class="btn btn-sm btn-primary" type="submit" value="Volver"/>
-    
+
     </form>
-    </div>
-        
-        <div class="row">
-            <div id="detalle_movimientos" class="col-md-4 col-md-offset-3">
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr class="success">
-                            <th>idMovimientoBancario</th>
-                            <th>tipoMovimiento</th>
-                            <th>concepto</th>
-                            <th>importe</th>
-                            <th>saldo</th>
-                            <th>fechaMovimiento </th>
-                        </tr>
-                    </thead>
 
-                    <tbody>
-                        <tr  ng-repeat="movimiento in movimientos">
-                            <td> {{movimiento.idMovimientoBancario}}</td>
-                            <td> {{movimiento.tipoMovimiento}}</td>
-                            <td> {{movimiento.concepto}}</td>
-                            <td> {{movimiento.importe}}</td>
-                            <td> {{movimiento.saldo}}</td>
-                            <td> {{movimiento.fechaMovimiento}}</td>
-
-                        </tr>
-                    </tbody>
-                </table>
-    
-            <a href="#/insertMovimiento"><button class="btn btn-sm btn-primary">Insertar movimiento</button></a>
-
-            </div>
-        </div>
-        
-
+</div>
 
 <div  class="alert alert-danger" ng-repeat="businessMessage in businessMessages"><span class="glyphicon glyphicon-exclamation-sign"></span> {{businessMessage.fieldName}}: {{businessMessage.mensaje}}</div>
+
+
+<div class="col-md-3 col-md-offset-3">
+    <div class="row">
+        <div id="detalle_movimientos" class="col-md-4 col-md-offset-3">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="success">
+                        <th>idMovimientoBancario</th>
+                        <th>tipoMovimiento</th>
+                        <th>concepto</th>
+                        <th>importe</th>
+                        <th>saldo Anterior</th>
+                        <th>saldo Actual</th>
+                        <th>fechaMovimiento </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr  ng-repeat="movimiento in movimientos">
+                        <td> {{movimiento.idMovimientoBancario}}</td>
+                        <td> {{movimiento.tipoMovimiento}}</td>
+                        <td> {{movimiento.concepto}}</td>
+                        <td> {{movimiento.importe}}</td>
+                        <td>{{cuentaBancaria.saldo - movimiento.importe}}</td>
+                        <td> {{cuentaBancaria.saldo}}</td>
+                        <td> {{movimiento.fechaMovimiento}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <a href="#/insertMovimiento"><button class="btn btn-sm btn-primary">Insertar movimiento</button></a>
+
+        </div>
+    </div>
+</div>
+
+
