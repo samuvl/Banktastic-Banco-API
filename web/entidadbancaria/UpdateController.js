@@ -1,5 +1,5 @@
-UpdateController.$inject = ['$scope', '$routeParams', 'entidadBancariaService', '$location', '$window'];
-function UpdateController($scope, $routeParams, entidadBancariaService, $location, $window) {
+UpdateController.$inject = ['$scope', '$routeParams', 'entidadBancariaService', 'sucursalBancariaService', '$location', '$window'];
+function UpdateController($scope, $routeParams, entidadBancariaService, sucursalBancariaService, $location, $window) {
 
     $scope.entidadBancaria = {};
     $scope.entidadBancaria.idEntidadBancaria = $routeParams.idEntidadBancaria;
@@ -7,13 +7,18 @@ function UpdateController($scope, $routeParams, entidadBancariaService, $locatio
     $scope.okBoton = "Actualizar";
     $scope.deleteBoton = "Borrar";
 
+    sucursalBancariaService.findSucursalByEntidad($scope.entidadBancaria.idEntidadBancaria).then(function (result) {
+        $scope.sucursalesBancarias = result.data;
+    }, function (result) {
+        alert("Ha fallado la petición. Estado HTTP:" + result.status);
+    });
+
     entidadBancariaService.get($routeParams.idEntidadBancaria).then(function (result) {
         $scope.entidadBancaria = result.data;
         $scope.entidadBancaria.fechaCreacion = new Date($scope.entidadBancaria.fechaCreacion);
     }, function (result) {
         alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });
-
 
     $scope.ok = function () {
         entidadBancariaService.update($scope.entidadBancaria).then(function (result) {

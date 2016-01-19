@@ -18,7 +18,6 @@ function InsertCuentaController($scope, cuentaBancariaService, usuarioService, s
     });
 
     $scope.ok = function () {
-
         cuentaBancariaService.insert($scope.cuentaBancaria).then(function (result) {
             alert("Cuenta Insertada con Éxito con el nombre Titular: " + $scope.cuentaBancaria.numeroCuenta);
             $location.url("/findCuenta");
@@ -32,7 +31,7 @@ function InsertCuentaController($scope, cuentaBancariaService, usuarioService, s
     };
 
     $scope.cancel = function () {
-        $location.url('/');
+        $location.url('/findCuenta');
     };
 
 }

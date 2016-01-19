@@ -44,5 +44,15 @@ function SucursalBancariaService($http) {
         return response;
     };
     
+    this.findSucursalByEntidad = function (idEntidadBancaria) {
+        var response = $http({
+            method: "GET",
+            url: "/banktastic-banco-api/api/sucursalbancariabyentidad/" + idEntidadBancaria
+        });
+        return response;
+    };
+    
+    
+    
 }
 app.service("sucursalBancariaService", SucursalBancariaService);

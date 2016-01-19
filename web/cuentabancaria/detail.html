@@ -31,8 +31,8 @@
         </div>
 
         <div class="form-group">
-            <label>Fecha de creacion</label>
-            <input ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="cuentaBancaria.fechaCreacion" ng-value="{{cuentaBancaria.fechaCreacion}}">
+            <label>Fecha de creación </label><span class="glyphicon glyphicon-calendar"></span>
+            <input id="fechaCreacion" ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="cuentaBancaria.fechaCreacion" ng-value="{{cuentaBancaria.fechaCreacion}}">
         </div>
 
 
@@ -55,12 +55,12 @@
                 <thead ng-disabled="(tipo === 'INSERT')">
                     <tr class="success">
                         <th>idMovimientoBancario</th>
-                        <th>tipoMovimiento</th>
-                        <th>concepto</th>
-                        <th>importe</th>
-                        <th>saldo Anterior</th>
-                        <th>saldo Posterior</th>
-                        <th>fechaMovimiento </th>
+                        <th>Tipo Movimiento</th>
+                        <th>Concepto</th>
+                        <th>Importe</th>
+                        <th>Saldo Anterior</th>
+                        <th>Saldo Posterior</th>
+                        <th>Fecha </th>
                     </tr>
                 </thead>
 
@@ -72,7 +72,7 @@
                         <td> {{movimiento.importe}}</td>
                         <td> {{movimiento.saldoAnterior}}</td>
                         <td> {{movimiento.saldoPosterior}}</td>
-                        <td> {{movimiento.fechaMovimiento | date:'dd/MMMM/yyyy'}}</td>
+                        <td> {{movimiento.fechaMovimiento| date:'dd/MMMM/yyyy'}}</td>
                     </tr>
                 </tbody>
             </table>

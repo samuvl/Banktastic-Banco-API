@@ -21,9 +21,9 @@
             <input type="text" class="form-control" placeholder="DNI" name="dni" ng-model="usuario.dni"  ng-value="{{usuario.dni}}"/>
         </div>
         
-        <div class="form-group">
+        <div class="form-group" ng-hide=" (tipo === 'UPDATE')">
             <label>Password</label>
-            <input type="password" class="form-control" placeholder="Password" name="Password" ng-model="usuario.password" ng-disabled="  (tipo === 'UPDATE') || (tipo === 'VIEW')">
+            <input type="password" class="form-control" placeholder="Password" name="Password" ng-model="usuario.password" >
         </div>
 
         <div class="form-group">

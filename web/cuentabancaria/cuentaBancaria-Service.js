@@ -47,7 +47,7 @@ function CuentaBancariaService($http) {
     this.findCuentaBySucursal = function (idSucursalBancaria) {
         var response = $http({
             method: "GET",
-            url: "/banktastic-banco-api/api/cuentabancariabySucursal/" + idSucursalBancaria
+            url: "/banktastic-banco-api/api/cuentabancariabysucursal/" + idSucursalBancaria
         });
         return response;
     };

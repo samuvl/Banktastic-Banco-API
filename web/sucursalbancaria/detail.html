@@ -26,7 +26,7 @@
 
         <div class="form-group">
             <label>Fecha de creacion</label>
-            <input ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="sucursalBancaria.fechaCreacion"  ng-value="{{sucursalBancaria.fechaCreacion}}">
+            <input id="fechaCreacion" ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="sucursalBancaria.fechaCreacion"  ng-value="{{sucursalBancaria.fechaCreacion}}">
         </div>
 
         <input ng-click="ok()" class="btn btn-sm btn-primary" type="submit" value="{{okBoton}}"/> 

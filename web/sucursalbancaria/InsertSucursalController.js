@@ -25,7 +25,7 @@ function InsertSucursalController($scope, sucursalBancariaService, entidadBancar
     };
 
     $scope.cancel = function () {
-        $location.url('/');
+        $location.url('/findSucursal');
     };
 
 }
