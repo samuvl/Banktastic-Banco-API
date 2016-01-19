@@ -17,8 +17,13 @@
         </div>
 
         <div class="form-group">
+            <label>DNI</label>
+            <input type="text" class="form-control" placeholder="DNI" name="dni" ng-model="usuario.dni"  ng-value="{{usuario.dni}}"/>
+        </div>
+        
+        <div class="form-group">
             <label>Password</label>
-            <input type="password" class="form-control" placeholder="Password" name="Password" ng-model="usuario.password" ng-disabled="  (tipo === 'UPDATE') || (tipo === 'VIEW') " ng-value="{{usuario.password}}">
+            <input type="password" class="form-control" placeholder="Password" name="Password" ng-model="usuario.password" ng-disabled="  (tipo === 'UPDATE') || (tipo === 'VIEW')">
         </div>
 
         <div class="form-group">

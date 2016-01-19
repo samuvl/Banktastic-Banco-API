@@ -59,7 +59,7 @@
                         <th>concepto</th>
                         <th>importe</th>
                         <th>saldo Anterior</th>
-                        <th>saldo Actual</th>
+                        <th>saldo Posterior</th>
                         <th>fechaMovimiento </th>
                     </tr>
                 </thead>
@@ -70,8 +70,8 @@
                         <td> {{movimiento.tipoMovimiento}}</td>
                         <td> {{movimiento.concepto}}</td>
                         <td> {{movimiento.importe}}</td>
-                        <td>{{cuentaBancaria.saldo - movimiento.importe}}</td>
-                        <td> {{cuentaBancaria.saldo}}</td>
+                        <td> {{movimiento.saldoAnterior}}</td>
+                        <td> {{movimiento.saldoPosterior}}</td>
                         <td> {{movimiento.fechaMovimiento | date:'dd/MMMM/yyyy'}}</td>
                     </tr>
                 </tbody>
