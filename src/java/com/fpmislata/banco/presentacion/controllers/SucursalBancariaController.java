@@ -136,4 +136,19 @@ public class SucursalBancariaController {
         }
     }
 
+    @RequestMapping(value = "/sucursalbancariabyentidad/{idEntidadBancaria}", method = RequestMethod.GET, produces = "application/json")
+    public void findBySucursal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria) {
+        try {
+            List<SucursalBancaria> sucursalesBancarias = sucursalBancariaService.getByEntidad(idEntidadBancaria);
+
+            String jsonSalida = jsonTransformer.objectToJson(sucursalesBancarias);
+
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            httpServletResponse.getWriter().println(jsonSalida);
+
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }

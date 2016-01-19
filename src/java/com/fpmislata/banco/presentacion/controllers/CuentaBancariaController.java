@@ -144,7 +144,7 @@ public class CuentaBancariaController {
     }
 
     
-     @RequestMapping(value = "/cuentabancariabySucursal/{idSucursalBancaria}", method = RequestMethod.GET, produces = "application/json")
+     @RequestMapping(value = "/cuentabancariabysucursal/{idSucursalBancaria}", method = RequestMethod.GET, produces = "application/json")
     public void findBySucursal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idSucursalBancaria") int idSucursalBancaria) {
         try {
             List<CuentaBancaria> cuentasBancarias = cuentaBancariaService.getBySucursal(idSucursalBancaria);
