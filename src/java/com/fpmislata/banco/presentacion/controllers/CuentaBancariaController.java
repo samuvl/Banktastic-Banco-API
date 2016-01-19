@@ -36,7 +36,7 @@ public class CuentaBancariaController {
     public void get(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
         try {
             CuentaBancaria cuentaBancaria = cuentaBancariaService.get(idCuentaBancaria);
-            
+
             String jsonSalida = jsonTransformer.objectToJson(cuentaBancaria);
 
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
@@ -143,8 +143,7 @@ public class CuentaBancariaController {
         }
     }
 
-    
-     @RequestMapping(value = "/cuentabancariabysucursal/{idSucursalBancaria}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/cuentabancariabysucursal/{idSucursalBancaria}", method = RequestMethod.GET, produces = "application/json")
     public void findBySucursal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idSucursalBancaria") int idSucursalBancaria) {
         try {
             List<CuentaBancaria> cuentasBancarias = cuentaBancariaService.getBySucursal(idSucursalBancaria);
@@ -159,4 +158,22 @@ public class CuentaBancariaController {
             throw new RuntimeException(ex);
         }
     }
+
+    @RequestMapping(value = "/cuentabancariabyusuario/{idUsuario}", method = RequestMethod.GET, produces = "application/json")
+    public void findByUsuario(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idUsuario") int idUsuario) {
+        try {
+            List<CuentaBancaria> cuentasBancarias = cuentaBancariaService.getByUsuario(idUsuario);
+
+            String jsonSalida = jsonTransformer.objectToJson(cuentasBancarias);
+
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            httpServletResponse.getWriter().println(jsonSalida);
+
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    
 }
