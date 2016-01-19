@@ -31,7 +31,7 @@ public class CuentaBancariaController {
     @Autowired
     JsonTransformer jsonTransformer;
 
-    @RequestMapping(value = {"/cuentabancaria/{idCuentaBancaria}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/cuentabancaria/{idCuentaBancaria}"}, method = RequestMethod.GET, produces = "application/json")
     public void get(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
         try {
             CuentaBancaria cuentaBancaria = cuentaBancariaService.get(idCuentaBancaria);
