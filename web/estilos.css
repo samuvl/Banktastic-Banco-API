@@ -54,3 +54,14 @@ h1{
 #fechaCreacion{
     background-color: white;
 }
+
+span {
+  position: absolute;
+  margin-top: -1000px;
+}
+
+span:hover {
+  position: relative;
+  margin-top: 20px;
+}
+
