@@ -1,5 +1,5 @@
-UpdateCuentaController.$inject = ['$scope', '$routeParams', 'cuentaBancariaService', 'usuarioService', 'sucursalBancariaService', 'movimientoService','$location', '$window'];
-function UpdateCuentaController($scope, $routeParams, cuentaBancariaService, usuarioService, sucursalBancariaService,movimientoService, $location, $window) {
+UpdateCuentaController.$inject = ['$scope', '$routeParams', 'cuentaBancariaService', 'usuarioService', 'sucursalBancariaService', 'movimientoService','sharedPropierties','$location', '$window'];
+function UpdateCuentaController($scope, $routeParams, cuentaBancariaService, usuarioService, sucursalBancariaService, movimientoService, sharedPropierties, $location, $window) {
 
     $scope.cuentaBancaria = {};
     $scope.cuentaBancaria.idCuentaBancaria = $routeParams.idCuentaBancaria;
@@ -29,6 +29,8 @@ function UpdateCuentaController($scope, $routeParams, cuentaBancariaService, usu
     
     //añado lo que seria el detalle de movimientos.
     movimientoService.getMovimiento($routeParams.idCuentaBancaria).then(function (result) {
+        //pasar parametro idCuentaBancaria con el service sharedPropierties
+        sharedPropierties.setProperty($routeParams.idCuentaBancaria);
         $scope.movimientos = result.data;
     }, function (result) {
         alert("Ha fallado la petición. Estado HTTP:" + result.status);
