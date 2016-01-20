@@ -29,7 +29,7 @@ public class CuentaBancariaController {
 
     @Autowired
     MovimientoBancarioService movimientoBancarioService;
-
+ 
     @Autowired
     UsuarioService usuarioService;
 
