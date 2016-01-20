@@ -2,8 +2,10 @@ package com.fpmislata.banco.presentacion.controllers;
 
 import com.fpmislata.banco.business.domain.CuentaBancaria;
 import com.fpmislata.banco.business.domain.SucursalBancaria;
+import com.fpmislata.banco.business.domain.Usuario;
 import com.fpmislata.banco.business.service.CuentaBancariaService;
 import com.fpmislata.banco.business.service.MovimientoBancarioService;
+import com.fpmislata.banco.business.service.UsuarioService;
 import com.fpmislata.banco.core.BusinessException;
 import com.fpmislata.banco.core.BusinessMessage;
 import com.fpmislata.banco.presentacion.json.JsonTransformer;
@@ -28,6 +30,9 @@ public class CuentaBancariaController {
 
     @Autowired
     MovimientoBancarioService movimientoBancarioService;
+    
+    @Autowired
+    UsuarioService usuarioService;
 
     @Autowired
     JsonTransformer jsonTransformer;
@@ -163,8 +168,14 @@ public class CuentaBancariaController {
     @RequestMapping(value = "/cuentabancariabyDni/{dni}", method = RequestMethod.GET, produces = "application/json")
     public void findByDni(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("dni") String dni) {
         try {
-            List<CuentaBancaria> cuentasBancarias = cuentaBancariaService.getByDni(dni);
+            
+            //obtenemos los los usuarios llamando al usuariservice.getByDni(dni) que acabo de crear
+            
+            Usuario usuario = usuarioService.getByDni(dni);
 
+            //aprovecho el getByUsuario que has creado tu para sacar las cuentas
+            List<CuentaBancaria> cuentasBancarias = cuentaBancariaService.getByUsuario(usuario.getIdUsuario());
+  
             String jsonSalida = jsonTransformer.objectToJson(cuentasBancarias);
 
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
