@@ -1,5 +1,15 @@
 <h1> Cuentas Bancarias</h1>
+<br>
 <div class="col-md-4 col-md-offset-4">
+    
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Filrar por dni" ng-model="dni">
+      <span class="input-group-btn">
+        <button ng-click="filtrarDni()" class="btn btn-default" type="button" >filtrar </button>
+      </span>
+    </div>
+    <br>
+    
     <table class="table table-striped table-hover">
         <thead>
             <tr class="success">

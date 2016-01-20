@@ -60,6 +60,17 @@ function CuentaBancariaService($http) {
         });
         return response;
     };
+    
+    this.findCuentaBydni = function(dni){
+        var response = $http({
+            
+            method: "GET",
+            url: "http://localhost:8080/banktastic-banco-api/api/cuentabancariabyDni/" + dni
+        });
+        
+        return response;
+        
+    };
 
 }
 app.service("cuentaBancariaService", CuentaBancariaService);
