@@ -6,7 +6,11 @@ function FindSucursalController($scope, $routeParams, sucursalBancariaService, u
     sucursalBancariaService.find().then(function (result) {
         $scope.sucursalesBancarias = result.data;
     }, function (result) {
-        alert("Ha fallado la petición. Estado HTTP:" + result.status);
+        if (result.status === 403) {
+            alert("Debes estar logeado para acceder a éste contenido.");
+        } else {
+            alert("Ha fallado la petición. Estado HTTP:" + result.status);
+        }
     });
 
 }

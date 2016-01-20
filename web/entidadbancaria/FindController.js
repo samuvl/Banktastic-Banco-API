@@ -3,16 +3,16 @@ FindController.$inject = ['$scope', '$routeParams', 'entidadBancariaService'];
 function FindController($scope, $routeParams, entidadBancariaService) {
     $scope.tipo = "FIND";
 
-    var response;
-    if ($routeParams.nombre === undefined) {
-        entidadBancariaService.find().then(function (result) {
-            $scope.entidadesBancarias = result.data;
-        });
-    }
-    else {
-        entidadBancariaService.findByNombre($routeParams.nombre).then(function (result) {
-            $scope.entidadesBancarias = result.data;
-        });
-    }
+
+    entidadBancariaService.find().then(function (result) {
+        $scope.entidadesBancarias = result.data;
+    }, function (result) {
+        if (result.status === 403) {
+                alert("Debes estar logeado para acceder a éste contenido.");
+        } else {
+            alert("Ha fallado la petición. Estado HTTP:" + result.status);
+        }
+    });
+
 }
 app.controller("FindController", FindController);

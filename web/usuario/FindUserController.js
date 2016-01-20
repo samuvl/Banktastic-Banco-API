@@ -3,15 +3,15 @@ FindUserController.$inject = ['$scope', '$routeParams', 'usuarioService'];
 function FindUserController($scope, $routeParams, usuarioService) {
     $scope.tipo = "FIND";
 
-    if ($routeParams.nombre === undefined) {
-        usuarioService.find().then(function (result) {
-            $scope.usuarios = result.data;
-        });
-    }
-    else {
-        usuarioService.findByNombre($routeParams.nombre).then(function (result) {
-            $scope.usuarios = result.data;
-        });
-    }
+    usuarioService.find().then(function (result) {
+        $scope.usuarios = result.data;
+    }, function (result) {
+        if (result.status === 403) {
+            alert("Debes estar logeado para acceder a éste contenido.");
+        } else {
+            alert("Ha fallado la petición. Estado HTTP:" + result.status);
+        }
+    });
+
 }
 app.controller("FindUserController", FindUserController);

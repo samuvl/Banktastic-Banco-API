@@ -8,18 +8,17 @@ function UpdateUserController($scope, $routeParams, usuarioService, cuentaBancar
     $scope.okBoton = "Actualizar";
     $scope.deleteBoton = "Borrar";
 
-    cuentaBancariaService.findCuentaByUsuario($scope.usuario.idUsuario).then(function (result) {
-        $scope.cuentasBancarias = result.data;
-    }, function (result) {
-        alert("Ha fallado la petición. Estado HTTP:" + result.status);
-    });
-
     usuarioService.get($routeParams.idUsuario).then(function (result) {
         $scope.usuario = result.data;
     }, function (result) {
         alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });
 
+    cuentaBancariaService.findCuentaByUsuario($scope.usuario.idUsuario).then(function (result) {
+        $scope.cuentasBancarias = result.data;
+    }, function (result) {
+        alert("Ha fallado la petición. Estado HTTP:" + result.status);
+    });
 
     $scope.ok = function () {
         usuarioService.update($scope.usuario).then(function (result) {

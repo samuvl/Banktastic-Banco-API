@@ -47,29 +47,25 @@ function CuentaBancariaService($http) {
     this.findCuentaBySucursal = function (idSucursalBancaria) {
         var response = $http({
             method: "GET",
-            url: "/banktastic-banco-api/api/cuentabancariabysucursal/" + idSucursalBancaria
-        });
+            url: "/banktastic-banco-api/api/cuentabancaria?sucursalbancaria.idSucursalBancaria=" + idSucursalBancaria
+        });                                                
         return response;
     };
-
 
     this.findCuentaByUsuario = function (idUsuario) {
         var response = $http({
             method: "GET",
-            url: "/banktastic-banco-api/api/cuentabancariabyusuario/" + idUsuario
+            url: "/banktastic-banco-api/api/cuentabancaria?usuario.idUsuario=" + idUsuario
         });
         return response;
     };
     
     this.findCuentaBydni = function(dni){
         var response = $http({
-            
             method: "GET",
-            url: "http://localhost:8080/banktastic-banco-api/api/cuentabancariabyDni/" + dni
+            url: "/banktastic-banco-api/api/cuentabancaria?usuario.dni=" + dni
         });
-        
         return response;
-        
     };
 
 }
