@@ -238,5 +238,24 @@ public class CuentaBancariaController {
             throw new RuntimeException(ex);
         }
     }
-     */
+     
+
+
+    @RequestMapping(value = "/cuentabancariabyusuario/{idUsuario}", method = RequestMethod.GET, produces = "application/json")
+    public void findByUsuario(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idUsuario") int idUsuario) {
+        try {
+            List<CuentaBancaria> cuentasBancarias = cuentaBancariaService.getByUsuario(idUsuario);
+
+            String jsonSalida = jsonTransformer.objectToJson(cuentasBancarias);
+
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            httpServletResponse.getWriter().println(jsonSalida);
+
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    */
 }
