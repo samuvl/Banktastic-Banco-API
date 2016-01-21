@@ -2,7 +2,7 @@ FindSucursalController.$inject = ['$scope', '$routeParams', 'sucursalBancariaSer
 
 function FindSucursalController($scope, $routeParams, sucursalBancariaService, usuarioService) {
     $scope.tipo = "FIND";
-
+    
     sucursalBancariaService.find().then(function (result) {
         $scope.sucursalesBancarias = result.data;
     }, function (result) {
@@ -11,7 +11,7 @@ function FindSucursalController($scope, $routeParams, sucursalBancariaService, u
         } else {
             alert("Ha fallado la petición. Estado HTTP:" + result.status);
         }
-    });
+    });   
 
 }
 app.controller("FindSucursalController", FindSucursalController);
