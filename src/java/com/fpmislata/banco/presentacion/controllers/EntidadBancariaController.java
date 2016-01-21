@@ -35,7 +35,6 @@ public class EntidadBancariaController {
      *
      * @param httpServletRequest
      * @param httpServletResponse
-     * @RequestBody requestbody
      * @param idEntidadBancaria
      */
     @RequestMapping(value = {"/entidadbancaria/{idEntidadBancaria}"}, method = RequestMethod.GET, produces = "application/json")
