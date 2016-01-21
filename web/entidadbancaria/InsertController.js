@@ -5,7 +5,6 @@ function InsertController($scope, entidadBancariaService, $location, $window) {
     $scope.entidadBancaria = {};
 
     $scope.ok = function () {
-
         entidadBancariaService.insert($scope.entidadBancaria).then(function (result) {
             alert("Entidad Insertada con Éxito con el nombre: " + $scope.entidadBancaria.nombre);
             $location.url("/find");

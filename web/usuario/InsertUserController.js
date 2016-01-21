@@ -1,5 +1,4 @@
 InsertUserController.$inject = ['$scope', 'usuarioService', '$location'];
-
 function InsertUserController($scope, usuarioService, $location) {
     $scope.tipo = "INSERT";
     $scope.okBoton = "Insertar";
