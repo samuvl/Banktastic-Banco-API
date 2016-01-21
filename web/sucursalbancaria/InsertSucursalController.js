@@ -14,7 +14,7 @@ function InsertSucursalController($scope, sucursalBancariaService, entidadBancar
     $scope.ok = function () {
         sucursalBancariaService.insert($scope.sucursalBancaria).then(function (result) {
             alert("Sucursal Insertada con Éxito, codigo Sucursal: " + $scope.sucursalBancaria.codigoSucursalBancaria);
-            $location.url("/findSucursal");
+            $location.url("/find");
         }, function (result) {
             if (status === 500) {
                 alert("Ha fallado la petición. Estado HTTP:" + status);
@@ -25,7 +25,7 @@ function InsertSucursalController($scope, sucursalBancariaService, entidadBancar
     };
 
     $scope.cancel = function () {
-        $location.url('/findSucursal');
+        $location.url('/find');
     };
 
 }

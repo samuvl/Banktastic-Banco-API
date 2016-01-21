@@ -1,4 +1,4 @@
-UpdateCuentaController.$inject = ['$scope', '$routeParams', 'cuentaBancariaService', 'usuarioService', 'sucursalBancariaService', 'movimientoService','sharedPropierties','$location', '$window'];
+UpdateCuentaController.$inject = ['$scope', '$routeParams', 'cuentaBancariaService', 'usuarioService', 'sucursalBancariaService', 'movimientoService', 'sharedPropierties', '$location', '$window'];
 function UpdateCuentaController($scope, $routeParams, cuentaBancariaService, usuarioService, sucursalBancariaService, movimientoService, sharedPropierties, $location, $window) {
 
     $scope.cuentaBancaria = {};
@@ -26,7 +26,7 @@ function UpdateCuentaController($scope, $routeParams, cuentaBancariaService, usu
     }, function (result) {
         alert("Ha fallado la petición. Estado HTTP:" + result.status);
     });
-    
+
     //añado lo que seria el detalle de movimientos.
     movimientoService.getMovimiento($routeParams.idCuentaBancaria).then(function (result) {
         //pasar parametro idCuentaBancaria con el service sharedPropierties
@@ -39,7 +39,7 @@ function UpdateCuentaController($scope, $routeParams, cuentaBancariaService, usu
     $scope.ok = function () {
         cuentaBancariaService.update($scope.cuentaBancaria).then(function (result) {
             alert("Actualizado con Éxito la cuenta Bancaria: " + $scope.cuentaBancaria.numeroCuenta) + "\n Recargando...";
-            $location.url('/findCuenta/');
+            $window.location.reload();
         }, function (result) {
             if (result.status === 500) {
                 alert("Ha fallado la petición. Estado HTTP:" + result.status);
@@ -56,7 +56,11 @@ function UpdateCuentaController($scope, $routeParams, cuentaBancariaService, usu
                 alert("Borrado Con Éxito");
                 $location.url('/findCuenta');
             }, function (result) {
-                alert("Ha fallado la petición. Estado HTTP:" + result.status);
+                if (result.status === 500) {
+                    alert("Ha fallado la petición. Estado HTTP:" + result.status);
+                } else {
+                    $scope.businessMessages = result.data;
+                }
             });
         } else {
 
@@ -66,6 +70,10 @@ function UpdateCuentaController($scope, $routeParams, cuentaBancariaService, usu
 
     $scope.cancel = function () {
         $location.url('/findCuenta/');
+    };
+    //No sirve, si entras directamente a Cuentas...No tienes id de sucursal por dónde has entrado.
+    $scope.atras = function () {
+        $location.url('/updateSucursal/' + sharedPropierties.getProperty());
     };
 }
 app.controller("UpdateCuentaController", UpdateCuentaController);

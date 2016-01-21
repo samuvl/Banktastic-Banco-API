@@ -1,5 +1,5 @@
-UpdateController.$inject = ['$scope', '$routeParams', 'entidadBancariaService', 'sucursalBancariaService', '$location', '$window'];
-function UpdateController($scope, $routeParams, entidadBancariaService, sucursalBancariaService, $location, $window) {
+UpdateController.$inject = ['$scope', '$routeParams', 'entidadBancariaService', 'sucursalBancariaService', 'sharedPropierties', '$location', '$window'];
+function UpdateController($scope, $routeParams, entidadBancariaService, sucursalBancariaService, sharedPropierties, $location, $window) {
 
     $scope.entidadBancaria = {};
     $scope.entidadBancaria.idEntidadBancaria = $routeParams.idEntidadBancaria;
@@ -14,6 +14,7 @@ function UpdateController($scope, $routeParams, entidadBancariaService, sucursal
     });
 
     entidadBancariaService.get($routeParams.idEntidadBancaria).then(function (result) {
+        sharedPropierties.setProperty($routeParams.idEntidadBancaria);
         $scope.entidadBancaria = result.data;
         $scope.entidadBancaria.fechaCreacion = new Date($scope.entidadBancaria.fechaCreacion);
     }, function (result) {
@@ -39,7 +40,11 @@ function UpdateController($scope, $routeParams, entidadBancariaService, sucursal
                 alert("Borrado Con Éxito");
                 $location.url('/find');
             }, function (result) {
-                alert("Error Borrando la entidad:  " + result.status);
+                if (result.status === 500) {
+                    alert("Ha fallado la petición. Estado HTTP:" + result.status);
+                } else {
+                    $scope.businessMessages = result.data;
+                }
             });
         } else {
 

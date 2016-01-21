@@ -39,7 +39,11 @@ function UpdateUserController($scope, $routeParams, usuarioService, cuentaBancar
                 alert("Borrado Con Éxito");
                 $location.url('/findUser');
             }, function (result) {
-                alert("Error Borrando la entidad:  " + result.status);
+                if (result.status === 500) {
+                    alert("Ha fallado la petición. Estado HTTP:" + result.status);
+                } else {
+                    $scope.businessMessages = result.data;
+                }
             });
         } else {
         }

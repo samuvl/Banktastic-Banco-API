@@ -35,7 +35,7 @@ function InsertMovimientoController($scope, movimientoService, $location, cuenta
     };
 
     $scope.cancel = function () {
-        $location.url('/findCuenta');
+        $location.url('/updateCuenta/' + sharedPropierties.getProperty());
     };
 
 }

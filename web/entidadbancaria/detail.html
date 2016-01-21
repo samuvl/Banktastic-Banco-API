@@ -1,70 +1,71 @@
 <h1>Detalle Entidad Bancaria</h1>
-<div class="col-md-4 col-md-offset-4">
-    <form role="form">
+<div class="row" >
+    <div class="col-md-4 col-md-offset-4">
+        <form role="form">
 
-        <div class="form-group">
-            <label>Nombre</label>
-            <input type="text" name="nombre" class="form-control" placeholder="Nombre de la entidad" ng-model="entidadBancaria.nombre" ng-value="{{entidadBancaria.nombre}}">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" name="nombre" class="form-control" placeholder="Nombre de la entidad" ng-model="entidadBancaria.nombre" ng-value="{{entidadBancaria.nombre}}">
+            </div>
+
+            <div class="form-group">
+                <label>Codigo Entidad</label>
+                <input type="text" class="form-control" placeholder="Codigo de la entidad" name="codigoEntidad" ng-model="entidadBancaria.codigoEntidad" ng-disabled="(tipo === 'UPDATE')" ng-value="{{entidadBancaria.codigoEntidad}}">
+            </div>
+
+            <div class="form-group">
+                <label>Fecha de creacion</label>
+                <input id="fechaCreacion" ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="entidadBancaria.fechaCreacion"ng-disabled="" ng-value="{{entidadBancaria.fechaCreacion}}">
+            </div>
+
+            <div class="form-group">
+                <label>Direccion</label>
+                <input type="text" class="form-control" placeholder="Direccion" name="direccion" ng-model="entidadBancaria.direccion"ng-disabled="" ng-value="{{entidadBancaria.direccion}}"/>
+            </div>
+
+            <div class="form-group">
+                <label>CIF</label>
+                <input type="text" class="form-control" placeholder="cif" name="cif" ng-model="entidadBancaria.cif"  ng-value="{{entidadBancaria.cif}}"/>
+            </div>
+
+            <input ng-click="ok()" class="btn btn-md btn-primary" type="submit" value="{{okBoton}}"/> 
+            <input ng-click="delete()" class="btn btn-md btn-danger" type="submit" value="{{deleteBoton}}" ng-hide="(tipo === 'INSERT')"> 
+            <input ng-click="cancel()" class="btn btn-md btn-error" type="submit" value="Volver"/><br><br>
+
+        </form>
+        <div id="errores">
+            <div  class="alert alert-danger" ng-repeat="businessMessage in businessMessages"><span class="glyphicon glyphicon-exclamation-sign"></span> {{businessMessage.fieldName}}: {{businessMessage.mensaje}}</div>
         </div>
-
-        <div class="form-group">
-            <label>Codigo Entidad</label>
-            <input type="text" class="form-control" placeholder="Codigo de la entidad" name="codigoEntidad" ng-model="entidadBancaria.codigoEntidad" ng-disabled="(tipo === 'UPDATE')" ng-value="{{entidadBancaria.codigoEntidad}}">
-        </div>
-
-        <div class="form-group">
-            <label>Fecha de creacion</label>
-            <input id="fechaCreacion" ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="entidadBancaria.fechaCreacion"ng-disabled="" ng-value="{{entidadBancaria.fechaCreacion}}">
-        </div>
-
-        <div class="form-group">
-            <label>Direccion</label>
-            <input type="text" class="form-control" placeholder="Direccion" name="direccion" ng-model="entidadBancaria.direccion"ng-disabled="" ng-value="{{entidadBancaria.direccion}}"/>
-        </div>
-
-        <div class="form-group">
-            <label>CIF</label>
-            <input type="text" class="form-control" placeholder="cif" name="cif" ng-model="entidadBancaria.cif"  ng-value="{{entidadBancaria.cif}}"/>
-        </div>
-
-        <input ng-click="ok()" class="btn btn-md btn-primary" type="submit" value="{{okBoton}}"/> 
-        <input ng-click="delete()" class="btn btn-md btn-danger" type="submit" value="{{deleteBoton}}" ng-hide="(tipo === 'INSERT')"> 
-        <input ng-click="cancel()" class="btn btn-md btn-error" type="submit" value="Volver"/><br><br>
-
-    </form>
-    <div id="errores">
-        <div  class="alert alert-danger" ng-repeat="businessMessage in businessMessages"><span class="glyphicon glyphicon-exclamation-sign"></span> {{businessMessage.fieldName}}: {{businessMessage.mensaje}}</div>
     </div>
 </div>
 
 <div class="row" >
-    <div class="col-md-3 col-md-offset-3" ng-hide="(tipo === 'INSERT')">
+    <div class="col-md-6 col-md-offset-3" ng-hide="(tipo === 'INSERT')">
 
-        <div id="detalle_movimientos" class="col-md-4 col-md-offset-3">
-            <table class="table table-striped table-hover"  >
-                <thead>
-                    <tr class="success">
-                        <th>Sucursal</th>
-                        <th>Dirección</th>
-                        <th>Teléfono</th>
-                        <th>Código Entidad</th>
-                        <th>Fecha Creación</th>
-                    </tr>
-                </thead>
+        <h1> Sucursales Asociadas</h1>
+        <table class="table table-striped table-hover"  >
+            <thead>
+                <tr class="success">
+                    <th>Sucursal</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Código Entidad</th>
+                    <th>Fecha Creación</th>
+                </tr>
+            </thead>
 
-                <tbody>
-                    <tr ng-repeat="sucursalBancaria in sucursalesBancarias" >
-                        <td> {{sucursalBancaria.codigoSucursalBancaria}}</td>
-                        <td> {{sucursalBancaria.direccion}}</td>
-                        <td> {{sucursalBancaria.telefono}}</td>
-                        <td> {{sucursalBancaria.entidadBancaria.codigoEntidad}}</td>
-                        <td >{{sucursalBancaria.fechaCreacion| date:'dd/MMMM/yyyy'}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <tbody>
+                <tr ng-repeat="sucursalBancaria in sucursalesBancarias" >
+                    <td><a class="tooltipp" href="#/updateSucursal/{{sucursalBancaria.idSucursalBancaria}}"> {{sucursalBancaria.codigoSucursalBancaria}}<span>Pulse aquí para ver más detalles.</span></a></td>
+                    <td> {{sucursalBancaria.direccion}}</td>
+                    <td> {{sucursalBancaria.telefono}}</td>
+                    <td> {{sucursalBancaria.entidadBancaria.codigoEntidad}}</td>
+                    <td >{{sucursalBancaria.fechaCreacion| date:'dd/MMMM/yyyy'}}</td>
+                </tr>
+            </tbody>
+        </table>
 
-            <a href="#/insertSucursal"><button class="btn btn-sm btn-primary">Insertar sucursal</button></a>
+        <a href="#/insertSucursal"><button class="btn btn-sm btn-primary">Insertar sucursal</button></a>
 
-        </div>
     </div>
 </div>

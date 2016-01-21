@@ -6,13 +6,8 @@ body{
     margin-top: 100px;
 }
 
-#detalle_movimientos{
-
-    margin-top: 50px;
-    margin-bottom: 100px;
-}
-
 footer{
+    color: white;
     background-color: #0C816A !important;
     position: fixed;
     padding-top: 10px;
@@ -27,9 +22,6 @@ footer{
 
 }
 
-footer{
-    color: white;
-}
 /* Barra Navegación Letra Blancas */
 .navbar-inverse .navbar-brand{
     color: white;
@@ -87,4 +79,8 @@ input.btn.btn-md.btn-error{
 
 #btnSearch{
     background-color: #DFF0D8;
+}
+
+.row{
+    margin-right: 0px;
 }
