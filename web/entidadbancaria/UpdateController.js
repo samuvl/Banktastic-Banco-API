@@ -23,7 +23,7 @@ function UpdateController($scope, $routeParams, entidadBancariaService, sucursal
     $scope.ok = function () {
         entidadBancariaService.update($scope.entidadBancaria).then(function (result) {
             alert("Actualizado con Éxito la Entidad Bancaria: " + $scope.entidadBancaria.nombre) + "\n Recargando...";
-            $window.location.reload();
+            $location.url("/find")
         }, function (result) {
             if (result.status === 500) {
                 alert("Ha fallado la petición. Estado HTTP:" + result.status);
