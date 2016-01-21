@@ -31,9 +31,9 @@
                 <input id="fechaCreacion" ui-date="{dateFormat:'dd/mm/yy'}" readonly type="text" class="form-control" placeholder="Fecha de creacion"  name="fechaCreacion" ng-model="sucursalBancaria.fechaCreacion"  ng-value="{{sucursalBancaria.fechaCreacion}}">
             </div>
 
-            <input ng-click="ok()" class="btn btn-md btn-primary" type="submit" value="{{okBoton}}"/> 
-            <input ng-click="delete()" class="btn btn-md btn-danger" type="submit" value="{{deleteBoton}}" ng-hide="(tipo === 'INSERT')"> 
-            <input ng-click="cancel()" class="btn btn-md btn-error" type="submit" value="Volver"/><br><br>
+            <input ng-click="ok()" class="btn btn-sm btn-primary" type="submit" value="{{okBoton}}"/> 
+            <input ng-click="delete()" class="btn btn-sm btn-danger" type="submit" value="{{deleteBoton}}" ng-hide="(tipo === 'INSERT')"> 
+            <input ng-click="cancel()" class="btn btn-sm btn-error" type="submit" value="Volver"/><br><br>
 
         </form>
         <div id="errores">

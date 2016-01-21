@@ -1,80 +1,81 @@
 <h1>Detalle Usuario</h1>
-<div class="col-md-4 col-md-offset-4">
-    <form role="form">
+<div class="row" >
+    <div class="col-md-4 col-md-offset-4">
+        <form role="form">
 
-        <div class="form-group">
-            <label>Nombre</label>
-            <input type="text" name="nombre" class="form-control" placeholder="Nombre" ng-model="usuario.nombre" ng-value="{{usuario.nombre}}">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" name="nombre" class="form-control" placeholder="Nombre" ng-model="usuario.nombre" ng-value="{{usuario.nombre}}">
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" placeholder="email" name="email" ng-model="usuario.email"  ng-value="{{usuario.email}}"/>
+            </div>
+
+            <div class="form-group">
+                <label>Nick</label>
+                <input type="text" class="form-control" placeholder="nick" name="nick" ng-model="usuario.nick"  ng-value="{{usuario.nick}}"/>
+            </div>
+
+            <div class="form-group">
+                <label>DNI</label>
+                <input type="text" class="form-control" placeholder="DNI" name="dni" ng-model="usuario.dni"  ng-value="{{usuario.dni}}"/>
+            </div>
+
+            <div class="form-group" ng-hide=" (tipo === 'UPDATE')">
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Password" name="Password" ng-model="usuario.password" >
+            </div>
+
+            <div class="form-group">
+                <label>Rol</label> <br />
+                <select name="rol" ng-model="usuario.rol"  ng-value="{{usuario.rol}}">
+                    <option value="trabajador">Trabajador</option>
+                    <option value="cliente">Cliente</option>
+                </select>
+            </div>
+
+            <input ng-click="ok()" class="btn btn-sm btn-primary" type="submit" value="{{okBoton}}"/> 
+            <input ng-click="delete()" class="btn btn-sm btn-danger" type="submit" value="{{deleteBoton}}" ng-hide="(tipo === 'INSERT')"> 
+            <input ng-click="cancel()" class="btn btn-sm btn-error" type="submit" value="Volver"/><br><br>
+
+        </form>
+        <div id="errores">
+            <div class="alert alert-danger" ng-repeat="businessMessage in businessMessages"><span class="glyphicon glyphicon-exclamation-sign"></span> {{businessMessage.fieldName}}: {{businessMessage.mensaje}}</div>
         </div>
-
-        <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control" placeholder="email" name="email" ng-model="usuario.email"  ng-value="{{usuario.email}}"/>
-        </div>
-
-        <div class="form-group">
-            <label>Nick</label>
-            <input type="text" class="form-control" placeholder="nick" name="nick" ng-model="usuario.nick"  ng-value="{{usuario.nick}}"/>
-        </div>
-
-        <div class="form-group">
-            <label>DNI</label>
-            <input type="text" class="form-control" placeholder="DNI" name="dni" ng-model="usuario.dni"  ng-value="{{usuario.dni}}"/>
-        </div>
-
-        <div class="form-group" ng-hide=" (tipo === 'UPDATE')">
-            <label>Password</label>
-            <input type="password" class="form-control" placeholder="Password" name="Password" ng-model="usuario.password" >
-        </div>
-
-        <div class="form-group">
-            <label>Rol</label> <br />
-            <select name="rol" ng-model="usuario.rol"  ng-value="{{usuario.rol}}">
-                <option value="trabajador">Trabajador</option>
-                <option value="cliente">Cliente</option>
-            </select>
-        </div>
-
-        <input ng-click="ok()" class="btn btn-md btn-primary" type="submit" value="{{okBoton}}"/> 
-        <input ng-click="delete()" class="btn btn-md btn-danger" type="submit" value="{{deleteBoton}}" ng-hide="(tipo === 'INSERT')"> 
-        <input ng-click="cancel()" class="btn btn-md btn-error" type="submit" value="Volver"/><br><br>
-
-    </form>
-    <div id="errores">
-        <div class="alert alert-danger" ng-repeat="businessMessage in businessMessages"><span class="glyphicon glyphicon-exclamation-sign"></span> {{businessMessage.fieldName}}: {{businessMessage.mensaje}}</div>
     </div>
 </div>
 
+<div class="row" >
+    <div class="col-md-6 col-md-offset-3" ng-hide="(tipo === 'INSERT')">
 
-<div class="col-md-3 col-md-offset-3" ng-hide="(tipo === 'INSERT')">
-    <div class="row" >
-        <div id="detalle_movimientos" class="col-md-4 col-md-offset-3">
-            <table class="table table-striped table-hover"  >
-                <thead>
-                    <tr class="success">
-                        <th>Entidad</th>
-                        <th>Sucursal</th>
-                        <th>Dígito Control</th>
-                        <th>Numero Cuenta</th>
-                        <th>Saldo</th>
-                        <th>Fecha Creación</th>
-                    </tr>
-                </thead>
+        <table class="table table-striped table-hover"  >
+            <thead>
+                <tr class="success">
+                    <th>Entidad</th>
+                    <th>Sucursal</th>
+                    <th>Dígito Control</th>
+                    <th>Numero Cuenta</th>
+                    <th>Saldo</th>
+                    <th>Fecha Creación</th>
+                </tr>
+            </thead>
 
-                <tbody>
-                    <tr ng-repeat="cuentaBancaria in cuentasBancarias" >
-                        <td> {{cuentaBancaria.sucursalBancaria.entidadBancaria.codigoEntidad}}</td>
-                        <td> {{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}}</td>
-                        <td> {{cuentaBancaria.digitoControl}}</td>
-                        <td> {{cuentaBancaria.numeroCuenta}}</td>
-                        <td> {{cuentaBancaria.saldo}}</td>
-                        <td> {{cuentaBancaria.fechaCreacion| date:'dd/MMMM/yyyy'}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <tbody>
+                <tr ng-repeat="cuentaBancaria in cuentasBancarias" >
+                    <td> {{cuentaBancaria.sucursalBancaria.entidadBancaria.codigoEntidad}}</td>
+                    <td> {{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}}</td>
+                    <td> {{cuentaBancaria.digitoControl}}</td>
+                    <td> {{cuentaBancaria.numeroCuenta}}</td>
+                    <td> {{cuentaBancaria.saldo}}</td>
+                    <td> {{cuentaBancaria.fechaCreacion| date:'dd/MMMM/yyyy'}}</td>
+                </tr>
+            </tbody>
+        </table>
 
-            <a href="#/insertUser"><button class="btn btn-sm btn-primary">Insertar usuario</button></a>
+        <a href="#/insertCuenta"><button class="btn btn-sm btn-primary">Insertar cuenta</button></a>
 
-        </div>
+
     </div>
 </div>

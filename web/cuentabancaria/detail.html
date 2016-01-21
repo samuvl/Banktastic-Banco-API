@@ -39,9 +39,9 @@
 
 
 
-            <input ng-click="ok()" class="btn btn-md btn-primary" type="submit" value="{{okBoton}}"/> 
-            <input ng-click="delete()" class="btn btn-md btn-danger" type="submit" value="{{deleteBoton}}" ng-hide="(tipo === 'INSERT')"> 
-            <input ng-click="cancel()" class="btn btn-md btn-error" type="submit" value="Volver"/> 
+            <input ng-click="ok()" class="btn btn-sm btn-primary" type="submit" value="{{okBoton}}"/> 
+            <input ng-click="delete()" class="btn btn-sm btn-danger" type="submit" value="{{deleteBoton}}" ng-hide="(tipo === 'INSERT')"> 
+            <input ng-click="cancel()" class="btn btn-sm btn-error" type="submit" value="Volver"/> 
         </form>
         <br/>
         <div id="errores" class="alert alert-danger" ng-repeat="businessMessage in businessMessages"><span class="glyphicon glyphicon-exclamation-sign"></span> {{businessMessage.fieldName}}: {{businessMessage.mensaje}}</div>
