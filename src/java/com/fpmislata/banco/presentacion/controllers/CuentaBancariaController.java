@@ -180,9 +180,25 @@ public class CuentaBancariaController {
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
 
-        } catch (Exception ex) {
+        } catch (BusinessException ex) {
+            List<BusinessMessage> bussinessMessage = ex.getBusinessMessages();
+            String jsonSalida = jsonTransformer.objectToJson(bussinessMessage);
+
+            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            try {
+                httpServletResponse.getWriter().println(jsonSalida);
+            } catch (IOException ex1) {
+                Logger.getLogger(EntidadBancariaController.class.getName()).log(Level.SEVERE, "Error devolviendo Lista de Mensajes", ex1);
+            }
+        } catch (Exception ex1) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            throw new RuntimeException(ex);
+            httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            try {
+                ex1.printStackTrace(httpServletResponse.getWriter());
+            } catch (IOException ex2) {
+                Logger.getLogger(EntidadBancariaController.class.getName()).log(Level.SEVERE, "Error devolviendo la traza", ex2);
+            }
         }
     }
 
