@@ -16,7 +16,6 @@
 
 .jk-slider{
     width:100%;
-
     margin-top: -100px !important;
 }
 
@@ -25,19 +24,18 @@
     top: 50%;
     left: 50%;
     z-index: 3;
-    color: #0C816A;
+    color: #1D6C60;
     text-align: center;
     text-transform: uppercase;
     text-shadow: 1px 1px 0 rgba(0,0,0,.75);
-      -webkit-transform: translate3d(-50%,-50%,0);
-         -moz-transform: translate3d(-50%,-50%,0);
-          -ms-transform: translate3d(-50%,-50%,0);
-           -o-transform: translate3d(-50%,-50%,0);
-              transform: translate3d(-50%,-50%,0);
+    -webkit-transform: translate3d(-50%,-50%,0);
+    -moz-transform: translate3d(-50%,-50%,0);
+    -ms-transform: translate3d(-50%,-50%,0);
+    -o-transform: translate3d(-50%,-50%,0);
+    transform: translate3d(-50%,-50%,0);
 }
 .hero h1 {
-    font-size: 6em;    
+    font-size: 7em;    
     font-weight: bold;
-    margin: 0;
-    padding: 0;
+
 }
