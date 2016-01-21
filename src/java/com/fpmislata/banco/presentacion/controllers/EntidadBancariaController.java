@@ -55,15 +55,7 @@ public class EntidadBancariaController {
     @RequestMapping(value = "/entidadbancaria", method = RequestMethod.GET, produces = "application/json")
     public void find(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
-            List<EntidadBancaria> entidadesBancarias;
-            String name = httpServletRequest.getParameter("nombre");
-            if (name == null) {
-                entidadesBancarias = entidadBancariaService.findAll();
-                System.out.println(entidadesBancarias.size());
-            } else {
-                entidadesBancarias = entidadBancariaService.findByNombre(name);
-            }
-
+            List<EntidadBancaria> entidadesBancarias = entidadBancariaService.findAll();
             String jsonSalida = jsonTransformer.objectToJson(entidadesBancarias);
 
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
