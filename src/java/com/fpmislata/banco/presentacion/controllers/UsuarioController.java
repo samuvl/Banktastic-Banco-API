@@ -76,10 +76,10 @@ public class UsuarioController {
     public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
         try {
             Usuario usuario = (Usuario) jsonTransformer.jsonToObject(jsonEntrada, Usuario.class);
-            if ( usuario == null){
+            if (usuario == null) {
                 throw new BusinessException("Campo", "Debe rellenar los datos");
             }
-            
+
             if (!passwordManager.checkComplexity(usuario.getPassword()) || usuario.getPassword().isEmpty()) {
                 throw new BusinessException("Password", "La contraseña debe contener Minusculas, Mayúsculas, Dígitos y de 6-20 caractéres");
             }
@@ -88,7 +88,6 @@ public class UsuarioController {
 
             usuarioService.insert(usuario);
 
-            System.out.println(jsonEntrada);
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.getWriter().println(jsonTransformer.objectToJson(usuario));
@@ -103,7 +102,7 @@ public class UsuarioController {
             try {
                 httpServletResponse.getWriter().println(jsonSalida);
             } catch (IOException ex1) {
-                Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, "Error devolviendo Lista de Mensajes", ex1);
+                Logger.getLogger(EntidadBancariaController.class.getName()).log(Level.SEVERE, "Error devolviendo Lista de Mensajes", ex1);
             }
         } catch (Exception ex1) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -111,7 +110,7 @@ public class UsuarioController {
             try {
                 ex1.printStackTrace(httpServletResponse.getWriter());
             } catch (IOException ex2) {
-                Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, "Error devolviendo la traza", ex2);
+                Logger.getLogger(EntidadBancariaController.class.getName()).log(Level.SEVERE, "Error devolviendo la traza", ex2);
             }
         }
     }
