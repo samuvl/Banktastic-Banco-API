@@ -115,10 +115,6 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${reference.banktastic-banco-services.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
                     <file>${file.reference.hibernate-validator-4.3.2.Final.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
@@ -136,6 +132,10 @@
                 </library>
                 <library dirs="200">
                     <file>${file.reference.validation-api-1.0.0.GA.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${reference.banktastic-banco-services.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
@@ -157,11 +157,5 @@
                 <id>jar</id>
             </reference>
         </references>
-        <spring-data xmlns="http://www.netbeans.org/ns/spring-data/1">
-            <config-files>
-                <config-file>src/java/com/fpmislata/banco/presentacion/xxs.properties.xml</config-file>
-            </config-files>
-            <config-file-groups/>
-        </spring-data>
     </configuration>
 </project>
