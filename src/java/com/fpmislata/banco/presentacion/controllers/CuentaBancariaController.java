@@ -1,13 +1,14 @@
 package com.fpmislata.banco.presentacion.controllers;
 
 import com.fpmislata.banco.business.domain.CuentaBancaria;
-import com.fpmislata.banco.business.domain.SucursalBancaria;
 import com.fpmislata.banco.business.service.CuentaBancariaService;
 import com.fpmislata.banco.business.service.MovimientoBancarioService;
+import com.fpmislata.banco.business.service.UsuarioService;
 import com.fpmislata.banco.core.BusinessException;
 import com.fpmislata.banco.core.BusinessMessage;
 import com.fpmislata.banco.presentacion.json.JsonTransformer;
 import java.io.IOException;
+import static java.lang.Integer.parseInt;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +29,9 @@ public class CuentaBancariaController {
 
     @Autowired
     MovimientoBancarioService movimientoBancarioService;
+ 
+    @Autowired
+    UsuarioService usuarioService;
 
     @Autowired
     JsonTransformer jsonTransformer;
@@ -51,16 +55,54 @@ public class CuentaBancariaController {
     @RequestMapping(value = "/cuentabancaria", method = RequestMethod.GET, produces = "application/json")
     public void find(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
-            List<CuentaBancaria> cuentasBancarias = cuentaBancariaService.findAll();
+            List<CuentaBancaria> cuentasBancarias;
+            if (httpServletRequest.getParameter("sucursalbancaria.idSucursalBancaria") != null && httpServletRequest.getParameter("usuario.dni") == null && httpServletRequest.getParameter("usuario.idUsuario") == null) {
+                int idSucursalBancaria = parseInt(httpServletRequest.getParameter("sucursalbancaria.idSucursalBancaria"));
+                cuentasBancarias = cuentaBancariaService.findBySucursal(idSucursalBancaria);
 
+            } else if (httpServletRequest.getParameter("usuario.dni") != null && httpServletRequest.getParameter("sucursalBancaria.idSucursalBancaria") == null && httpServletRequest.getParameter("usuario.idUsuario") == null) {
+                String dni = httpServletRequest.getParameter("usuario.dni");
+                cuentasBancarias = cuentaBancariaService.findByDni(dni);
+
+            } else if (httpServletRequest.getParameter("usuario.idUsuario") != null && httpServletRequest.getParameter("usuario.dni") == null && httpServletRequest.getParameter("sucursalBancaria.idSucursalBancaria") == null) {
+                int idUsuario = parseInt(httpServletRequest.getParameter("usuario.idUsuario"));
+                cuentasBancarias = cuentaBancariaService.findByUsuario(idUsuario);
+ 
+            } else if (httpServletRequest.getParameter("usuario.dni") == null && httpServletRequest.getParameter("sucursalBancaria.idSucursalBancaria") == null && httpServletRequest.getParameter("usuario.idUsuario") == null) {
+                cuentasBancarias = cuentaBancariaService.findAll();
+
+            } else if (httpServletRequest.getParameter("usuario.dni") == null ) {
+                throw new BusinessException("DNI", "Introduzca un DNI.");
+                
+            } else {
+                throw new BusinessException("Error", "Sólo se necesita 1 parámetro.");
+            }
+ 
             String jsonSalida = jsonTransformer.objectToJson(cuentasBancarias);
 
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.getWriter().println(jsonSalida);
 
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
+        } catch (BusinessException ex) {
+            List<BusinessMessage> bussinessMessage = ex.getBusinessMessages();
+            String jsonSalida = jsonTransformer.objectToJson(bussinessMessage);
+
+            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            try {
+                httpServletResponse.getWriter().println(jsonSalida);
+            } catch (IOException ex1) {
+                Logger.getLogger(EntidadBancariaController.class.getName()).log(Level.SEVERE, "Error devolviendo Lista de Mensajes", ex1);
+            }
+        } catch (Exception ex1) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            try {
+                ex1.printStackTrace(httpServletResponse.getWriter());
+            } catch (IOException ex2) {
+                Logger.getLogger(EntidadBancariaController.class.getName()).log(Level.SEVERE, "Error devolviendo la traza", ex2);
+            }
         }
     }
 
@@ -100,6 +142,7 @@ public class CuentaBancariaController {
     @RequestMapping(value = {"/cuentabancaria"}, method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public void update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
         try {
+
             CuentaBancaria cuentaBancaria = (CuentaBancaria) jsonTransformer.jsonToObject(jsonEntrada, CuentaBancaria.class);
             cuentaBancariaService.update(cuentaBancaria);
 
@@ -143,6 +186,7 @@ public class CuentaBancariaController {
         }
     }
 
+    /*
     @RequestMapping(value = "/cuentabancariabysucursal/{idSucursalBancaria}", method = RequestMethod.GET, produces = "application/json")
     public void findBySucursal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idSucursalBancaria") int idSucursalBancaria) {
         try {
@@ -158,6 +202,44 @@ public class CuentaBancariaController {
             throw new RuntimeException(ex);
         }
     }
+    
+    @RequestMapping(value = "/cuentabancariabydni/{dni}", method = RequestMethod.GET, produces = "application/json")
+    public void findByDni(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("dni") String dni) {
+        try {
+            //obtenemos los los usuarios llamando al usuariservice.getByDni(dni) que acabo de crear
+            Usuario usuario = usuarioService.getByDni(dni);
+
+            //aprovecho el getByUsuario que has creado tu para sacar las cuentas
+            List<CuentaBancaria> cuentasBancarias = cuentaBancariaService.getByUsuario(usuario.getIdUsuario());
+
+            String jsonSalida = jsonTransformer.objectToJson(cuentasBancarias);
+
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            httpServletResponse.getWriter().println(jsonSalida);
+
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    /*
+    @RequestMapping(value = "/cuentabancariabyusuario/{idUsuario}", method = RequestMethod.GET, produces = "application/json")
+    public void findByUsuario(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idUsuario") int idUsuario) {
+        try {
+            List<CuentaBancaria> cuentasBancarias = cuentaBancariaService.getByUsuario(idUsuario);
+
+            String jsonSalida = jsonTransformer.objectToJson(cuentasBancarias);
+
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            httpServletResponse.getWriter().println(jsonSalida);
+
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+     
+
 
     @RequestMapping(value = "/cuentabancariabyusuario/{idUsuario}", method = RequestMethod.GET, produces = "application/json")
     public void findByUsuario(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idUsuario") int idUsuario) {
@@ -175,5 +257,5 @@ public class CuentaBancariaController {
         }
     }
 
-    
+    */
 }

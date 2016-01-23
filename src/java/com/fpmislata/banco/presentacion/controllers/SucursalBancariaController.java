@@ -46,10 +46,18 @@ public class SucursalBancariaController {
 
     @RequestMapping(value = "/sucursalbancaria", method = RequestMethod.GET, produces = "application/json")
     public void findAll(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        List<SucursalBancaria> sucursalesBancarias;
-        try {
-            sucursalesBancarias = sucursalBancariaService.findAll();
 
+        try {
+            List<SucursalBancaria> sucursalesBancarias;
+
+            if (httpServletRequest.getParameter("entidadbancaria.idEntidadBancaria") != null) {
+                int idEntidadBancaria = Integer.parseInt(httpServletRequest.getParameter("entidadbancaria.idEntidadBancaria"));
+                sucursalesBancarias = sucursalBancariaService.getByEntidad(idEntidadBancaria);
+
+            } else {
+                sucursalesBancarias = sucursalBancariaService.findAll();
+
+            }
             String jsonSalida = jsonTransformer.objectToJson(sucursalesBancarias);
 
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
@@ -136,19 +144,19 @@ public class SucursalBancariaController {
         }
     }
 
-    @RequestMapping(value = "/sucursalbancariabyentidad/{idEntidadBancaria}", method = RequestMethod.GET, produces = "application/json")
-    public void findBySucursal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria) {
-        try {
-            List<SucursalBancaria> sucursalesBancarias = sucursalBancariaService.getByEntidad(idEntidadBancaria);
-
-            String jsonSalida = jsonTransformer.objectToJson(sucursalesBancarias);
-
-            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-            httpServletResponse.setContentType("application/json; charset=UTF-8");
-            httpServletResponse.getWriter().println(jsonSalida);
-
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
-    }
+//    @RequestMapping(value = "/sucursalbancariabyentidad/{idEntidadBancaria}", method = RequestMethod.GET, produces = "application/json")
+//    public void findBySucursal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria) {
+//        try {
+//            List<SucursalBancaria> sucursalesBancarias = sucursalBancariaService.getByEntidad(idEntidadBancaria);
+//
+//            String jsonSalida = jsonTransformer.objectToJson(sucursalesBancarias);
+//
+//            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+//            httpServletResponse.setContentType("application/json; charset=UTF-8");
+//            httpServletResponse.getWriter().println(jsonSalida);
+//
+//        } catch (Exception ex) {
+//            throw new RuntimeException(ex);
+//        }
+//    }
 }
