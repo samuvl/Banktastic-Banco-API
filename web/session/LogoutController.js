@@ -1,9 +1,11 @@
-LogoutController.$inject = ['$scope', '$location', 'sessionService'];
-function LogoutController($scope, $location, sessionService) {
+LogoutController.$inject = ['$rootScope', '$scope', '$location', 'sessionService'];
+function LogoutController($rootScope, $scope, $location, sessionService) {
 
     var response = sessionService.logout();
 
     response.success(function (data, status, headers, config) {
+        $rootScope.session = {};
+
         $location.url('/logout/');
     });
 }

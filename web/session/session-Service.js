@@ -9,10 +9,18 @@ function SessionService($http) {
         });
         return response;
     };
-    
+
     this.logout = function () {
         var response = $http({
             method: "DELETE",
+            url: "/banktastic-banco-api/api/session"
+        });
+        return response;
+    };
+
+    this.logged = function () {
+        var response = $http({
+            method: "GET",
             url: "/banktastic-banco-api/api/session"
         });
         return response;

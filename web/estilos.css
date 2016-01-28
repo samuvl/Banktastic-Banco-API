@@ -4,6 +4,7 @@ body{
 
 .variante{
     margin-top: 100px;
+    margin-bottom: 120px;
 }
 
 footer{
@@ -83,4 +84,19 @@ input.btn.btn-sm.btn-error{
 
 .row{
     margin-right: 0px;
+}
+
+#logged{
+    color: wheat;
+    padding-top: 15px;
+    float: right;
+    list-style: none;
+}
+
+li#logout{
+    color: wheat;
+    margin-right: 10px;
+    padding-top:2px;
+    float: right;
+    list-style: none;
 }
