@@ -46,7 +46,7 @@ public class FilterImplSecurity implements Filter {
         Usuario usuario;
 
         if (webSession != null) {
-            usuario = webSession.getUser();
+            usuario = webSession.getUsuario();
         } else {
             usuario = null;
             Logger.getLogger(FilterImplSecurity.class.getName()).log(Level.SEVERE, "No hay sesión");

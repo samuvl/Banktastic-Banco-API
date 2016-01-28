@@ -79,8 +79,8 @@ public class LoginController {
         }
     }
 
-    @RequestMapping(value = {"/session"}, method = RequestMethod.GET, consumes = "application/json", produces = "application/json")
-    public void logged(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
+    @RequestMapping(value = {"/session"}, method = RequestMethod.GET, produces = "application/json")
+    public void logged(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
             WebSession webSession = loginService.logged(httpServletRequest, httpServletResponse);
 

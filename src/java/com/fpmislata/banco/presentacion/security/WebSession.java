@@ -9,24 +9,24 @@ import java.util.Date;
  */
 public class WebSession {
 
-    private Usuario user;
+    private Usuario usuario;
     private Date fecha;
 
     public WebSession(){
         
     }
     
-    public WebSession(Usuario user, Date fecha) {
-        this.user = user;
+    public WebSession(Usuario usuario, Date fecha) {
+        this.usuario = usuario;
         this.fecha = fecha;
     }
 
-    public Usuario getUser() {
-        return user;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUser(Usuario user) {
-        this.user = user;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Date getFecha() {
