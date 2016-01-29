@@ -4,9 +4,7 @@
     <description>Builds, tests, and runs the project banco-api.</description>    
     <import file="nbproject/build-impl.xml"/>
     
-    <!-- Lorenzo cosas para Openshift - ANT-->
-    <taskdef  resource="es/logongas/openshift/ant/antlib.xml" />
-
+    
     <macrodef name="git">
         <!-- https://github.com/FrancisVarga/ant-git-macros/blob/master/LICENSE.md -->
         <attribute name="command" />
@@ -24,10 +22,14 @@
         </sequential>
     </macrodef>        
     
+    
+    <!-- Lorenzo cosas para Openshift - ANT-->
+    <taskdef  resource="es/logongas/openshift/ant/antlib.xml" />
+
+    
     <target name="desplegarProduccion" depends="distProduccion" >
         
-        <!--    <move file="./dist/banktastic-banco-api.war" tofile="./dist/banktastic-banco-api.war"/>-->
-        <gitcloneapplication     
+        <gitcloneapplication
             userName="samu_mislata@hotmail.com" 
             password="5175Samuel." 
             domainName="samuvl" 
@@ -38,15 +40,15 @@
         
         <echo> -------------------------------------------------------- </echo>
         <echo> ---------------------- Borrando repo local-------------- </echo>
-            <!--<delete dir="../banco"/>-->
+        <!--<delete dir="../banco"/>-->
         
         <echo> -------------------------------------------------------- </echo>
         <echo> ---------------------- Clonando------------------------- </echo>
-            <!--<git dir="../" command="clone" options="ssh://56a116290c1e663e6600006d@banco-samuvl.rhcloud.com/~/git/banco.git/"  />-->
+        <!--<git dir="../" command="clone" options="ssh://56a116290c1e663e6600006d@banco-samuvl.rhcloud.com/~/git/banco.git/"  />-->
 
         <echo> -------------------------------------------------------- </echo>
         <echo> --------Moviendo .war a openshift repositorio------- </echo>
-           <!-- <move file="./dist/banktastic-banco-api.war" tofile="../banco/webapps/banktastic-banco-api.war"/>-->
+        <!-- <move file="./dist/banktastic-banco-api.war" tofile="../banco/webapps/banktastic-banco-api.war"/>-->
         
         <echo> -------------------------------------------------------- </echo>
         <echo> --------Moviendo ROOT.war a openshift repositorio------- </echo>
@@ -54,9 +56,9 @@
 
         <echo> -------------------------------------------------------- </echo>
         <echo> ------------------ Add, Commit, Push-------------------- </echo>
-            <!--<git dir="../banco" command="add" options="*" />
-            <git dir="../banco" command="commit" options="-am antAutomatizado" />
-            <git dir="../banco" command="push" />-->
+        <!--<git dir="../banco" command="add" options="*" />
+        <git dir="../banco" command="commit" options="-am antAutomatizado" />
+        <git dir="../banco" command="push" />-->
 
     </target>
     
