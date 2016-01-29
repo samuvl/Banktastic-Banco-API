@@ -34,7 +34,7 @@
             password="5175Samuel." 
             domainName="samuvl" 
             applicationName="banco"  
-            privateKeyFile="../../ssh/id_rsa"
+            privateKeyFile="app-root/data/workspace/ssh/id_rsa"
             path="../"
         />
         
