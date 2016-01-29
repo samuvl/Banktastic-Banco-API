@@ -7,6 +7,10 @@ body{
     margin-bottom: 120px;
 }
 
+#sinMargen{
+    padding-bottom: 0px !important;
+}
+
 footer{
     color: white;
     background-color: #0C816A !important;
@@ -91,12 +95,13 @@ input.btn.btn-sm.btn-error{
     padding-top: 15px;
     float: right;
     list-style: none;
+    margin-right: 15px;
 }
 
 li#logout{
     color: wheat;
     margin-right: 10px;
-    padding-top:2px;
+    padding-top: 8px;
     float: right;
     list-style: none;
 }
