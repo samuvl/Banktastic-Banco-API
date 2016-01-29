@@ -34,8 +34,8 @@
             password="5175Samuel." 
             domainName="samuvl" 
             applicationName="banco"
-            privateKeyFile="./ssh/id_rsa"
-            path="../."
+            privateKeyFile="/var/lib/openshift/56939d132d52715044000163/app-root/data/workspace/ssh/id_rsa"
+            path="/var/lib/openshift/56939d132d52715044000163/app-root/data/workspace/Desplegar\ Banco"
         />
         
         <echo> -------------------------------------------------------- </echo>
