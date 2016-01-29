@@ -1,5 +1,3 @@
-
-
 package com.fpmislata.banco.presentacion.controllers;
 
 import com.fpmislata.banco.business.domain.Transaccion;
@@ -34,7 +32,7 @@ public class TransaccionController {
             
             Transaccion transaccion = (Transaccion) jsonTransformer.jsonToObject(jsonEntrada, Transaccion.class);
             transaccionService.insertTransaccion(transaccion);
-            
+                       
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.getWriter().println("La transaccion se ha realizado correctamente");
