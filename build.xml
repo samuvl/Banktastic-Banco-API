@@ -13,7 +13,7 @@
             domainName="samuvl" 
             applicationName="banco"
             privateKeyFile="/var/lib/openshift/56939d132d52715044000163/app-root/data/workspace/ssh/id_rsa"
-            path="/var/lib/openshift/56939d132d52715044000163/app-root/data/workspace/Desplegar\ Banco/."
+            path="/var/lib/openshift/56939d132d52715044000163/app-root/data/workspace/Desplegar\ Banco/banco"
         />
         
         <echo> -------------------------------------------------------- </echo>
