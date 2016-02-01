@@ -3,14 +3,7 @@
 <project name="banco-api" default="default" basedir=".">
     <description>Builds, tests, and runs the project banco-api.</description>    
     <import file="nbproject/build-impl.xml"/>
-    
-          
-    
-    
-    <!-- Lorenzo cosas para Openshift - ANT-->
 
-
-    
     <target name="desplegarProduccion" depends="distProduccion" >
         <taskdef  resource="es/logongas/openshift/ant/antlib.xml" />
     
