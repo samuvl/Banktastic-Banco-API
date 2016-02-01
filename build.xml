@@ -10,6 +10,16 @@
 <project name="banktastic-banco" default="default" basedir=".">
     <description>Builds, tests, and runs the project banktastic-banco.</description>
     <import file="nbproject/build-impl.xml"/>
+    
+    
+    <property name="libs.CopyLibs.classpath" value="ant/lib/org-netbeans-modules-java-j2seproject-copylibstask.jar" />
+    <property name="j2ee.server.home" value="ant" />
+    
+    <path id="tomcat.classpath"> 
+        <fileset dir="ant/lib" includes="*.jar" />
+    </path>
+    <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" classpathref="tomcat.classpath" />
+
     <!--
 
     There exist several targets which are by default empty and which can be 
