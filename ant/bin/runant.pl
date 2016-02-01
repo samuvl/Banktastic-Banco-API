@@ -28,6 +28,9 @@
 # issues. oops. (NB, use File::Spec::Functions  will help and the code is
 # structured for the catfile() call, but because of perl version funnies
 # the code is not included. 
+#
+# created:         2000-8-24
+# author:          Steve Loughran steve_l@sourceforge.net
 #######################################################################
 #
 # Assumptions:
