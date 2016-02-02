@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app" ng-strict-di>
+<html ng-app="app" ng-strict-di lang="es">
     <head>
         <title>Banktastic -  Tu banco online.</title>
         <meta charset="UTF-8">
@@ -91,7 +91,6 @@
                         </li>
                         <li ng-show="session.usuario" id="logged">¡Bienvenido Usuario! {{session.usuario.nombre}} </li>
                     </ul>
-
                 </div>
             </div>
         </nav>
@@ -101,8 +100,11 @@
                         $(this).parent().addClass("active");
                     });
         </script>
+        <div id="ocultoAccesibilidad">
+            <h1>H1</h1>
+            <p>parrafo</p>
+        </div>
         <div class="variante" ng-view> 
-
         </div>
 
         <footer >

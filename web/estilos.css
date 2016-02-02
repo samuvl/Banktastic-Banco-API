@@ -105,3 +105,7 @@ li#logout{
     float: right;
     list-style: none;
 }
+
+#ocultoAccesibilidad{
+    display:none;
+}
