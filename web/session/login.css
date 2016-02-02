@@ -28,11 +28,9 @@ h1{
 
 }
 
-h3{
-
-    color: white;
+h2{
+    color: white !important;
     opacity: 0.8;
-
 }
 
 
