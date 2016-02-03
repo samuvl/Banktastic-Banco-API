@@ -3,7 +3,7 @@
 <project name="desplegarOpenshift" default="desplegarProduccion" basedir=".">
     <description>Desplegar Openshift</description>
          
-    <target name="desplegarProduccion" depends="distProduccion, DeleteGitLocalPath" >
+    <target name="desplegarProduccion" depends="DeleteGitLocalPath" >
         <taskdef  resource="es/logongas/openshift/ant/antlib.xml" />
 
         <property name="gitlocalpath" value="/tmp/BANKTASTIC/samuvl/banco" />
