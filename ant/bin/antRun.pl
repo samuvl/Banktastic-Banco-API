@@ -21,6 +21,9 @@
 #
 # wrapper script for invoking commands on a platform with Perl installed
 # this is akin to antRun.bat, and antRun the SH script 
+#
+# created:         2001-10-18
+# author:          Jeff Tulley jtulley@novell.com 
 #######################################################################
 #be fussy about variables
 use strict;

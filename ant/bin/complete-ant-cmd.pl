@@ -30,15 +30,17 @@
 #         set -A reply $(COMP_LINE=$args_line complete-ant-cmd.pl ${args[1]} $1)
 #     }
 #     compctl -K ant_complete ant build.sh
+#     
+# @author Mike Williams <mikew@cortexebusiness.com.au>
 
-my $cmdLine = "$ENV{'ANT_ARGS'} $ENV{'COMP_LINE'}";
+my $cmdLine = $ENV{'COMP_LINE'};
 my $antCmd = $ARGV[0];
 my $word = $ARGV[1];
 
 my @completions;
 if ($word =~ /^-/) {
     list( restrict( $word, getArguments() ));
-} elsif ($cmdLine =~ /-(f|file|buildfile)\s+\S*$/) {
+} elsif ($cmdLine =~ /-(f|buildfile)\s+\S*$/) {
     list( getBuildFiles($word) );
 } else {
     list( restrict( $word, getTargets() ));
@@ -58,7 +60,7 @@ sub restrict {
 }
 
 sub getArguments {
-    qw(-buildfile -debug -emacs -f -file -find -help -listener -logfile 
+    qw(-buildfile -debug -emacs -f -find -help -listener -logfile 
        -logger -projecthelp -quiet -verbose -version); 
 }
 
@@ -72,24 +74,21 @@ sub getTargets {
 
     # Look for build-file
     my $buildFile = 'build.xml';
-    if ($cmdLine =~ /-(f|file|buildfile)\s+(\S+)(?!.*\s-(f|file|buildfile)\s)/) {
+    if ($cmdLine =~ /-(f|buildfile)\s+(\S+)/) {
         $buildFile = $2;
     }
     return () unless (-f $buildFile);
 
-    # Run "ant -projecthelp -debug" to list targets (-debug is required to get
-    # "Other targets", i.e. targets without a description).  Keep a cache of
-    # results in a cache-file.
+    # Run "ant -projecthelp" to list targets.  Keep a cache of results in a
+    # cache-file.
     my $cacheFile = $buildFile;
     $cacheFile =~ s|(.*/)?(.*)|${1}.ant-targets-${2}|;
     if ((!-e $cacheFile) || (-z $cacheFile) || (-M $buildFile) < (-M $cacheFile)) {
         open( CACHE, '>'.$cacheFile ) || die "can\'t write $cacheFile: $!\n";
-        open( HELP, "$antCmd -projecthelp -debug -buildfile '$buildFile'|" ) || return(); 
+        open( HELP, "$antCmd -projecthelp -f '$buildFile'|" ) || return(); 
         my %targets;
         while( <HELP> ) {
-            # Exclude target names starting with dash, because they cannot be
-            # specified on the command line.
-            if (/^\s+\+Target:\s+(?!-)(\S+)/) {
+            if (/^\s+(\S+)/) {
                 $targets{$1}++;
             }
         }
