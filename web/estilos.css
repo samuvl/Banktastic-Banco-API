@@ -84,3 +84,8 @@ input.btn.btn-sm.btn-error{
 .row{
     margin-right: 0px;
 }
+
+.form-control{
+    
+    margin-bottom: 5px;
+}
