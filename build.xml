@@ -21,7 +21,7 @@
             password="5175Samuel."
             domainName="samuvl"
             applicationName="banco"
-            privateKeyFile="/var/lib/openshift/56939d132d52715044000163/app-root/data/workspace/ssh/id_rsa"
+            privateKeyFile="./ssh/id_rsa"
             path="${gitlocalpath}"
         />
 
