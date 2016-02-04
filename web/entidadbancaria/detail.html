@@ -1,16 +1,28 @@
 <h1>Detalle Entidad Bancaria</h1>
 <div class="row" >
     <div class="col-md-4 col-md-offset-4">
-        <form role="form">
+        <form name="formulario" role="form" novalidate>
 
             <div class="form-group">
                 <label>Nombre</label>
-                <input type="text" name="nombre" class="form-control" placeholder="Nombre de la entidad" ng-model="entidadBancaria.nombre" ng-value="{{entidadBancaria.nombre}}">
+                <input type="text" name="nombre" class="form-control" placeholder="Nombre de la entidad" ng-model="entidadBancaria.nombre" ng-value="{{entidadBancaria.nombre}}" ng-minlength="2" ng-maxlength="40" required>
+                    <div class="alert alert-warning" ng-show="formulario.nombre.$error.required">
+                        <span class="glyphicon glyphicon-alert" ></span> El nombre no puede estar vacío
+                     </div>
+                    <div class="alert alert-danger" ng-show="formulario.nombre.$error.maxlength || formulario.nombre.$error.minlength ">
+                        <span class="glyphicon glyphicon-exclamation-sign" ></span> Debe tener como minimo 2 carácteres y como máximo 40 caracteres     
+                    </div>
             </div>
 
             <div class="form-group">
                 <label>Codigo Entidad</label>
-                <input type="text" class="form-control" placeholder="Codigo de la entidad" name="codigoEntidad" ng-model="entidadBancaria.codigoEntidad" ng-disabled="(tipo === 'UPDATE')" ng-value="{{entidadBancaria.codigoEntidad}}">
+                <input type="text" class="form-control" placeholder="Codigo de la entidad" name="codigoEntidad" ng-model="entidadBancaria.codigoEntidad" ng-disabled="(tipo === 'UPDATE')" ng-value="{{entidadBancaria.codigoEntidad}}" ng-minlength="2" ng-maxlength="50" required>
+                    <div class="alert alert-warning" ng-show="formulario.codigoEntidad.$error.required">
+                        <span class="glyphicon glyphicon-alert" ></span> El codigo entidad no puede estar vacío
+                     </div>
+                    <div class="alert alert-danger" ng-show="formulario.codigoEntidad.$error.maxlength || formulario.codigoEntidad.$error.minlength ">
+                        <span class="glyphicon glyphicon-exclamation-sign" ></span> Debe tener como minimo 2 carácteres y como máximo 50 caracteres                       
+                    </div>
             </div>
 
             <div class="form-group">
@@ -20,12 +32,21 @@
 
             <div class="form-group">
                 <label>Direccion</label>
-                <input type="text" class="form-control" placeholder="Direccion" name="direccion" ng-model="entidadBancaria.direccion"ng-disabled="" ng-value="{{entidadBancaria.direccion}}"/>
+                <input type="text" class="form-control" placeholder="Direccion" name="direccion" ng-model="entidadBancaria.direccion"ng-disabled="" ng-value="{{entidadBancaria.direccion}}" ng-minlength="2" ng-maxlength="40" required/>
+                <div class="alert alert-warning" ng-show="formulario.direccion.$error.required">
+                        <span class="glyphicon glyphicon-alert" ></span> Debe de escribir una dirección
+                     </div>
+                    <div class="alert alert-danger" ng-show="formulario.direccion.$error.maxlength || formulario.direccion.$error.minlength ">
+                        <span class="glyphicon glyphicon-exclamation-sign" ></span> Debe tener como minimo 2 carácteres y como máximo 50 caracteres                       
+                    </div>
             </div>
 
             <div class="form-group">
                 <label>CIF</label>
-                <input type="text" class="form-control" placeholder="cif" name="cif" ng-model="entidadBancaria.cif"  ng-value="{{entidadBancaria.cif}}"/>
+                <input type="text" class="form-control" placeholder="cif" name="cif" ng-model="entidadBancaria.cif"  ng-value="{{entidadBancaria.cif}}" required/>
+                <div class="alert alert-warning" ng-show="formulario.cif.$error.required">
+                        <span class="glyphicon glyphicon-alert" ></span> El campo cif no puede estar vacío
+                     </div>
             </div>
 
             <input ng-click="ok()" class="btn btn-sm btn-primary" type="submit" value="{{okBoton}}"/> 

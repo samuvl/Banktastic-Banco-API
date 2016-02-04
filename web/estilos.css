@@ -109,3 +109,7 @@ li#logout{
 #ocultoAccesibilidad{
     display:none;
 }
+.form-control{
+
+    margin-bottom: 5px;
+}
