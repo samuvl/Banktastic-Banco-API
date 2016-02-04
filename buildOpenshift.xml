@@ -45,7 +45,7 @@
             privateKeyFile="../../ssh/id_rsa"
             path="${gitlocalpath}"
         />
-
+ 
     </target>
     
     <target name="DeleteGitLocalPath">
