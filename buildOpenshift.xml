@@ -49,6 +49,7 @@
     </target>
     
     <target name="DeleteGitLocalPath">
+        <echo>Borrando Antiguo Repositorio /TMP openshift </echo>
         <delete dir="${gitlocalpath}" />
     </target>
     
