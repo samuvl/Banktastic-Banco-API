@@ -207,7 +207,7 @@ public class CuentaBancariaController {
     public void findBySucursal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idSucursalBancaria") int idSucursalBancaria) {
         try {
             List<CuentaBancaria> cuentasBancarias = cuentaBancariaService.getBySucursal(idSucursalBancaria);
-
+    
             String jsonSalida = jsonTransformer.objectToJson(cuentasBancarias);
 
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);

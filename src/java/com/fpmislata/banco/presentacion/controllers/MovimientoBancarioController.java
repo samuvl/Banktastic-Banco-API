@@ -53,6 +53,7 @@ public class MovimientoBancarioController {
                     saldoNuevo = saldoViejo.add(saldoNuevo);
                     if (saldoNuevo.compareTo(BigDecimal.ZERO) > 0) {
                         cuentaBancaria.setSaldo(saldoNuevo);
+                        cuentaBancariaService.update(cuentaBancaria);
                         return true;
                     }
                 } else {
@@ -85,14 +86,16 @@ public class MovimientoBancarioController {
     @RequestMapping(value = {"/movimientobancario"}, method = RequestMethod.POST)
     public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) throws IOException {
         try {
-
-            //Primero hay que cojer el id o el numero de cuenta y hacer un get de ese numero de cuenta
-            //para obtener todos los datos de la cuenta, y crear un objeto de tipo CuentaBancaria que será
-            //metido en un objeto MovimientoBancario    
             
             MovimientoBancario movimientoBancario = (MovimientoBancario) jsonTransformer.jsonToObject(jsonEntrada, MovimientoBancario.class);
+           
             
-            
+            if(movimientoBancario.getImporte().compareTo(BigDecimal.ZERO)<=0){
+            throw new BusinessException("Importe","el importe introducido tiene que ser mayor de 0");
+            }else{
+            //seguimos con la ejecución
+            }
+          
             if (updateSaldoCuenta(httpServletResponse, movimientoBancario)) {
                 movimientoBancarioService.insert(movimientoBancario);
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
@@ -115,6 +118,7 @@ public class MovimientoBancarioController {
         } catch (Exception ex1) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            
             try {
                 ex1.printStackTrace(httpServletResponse.getWriter());
             } catch (IOException ex2) {
