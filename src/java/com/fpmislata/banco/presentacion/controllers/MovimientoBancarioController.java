@@ -53,6 +53,7 @@ public class MovimientoBancarioController {
                     saldoNuevo = saldoViejo.add(saldoNuevo);
                     if (saldoNuevo.compareTo(BigDecimal.ZERO) > 0) {
                         cuentaBancaria.setSaldo(saldoNuevo);
+                        cuentaBancariaService.update(cuentaBancaria);
                         return true;
                     }
                 } else {
@@ -87,8 +88,14 @@ public class MovimientoBancarioController {
         try {
             
             MovimientoBancario movimientoBancario = (MovimientoBancario) jsonTransformer.jsonToObject(jsonEntrada, MovimientoBancario.class);
+           
             
-            
+            if(movimientoBancario.getImporte().compareTo(BigDecimal.ZERO)<=0){
+            throw new BusinessException("Importe","el importe introducido tiene que ser mayor de 0");
+            }else{
+            //seguimos con la ejecución
+            }
+          
             if (updateSaldoCuenta(httpServletResponse, movimientoBancario)) {
                 movimientoBancarioService.insert(movimientoBancario);
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
@@ -111,6 +118,7 @@ public class MovimientoBancarioController {
         } catch (Exception ex1) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            
             try {
                 ex1.printStackTrace(httpServletResponse.getWriter());
             } catch (IOException ex2) {
