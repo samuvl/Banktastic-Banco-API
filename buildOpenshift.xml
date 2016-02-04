@@ -15,7 +15,7 @@
         
         <gitcloneapplication
             userName="samu_mislata@hotmail.com"
-            password="5175Samuel."
+            password="${password}"
             domainName="samuvl"
             applicationName="banco"
             privateKeyFile="./ssh/id_rsa"
@@ -39,7 +39,7 @@
                 
         <gitpushapplication    
             userName="samu_mislata@hotmail.com"
-            password="5175Samuel."
+            password="${password}"
             domainName="samuvl"
             applicationName="banco"
             privateKeyFile="./ssh/id_rsa"
