@@ -18,7 +18,7 @@
             password="${password}"
             domainName="samuvl"
             applicationName="banco"
-            privateKeyFile="./ssh/id_rsa"
+            privateKeyFile="../../ssh/id_rsa"
             path="${gitlocalpath}"
         />
         
@@ -42,7 +42,7 @@
             password="${password}"
             domainName="samuvl"
             applicationName="banco"
-            privateKeyFile="./ssh/id_rsa"
+            privateKeyFile="../../ssh/id_rsa"
             path="${gitlocalpath}"
         />
 
