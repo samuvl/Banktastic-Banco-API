@@ -2,4 +2,3 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <nextCatalog catalog="nbproject/private/retriever/catalog.xml"/>
 </catalog>
-<!--Linea para probar auto jenkins -->
