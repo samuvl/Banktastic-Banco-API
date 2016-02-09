@@ -19,19 +19,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class TransaccionController {
-    
+
     @Autowired
     TransaccionService transaccionService;
-    
+
     @Autowired
     JsonTransformer jsonTransformer;
-    
+
     @RequestMapping(value = {"/transaccion"}, method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public void insertTransaccion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
         try {
             Transaccion transaccion = (Transaccion) jsonTransformer.jsonToObject(jsonEntrada, Transaccion.class);
             transaccionService.insertTransaccion(transaccion);
-                       
+
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
 
         } catch (BusinessException ex) {
