@@ -29,13 +29,10 @@ public class TransaccionController {
     @RequestMapping(value = {"/transaccion"}, method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public void insertTransaccion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
         try {
-            
             Transaccion transaccion = (Transaccion) jsonTransformer.jsonToObject(jsonEntrada, Transaccion.class);
             transaccionService.insertTransaccion(transaccion);
                        
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-            httpServletResponse.setContentType("application/json; charset=UTF-8");
-            httpServletResponse.getWriter().println("La transaccion se ha realizado correctamente");
 
         } catch (BusinessException ex) {
             List<BusinessMessage> bussinessMessage = ex.getBusinessMessages();
