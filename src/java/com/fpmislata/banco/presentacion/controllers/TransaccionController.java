@@ -56,9 +56,4 @@ public class TransaccionController {
             }
         }
     }
-
-    @RequestMapping(value = {"/transaccion"}, method = RequestMethod.GET, produces = "application/json")
-    public void getUrlRetirar(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        
-    }
 }
