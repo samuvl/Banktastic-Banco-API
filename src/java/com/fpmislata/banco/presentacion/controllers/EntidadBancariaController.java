@@ -4,7 +4,7 @@ import com.fpmislata.banco.business.domain.EntidadBancaria;
 import com.fpmislata.banco.business.service.EntidadBancariaService;
 import com.fpmislata.banco.core.BusinessException;
 import com.fpmislata.banco.core.BusinessMessage;
-import com.fpmislata.banco.presentacion.json.JsonTransformer;
+import com.fpmislata.banco.core.json.JsonTransformer;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;

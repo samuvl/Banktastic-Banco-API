@@ -4,7 +4,7 @@ import com.fpmislata.banco.business.domain.Transaccion;
 import com.fpmislata.banco.business.service.TransaccionService;
 import com.fpmislata.banco.core.BusinessException;
 import com.fpmislata.banco.core.BusinessMessage;
-import com.fpmislata.banco.presentacion.json.JsonTransformer;
+import com.fpmislata.banco.core.json.JsonTransformer;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,7 +30,7 @@ public class TransaccionController {
     public void insertTransaccion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
         try {
             Transaccion transaccion = (Transaccion) jsonTransformer.jsonToObject(jsonEntrada, Transaccion.class);
-            transaccionService.insertTransaccion(transaccion);
+            transaccionService.insert(transaccion);
 
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
@@ -57,4 +57,8 @@ public class TransaccionController {
         }
     }
 
+    @RequestMapping(value = {"/transaccion"}, method = RequestMethod.GET, produces = "application/json")
+    public void getUrlRetirar(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        
+    }
 }

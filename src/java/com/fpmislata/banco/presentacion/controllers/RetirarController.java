@@ -4,7 +4,7 @@ import com.fpmislata.banco.business.domain.Transaccion;
 import com.fpmislata.banco.business.service.TransaccionService;
 import com.fpmislata.banco.core.BusinessException;
 import com.fpmislata.banco.core.BusinessMessage;
-import com.fpmislata.banco.presentacion.json.JsonTransformer;
+import com.fpmislata.banco.core.json.JsonTransformer;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,7 +27,7 @@ public class RetirarController {
     
     @RequestMapping(value = {"/retirar"}, method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public void retirar(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
-     try {
+     /*try {
             Transaccion transaccion = (Transaccion) jsonTransformer.jsonToObject(jsonEntrada, Transaccion.class);
             transaccionService.retirar(transaccion);
 
@@ -53,6 +53,6 @@ public class RetirarController {
             } catch (IOException ex2) {
                 Logger.getLogger(EntidadBancariaController.class.getName()).log(Level.SEVERE, "Error devolviendo la traza", ex2);
             }
-        }
+        }*/
     }
 }

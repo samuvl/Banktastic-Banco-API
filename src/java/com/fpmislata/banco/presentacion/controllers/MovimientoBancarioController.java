@@ -7,7 +7,7 @@ import com.fpmislata.banco.business.service.CuentaBancariaService;
 import com.fpmislata.banco.business.service.MovimientoBancarioService;
 import com.fpmislata.banco.core.BusinessException;
 import com.fpmislata.banco.core.BusinessMessage;
-import com.fpmislata.banco.presentacion.json.JsonTransformer;
+import com.fpmislata.banco.core.json.JsonTransformer;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;

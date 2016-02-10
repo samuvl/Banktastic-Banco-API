@@ -9,7 +9,6 @@
   
     <context:annotation-config/>
     
-    <bean class="com.fpmislata.banco.presentacion.json.implementacion.JsonTransformerImplJackson" />
     <bean class="com.fpmislata.banco.presentacion.security.impl.WebSessionProviderImpl" />
     <bean class="com.fpmislata.banco.presentacion.security.impl.LoginServiceImpl" />
 </beans> 

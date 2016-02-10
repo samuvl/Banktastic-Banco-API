@@ -4,7 +4,7 @@ import com.fpmislata.banco.business.domain.Usuario;
 import com.fpmislata.banco.business.service.UsuarioService;
 import com.fpmislata.banco.core.BusinessException;
 import com.fpmislata.banco.core.BusinessMessage;
-import com.fpmislata.banco.presentacion.json.JsonTransformer;
+import com.fpmislata.banco.core.json.JsonTransformer;
 import com.fpmislata.banco.security.PasswordManager;
 import java.io.IOException;
 import java.util.List;

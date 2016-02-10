@@ -6,7 +6,7 @@ import com.fpmislata.banco.business.service.MovimientoBancarioService;
 import com.fpmislata.banco.business.service.UsuarioService;
 import com.fpmislata.banco.core.BusinessException;
 import com.fpmislata.banco.core.BusinessMessage;
-import com.fpmislata.banco.presentacion.json.JsonTransformer;
+import com.fpmislata.banco.core.json.JsonTransformer;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.util.List;
