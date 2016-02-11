@@ -1,6 +1,8 @@
 package com.fpmislata.banco.presentacion.controllers;
 
+import com.fpmislata.banco.business.domain.Extraccion;
 import com.fpmislata.banco.business.domain.Transaccion;
+import com.fpmislata.banco.business.service.RetirarService;
 import com.fpmislata.banco.business.service.TransaccionService;
 import com.fpmislata.banco.core.BusinessException;
 import com.fpmislata.banco.core.BusinessMessage;
@@ -20,16 +22,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class RetirarController {
      @Autowired
-    TransaccionService transaccionService;
+    RetirarService retirarService;
     
     @Autowired
     JsonTransformer jsonTransformer;
     
     @RequestMapping(value = {"/retirar"}, method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public void retirar(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
-     /*try {
-            Transaccion transaccion = (Transaccion) jsonTransformer.jsonToObject(jsonEntrada, Transaccion.class);
-            transaccionService.retirar(transaccion);
+     try {
+            Extraccion extraccion = (Extraccion) jsonTransformer.jsonToObject(jsonEntrada, Extraccion.class);
+            retirarService.retirar(extraccion);
 
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
@@ -53,6 +55,6 @@ public class RetirarController {
             } catch (IOException ex2) {
                 Logger.getLogger(EntidadBancariaController.class.getName()).log(Level.SEVERE, "Error devolviendo la traza", ex2);
             }
-        }*/
+        }
     }
 }

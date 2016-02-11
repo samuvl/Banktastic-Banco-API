@@ -27,11 +27,11 @@ public class TransaccionController {
     JsonTransformer jsonTransformer;
 
     @RequestMapping(value = {"/transaccion"}, method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public void insertTransaccion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
+    public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
         try {
             Transaccion transaccion = (Transaccion) jsonTransformer.jsonToObject(jsonEntrada, Transaccion.class);
             transaccionService.insert(transaccion);
-
+            
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
 
