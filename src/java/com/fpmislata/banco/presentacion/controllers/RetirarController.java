@@ -35,7 +35,6 @@ public class RetirarController {
 
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-
         } catch (BusinessException ex) {
             List<BusinessMessage> bussinessMessage = ex.getBusinessMessages();
             String jsonSalida = jsonTransformer.objectToJson(bussinessMessage);
