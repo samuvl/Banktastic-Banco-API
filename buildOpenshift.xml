@@ -36,8 +36,8 @@
         <echo> ------------------ Add, Commit-------------------- </echo>
         <git dir="${gitlocalpath}" command="add" options="*" />
         <git dir="${gitlocalpath}" command="commit" options="-am 'antAutomatizado'" />
-                
-        <gitpushapplication    
+
+        <gitpushapplication
             userName="samu_mislata@hotmail.com"
             password="${password}"
             domainName="samuvl"

@@ -8,7 +8,7 @@
     </target>
    
     <target name="-enable-produccion" >
-        <property name="enableProduccion" value="patata" />
+        <property name="enableProduccion" value="true" />
     </target>
     
     
