@@ -1,5 +1,5 @@
-    node {
-    stage('Try-CATCH') {
+node {
+    stage('Example') {
         try {
             sh 'exit 1'
         }
@@ -8,4 +8,4 @@
             throw
         }
     }
-    }
+}
